@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+				<div class="container py-4">
+
+
+
+					<form th:action="@{/formMaterial}" th:object="${mof}" method="post"
+						enctype="multipart/form-data">
+						<div class="form-group row">
+							<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control"
+									th:field="*{nombreCompuesto}" />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="descripcion" class="col-sm-2 col-form-label">F&oacute;rmula</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" th:field="*{formula}" />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Clasificaci&oacute;n
+							</label>
+							<div class="col-sm-6">
+								<select id="optiontag" name="clasificacion" th:field="*{clasificacionmof}">
+									<option th:each="clasificacionmof : ${clasificacion}"
+										th:value="${clasificacionmof.id}"
+										th:utext="${clasificacionmof.nombreClasificacion}"
+										/>
+								</select>
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Nombre Clasificaci&oacute;n
+							</label>
+							<div class="col-sm-6">
+								<select id="optiontag" th:field="*{nombreClasificacion}">
+									<option th:each="clasificacionmof : ${clasificacion}"
+										th:value="${clasificacionmof.nombreClasificacion}"
+										th:utext="${clasificacionmof.nombreClasificacion}"
+										/>
+								</select>
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<label for="descripcion" class="col-sm-2 col-form-label">Directores</label>
+							<div class="col-sm-6">
+								
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<label for="descripcion" class="col-sm-2 col-form-label">CIF</label>
+							<div class="col-sm-6">
+								
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<label for="descripcion" class="col-sm-2 col-form-label">Aplicaciones</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" th:field="*{aplicaciones}" />
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<label for="descripcion" class="col-sm-2 col-form-label">M&eacute;todo de S&iacute;ntesis</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" th:field="*{metodoSintesis}" />
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<label for="descripcion" class="col-sm-2 col-form-label">Art&iacute;culo</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" th:field="*{articulo}" />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<label for="descripcion" class="col-sm-2 col-form-label">T&iacute;tulo Tesis</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" th:field="*{tituloTesis}" />
+							</div>
+						</div>
+						
+						<div class="form-group row">
+							<label for="descripcion" class="col-sm-2 col-form-label">URL Tesis</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" th:field="*{url}" />
+							</div>
+						</div>
+
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<input type="submit" value="Guardar" class="btn-primary" />
+							</div>
+						</div>
+						<input type="hidden" th:field="*{id}" />
+						
+						
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+
+			<div class="card-body">
+
+				<!--  <table th:if="${not #lists.isEmpty(clasificacion.listaMOFs)}" class="table">-->
+					<table class="table">
+					<thead class="table-light">
+						<tr>
+							<th>id</th>
+							<th>Nombre</th>
+							<th>Clasificaci&oacute;n</th>
+							<th>Directores</th>
+							<th>Investigador Responsable</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="mof: ${clasificacion.mofs}">
+							<td><a class="btn btn-primary btn-xs"
+								th:href="@{/fichaMaterial/} + ${mof.id}" th:text="${mof.id}"></a></td>
+							<td th:text="${mof.nombreCompuesto}"></td>
+							<td th:text="${mof.nombreClasificacion}"></td>
+						</tr>
+					</tbody>
+				</table>
+
+
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div th:if="${#lists.isEmpty(mof.expedientesMOF)}"
+				class="alert alert-info my-4"
+				th:text="'No hay expedientes del compuesto ' + ${mof.nombreCompuesto}"></div>
+			<div th:unless="${#lists.isEmpty(mof.expedientesMOF)}">
+				<div><a class="btn btn-primary btn-xs"
+								th:href="@{/listarExpedientes/}">Ver Expedientes</a></div>
+								<!--  th:href="@{/expedienteMaterial/} + ${mof.id}">Ver Expedientes</a></div>-->
+								
+			</div>
+
+			<div class="card-body" th:each="mof: ${mof}">
+
+				<div class="container">
+					<div class="card bg-light">
+						<ul class="nav nav-tabs" id="myTab" role="tablist">
+							<li class="nav-item"><a class="nav-link active"
+								id="formula-tab" data-toggle="tab" href="#formula" role="tab"
+								aria-controls="home" aria-selected="true">F&oacute;rmula</a></li>
+							<li class="nav-item"><a class="nav-link" id="cif-tab"
+								data-toggle="tab" href="#cif" role="tab" aria-controls="cif"
+								aria-selected="false">CIF</a></li>
+							<li class="nav-item"><a class="nav-link"
+								id="aplicaciones-tab" data-toggle="tab" href="#aplicaciones"
+								role="tab" aria-controls="aplicaciones" aria-selected="false">Aplicaciones</a></li>
+							<li class="nav-item"><a class="nav-link"
+								id="metodoSintesis-tab" data-toggle="tab" href="#metodoSintesis"
+								role="tab" aria-controls="metodoSintesis" aria-selected="false">M&eacute;todo
+									de s&iacute;ntesis</a></li>
+							<li class="nav-item"><a class="nav-link" id="articulo-tab"
+								data-toggle="tab" href="#articulo" role="tab"
+								aria-controls="articulo" aria-selected="false">Art&iacute;culo</a></li>
+							<li class="nav-item"><a class="nav-link"
+								id="tituloTesis-tab" data-toggle="tab" href="#tituloTesis"
+								role="tab" aria-controls="tituloTesis" aria-selected="false">T&iacute;tulo
+									de tesis</a></li>
+							<li class="nav-item"><a class="nav-link" id="url-tab"
+								data-toggle="tab" href="#url" role="tab" aria-controls="url"
+								aria-selected="false">Tesis</a></li>
+							<li class="nav-item"><a class="nav-link" id="fecha-tab"
+								data-toggle="tab" href="#fecha" role="tab" aria-controls="fecha"
+								aria-selected="false">&Uacute;ltima modificaci&oacute;n</a></li>
+						</ul>
+						<div class="card-body">
+							<div class="tab-content" id="myTabContent">
+								<div class="tab-pane fade show active" id="formula"
+									role="tabpanel" aria-labelledby="formula-tab">
+									<p th:text="${mof.formula}"></p>
+								</div>
+								<div class="tab-pane fade" id="cif" role="tabpanel"
+									aria-labelledby="cif-tab">
+									<p>CIF</p>
+								</div>
+								<div class="tab-pane fade" id="aplicaciones" role="tabpanel"
+									aria-labelledby="aplicaciones-tab">
+									<p th:text="${mof.aplicaciones}"></p>
+								</div>
+								<div class="tab-pane fade" id="metodoSintesis" role="tabpanel"
+									aria-labelledby="metodoSintesis-tab">
+									<p th:text="${mof.metodoSintesis}"></p>
+								</div>
+								<div class="tab-pane fade" id="articulo" role="tabpanel"
+									aria-labelledby="articulo-tab">
+									<p th:text="${mof.articulo}"></p>
+								</div>
+								<div class="tab-pane fade" id="tituloTesis" role="tabpanel"
+									aria-labelledby="tituloTesis-tab">
+									<p th:text="${mof.tituloTesis}"></p>
+								</div>
+								<div class="tab-pane fade" id="url" role="tabpanel"
+									aria-labelledby="url-tab">
+									<p th:text="${mof.url}"></p>
+								</div>
+								<div class="tab-pane fade" id="fecha" role="tabpanel"
+									aria-labelledby="fecha-tab">
+									<p th:text="${mof.fecha}"></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

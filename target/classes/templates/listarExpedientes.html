@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="card bg-light">
+		<div class="card-header" th:text="${titulo}"></div>
+		<div class="card-body">
+			<div class="container py-4">
+				<nav class="navbar navbar-light bg-light">
+					<div class="container-fluid">
+						<a th:href="@{/formMaterial}" class="btn btn-primary btn-xs">Crear
+							Expediente</a>
+						<form class="d-flex">
+							<input class="form-control me-2" type="search"
+								placeholder="Buscar" aria-label="Search">
+							<button class="btn btn-outline-success" type="submit">Buscar</button>
+						</form>
+					</div>
+				</nav>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>Nombre del Expediente</th>
+							<th>Investigadores Responsables</th>
+							<th>&Uacute;ltima modificaci&oacute;n</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="expedientes: ${expedientemof}">
+							<td><a class="btn btn-primary btn-xs"
+								th:href="@{/expedienteMaterial/} + ${expedientes.id}" th:text="${expedientes.id}"></a></td>
+							<td th:text="${expedientes.nombreExpediente}"></td>
+							<td></td>
+							<td th:text="${expedientes.fecha}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+	
+	<footer th:replace="layout/layout :: footer"></footer>
+	
+</body>
+</html>

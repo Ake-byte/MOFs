@@ -20,6 +20,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "mof", schema = "public")
@@ -30,34 +31,41 @@ public class MOF implements Serializable {
 	@Column(name = "mof_id")
 	private Long id;
 
+	@NotEmpty
 	@Column(name = "nombre_compuesto")
 	private String nombreCompuesto;
 
 	// Clasificación
+	//@NotEmpty
 	@Column(name = "nombre_clasificacion")
 	private String nombreClasificacion;
 
 	// Directores
 
 	// Investigador Responsable
-
+	//@NotEmpty
 	private String formula;
 
 	// Archivo - CIF
-
+	//@NotEmpty
 	private String aplicaciones; // Propósito/Aplicaciones del MOF
 
+	//@NotEmpty
 	@Column(name = "metodo_sintesis")
 	private String metodoSintesis;
 
+	//@NotEmpty
 	private String articulo;
 
+	//@NotEmpty
 	@Column(name = "titulo_tesis")
 	private String tituloTesis;
 
+	//@NotEmpty
 	@Column(name = "url_tesis")
 	private String url;
 
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha")
 	private Date fecha;

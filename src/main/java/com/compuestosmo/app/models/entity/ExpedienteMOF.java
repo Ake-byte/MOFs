@@ -1,11 +1,8 @@
 package com.compuestosmo.app.models.entity;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,17 +10,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="expedientes")
+@Table(name="expedientes", schema = "public")
 public class ExpedienteMOF implements Serializable{
 
 	@Id
@@ -32,8 +28,16 @@ public class ExpedienteMOF implements Serializable{
 	private Long id;
 	
 	//Investigadores Responsables
-	@Column(name = "nombre_expediente")
-	private String nombreExpediente;
+	//@NotEmpty
+	@Column(name = "nombre_prueba")
+	private String nombrePrueba;
+	
+	//@NotEmpty
+	@Column(name = "descripcion_prueba")
+	private String descripcionPrueba;
+	
+	private String imagen;
+	
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha")
@@ -48,13 +52,6 @@ public class ExpedienteMOF implements Serializable{
 	@JoinColumn(name = "mof_id")
 	private MOF mof;
 	
-	@OneToMany(mappedBy = "expedientes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<DetallesExpedienteMOF> detallesExpediente;
-	
-	public ExpedienteMOF() {
-		detallesExpediente = new ArrayList<DetallesExpedienteMOF>();
-	}
-	
 	public Long getId() {
 		return id;
 	}
@@ -64,13 +61,6 @@ public class ExpedienteMOF implements Serializable{
 		this.id = id;
 	}
 	
-	public String getNombreExpediente() {
-		return nombreExpediente;
-	}
-
-	public void setNombreExpediente(String nombreExpediente) {
-		this.nombreExpediente = nombreExpediente;
-	}
 
 	public Date getFecha() {
 		return fecha;
@@ -90,21 +80,36 @@ public class ExpedienteMOF implements Serializable{
 	public void setMof(MOF mof) {
 		this.mof = mof;
 	}
-
-
+	
 	
 
-
-	public List<DetallesExpedienteMOF> getDetallesExpediente() {
-		return detallesExpediente;
+	public String getNombrePrueba() {
+		return nombrePrueba;
 	}
 
-	public void setDetallesExpediente(List<DetallesExpedienteMOF> detallesExpediente) {
-		this.detallesExpediente = detallesExpediente;
+
+	public void setNombrePrueba(String nombrePrueba) {
+		this.nombrePrueba = nombrePrueba;
 	}
-	
-	public void addDetalles(DetallesExpedienteMOF detalleExpediente) {
-		detallesExpediente.add(detalleExpediente);
+
+
+	public String getDescripcionPrueba() {
+		return descripcionPrueba;
+	}
+
+
+	public void setDescripcionPrueba(String descripcionPrueba) {
+		this.descripcionPrueba = descripcionPrueba;
+	}
+
+
+	public String getImagen() {
+		return imagen;
+	}
+
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 	private static final long serialVersionUID = 1L;

@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="layout/layout :: head"></head>
+<head th:replace="layout/layout :: head">
+
+
+</head>
 
 <body>
 	<header th:replace="layout/layout :: header"></header>
@@ -32,7 +35,8 @@
 					<tbody>
 						<tr th:each="clasificaciones: ${clasificacion}">
 							<td><a class="btn btn-primary btn-xs"
-								th:href="@{/fichaMaterial/} + ${clasificaciones.id}" th:text="${clasificaciones.id}"></a></td>
+								th:href="@{/verClasificacion/} + ${clasificaciones.id}"
+								th:text="${clasificaciones.id}"></a></td>
 							<td th:text="${clasificaciones.nombreClasificacion}"></td>
 							<td th:text="${clasificaciones.descripcionClasificacion}"></td>
 						</tr>
@@ -45,5 +49,8 @@
 	
 	<footer th:replace="layout/layout :: footer"></footer>
 	
+
+
+
 </body>
 </html>

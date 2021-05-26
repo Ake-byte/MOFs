@@ -7,14 +7,7 @@ INSERT INTO mof (nombre_compuesto, nombre_clasificacion, id_clasificacion) VALUE
 INSERT INTO mof (nombre_compuesto, nombre_clasificacion, id_clasificacion) VALUES('Compuesto D', 'Clasificacion A', 1);
  
 
-INSERT INTO expedientes (nombre_expediente, fecha, mof_id) VALUES('Expediente 1 del compuesto B', NOW(), 2)
+INSERT INTO expedientes (nombre_prueba, descripcion_prueba, fecha, imagen, mof_id) VALUES('Prueba Electrica', 'Se realizaron pruebas electricas al compuesto 1', NOW(), '', 1)
+INSERT INTO expedientes (nombre_prueba, descripcion_prueba, fecha, imagen, mof_id) VALUES('Prueba Electrica', 'Se realizaron pruebas electricas al compuesto 2', NOW(), '', 2)
+INSERT INTO expedientes (nombre_prueba, descripcion_prueba, fecha, imagen, mof_id) VALUES('Prueba Espectroscopica', 'Se realizaron pruebas espectroscopicas al compuesto 2', NOW(), '', 2)
 
-INSERT INTO detalle_expediente (nombre_prueba, descripcion_prueba, expediente_id) VALUES('Prueba espectroscopica', 'Se le realizaron pruebas espectroscopicas al MOF B', 1)
-INSERT INTO detalle_expediente (nombre_prueba, descripcion_prueba, expediente_id) VALUES('Prueba electrica', 'Se le realizaron pruebas electricas al MOF B', 1)
-INSERT INTO detalle_expediente (nombre_prueba, descripcion_prueba, expediente_id) VALUES('Prueba magneticas', 'Se le realizaron pruebas magneticas al MOF B', 1)
-INSERT INTO detalle_expediente (nombre_prueba, descripcion_prueba, expediente_id) VALUES('Prueba termicas', 'Se le realizaron pruebas termicas al MOF B', 1)
-
-INSERT INTO expedientes (nombre_expediente, fecha, mof_id) VALUES('Expediente 2 del compuesto B', NOW(), 2)
-
-INSERT INTO detalle_expediente (nombre_prueba, descripcion_prueba, expediente_id) VALUES('Prueba espectroscopica', 'Se le realizaron pruebas espectroscopicas al MOF B', 2)
-INSERT INTO detalle_expediente (nombre_prueba, descripcion_prueba, expediente_id) VALUES('Prueba electrica', 'Se le realizaron pruebas electricas al MOF B', 2)

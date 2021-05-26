@@ -16,36 +16,46 @@
 						<div class="form-group row">
 							<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control"
+								<input type="text" class="form-control" th:errorclass="'form-control alert-danger'"
 									th:field="*{nombreCompuesto}" />
+									<small class="form-text text-danger" th:if="${#fields.hasErrors('nombreCompuesto')}" th:errors="*{nombreCompuesto}"></small>
 							</div>
 						</div>
 
 						<div class="form-group row">
 							<label for="descripcion" class="col-sm-2 col-form-label">F&oacute;rmula</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" th:field="*{formula}" />
+								<input type="text" class="form-control" th:errorclass="'form-control alert-danger'" th:field="*{formula}" />
+								<small class="form-text text-danger" th:if="${#fields.hasErrors('formula')}" th:errors="*{formula}"></small>
 							</div>
 						</div>
+
 
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Clasificaci&oacute;n
 							</label>
 							<div class="col-sm-6">
-								<select id="optiontag" name="clasificacion" th:field="*{clasificacionmof}">
+								<select id="clasificacion" name="clasificacion"
+									th:field="*{clasificacionmof}" >
 									<option th:each="clasificacionmof : ${clasificacion}"
 										th:value="${clasificacionmof.id}"
-										th:utext="${clasificacionmof.nombreClasificacion}"
-										/>
-								</select>
+										th:utext="${clasificacionmof.nombreClasificacion}" />
+								</select> 
+								
+								<input type="text" name="display" id="display" th:field="*{nombreClasificacion}"/>
 							</div>
 						</div>
-						
+
+						<p> 
+							<input type="button" id="showTxt" value="selectedIndex/Text"/> 
+						</p>
+
+						<!--      
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Nombre Clasificaci&oacute;n
 							</label>
 							<div class="col-sm-6">
-								<select id="optiontag" th:field="*{nombreClasificacion}">
+								<select id="optiontag" name="clasificacion" th:field="*{nombreClasificacion}">
 									<option th:each="clasificacionmof : ${clasificacion}"
 										th:value="${clasificacionmof.nombreClasificacion}"
 										th:utext="${clasificacionmof.nombreClasificacion}"
@@ -53,35 +63,35 @@
 								</select>
 							</div>
 						</div>
-						
+						-->
+
 						<div class="form-group row">
 							<label for="descripcion" class="col-sm-2 col-form-label">Directores</label>
-							<div class="col-sm-6">
-								
-							</div>
+							<div class="col-sm-6"></div>
 						</div>
-						
+
 						<div class="form-group row">
 							<label for="descripcion" class="col-sm-2 col-form-label">CIF</label>
-							<div class="col-sm-6">
-								
-							</div>
+							<div class="col-sm-6"></div>
 						</div>
-						
+
 						<div class="form-group row">
 							<label for="descripcion" class="col-sm-2 col-form-label">Aplicaciones</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" th:field="*{aplicaciones}" />
+								<input type="text" class="form-control"
+									th:field="*{aplicaciones}" />
 							</div>
 						</div>
-						
+
 						<div class="form-group row">
-							<label for="descripcion" class="col-sm-2 col-form-label">M&eacute;todo de S&iacute;ntesis</label>
+							<label for="descripcion" class="col-sm-2 col-form-label">M&eacute;todo
+								de S&iacute;ntesis</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" th:field="*{metodoSintesis}" />
+								<input type="text" class="form-control"
+									th:field="*{metodoSintesis}" />
 							</div>
 						</div>
-						
+
 						<div class="form-group row">
 							<label for="descripcion" class="col-sm-2 col-form-label">Art&iacute;culo</label>
 							<div class="col-sm-6">
@@ -90,14 +100,17 @@
 						</div>
 
 						<div class="form-group row">
-							<label for="descripcion" class="col-sm-2 col-form-label">T&iacute;tulo Tesis</label>
+							<label for="descripcion" class="col-sm-2 col-form-label">T&iacute;tulo
+								Tesis</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" th:field="*{tituloTesis}" />
+								<input type="text" class="form-control"
+									th:field="*{tituloTesis}" />
 							</div>
 						</div>
-						
+
 						<div class="form-group row">
-							<label for="descripcion" class="col-sm-2 col-form-label">URL Tesis</label>
+							<label for="descripcion" class="col-sm-2 col-form-label">URL
+								Tesis</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control" th:field="*{url}" />
 							</div>
@@ -108,15 +121,17 @@
 								<input type="submit" value="Guardar" class="btn-primary" />
 							</div>
 						</div>
+						
 						<input type="hidden" th:field="*{id}" />
-						
-						
+
 
 					</form>
 				</div>
 			</div>
 		</div>
 	</div>
+	
 	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:src="@{/js/scriptclasificacion.js}"></script>
 </body>
 </html>

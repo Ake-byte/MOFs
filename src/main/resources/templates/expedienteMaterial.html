@@ -1,38 +1,68 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="layout/layout :: head"></head>
+<head th:replace="layout/layout :: head">
+<style>
+img.zoom {
+    width: 350px;
+    height: 200px;
+    -webkit-transition: all .2s ease-in-out;
+    -moz-transition: all .2s ease-in-out;
+    -o-transition: all .2s ease-in-out;
+    -ms-transition: all .2s ease-in-out;
+}
+ 
+.transition {
+    -webkit-transform: scale(1.8); 
+    -moz-transform: scale(1.8);
+    -o-transform: scale(1.8);
+    transform: scale(1.8);
+}
+</style>
+
+</head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
 
 	<div class="container">
 		<div class="card bg-light">
-			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-header">
+			<h5 th:text="${titulo}"></h5></div>
 			
 				<div class="card-group">
-					<th:block th:each="expediente: ${expedientemof.detallesExpediente}">
+					<!--  <th:block th:each="expediente: ${expedientemof.detallesExpediente}">-->
 						<div class="col-sm-6">
-							<!--  <img th:if="${#strings.length(producto.foto)>0}"
-								style="width: 220px; height: 300px;" class="card-img-top"
-								th:src="@{'/uploadsP/' + ${producto.foto}}"
-								th:alt="${producto.foto}" />-->
+							<img th:if="${#strings.length(expedientemof.imagen)>0}"
+								class="zoom"
+								th:src="@{'/uploads/' + ${expedientemof.imagen}}"
+								th:alt="${expedientemof.imagen}" />
 							<div class="card-body">
-								<h5 class="card-title" th:text="${expediente.nombrePrueba}"></h5>
-								<p class="card-text" th:text="${expediente.descripcionPrueba}"></p>
+								<h5 class="card-title" th:text="${expedientemof.nombrePrueba}"></h5>
+								<p class="card-text" th:text="${expedientemof.descripcionPrueba}"></p>
 								<p class="card-text">
 									<a class="btn btn-primary btn-xs"
-										th:href="@{/verExpediente/} + ${expediente.id}"
-										th:text="${expediente.id}"></a>
+										th:href="@{/verExpediente/} + ${expedientemof.id}"
+										th:text="${expedientemof.id}"></a>
 								</p>
 							</div>
 						</div>
 
-					</th:block>
+					<!--  </th:block>-->
 				</div>
 			
 			
 		</div>
 	</div>
-
+	
 	<footer th:replace="layout/layout :: footer"></footer>
+	<!--  <script th:src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>-->
+	<script>
+$(document).ready(function(){
+    $('.zoom').hover(function() {
+        $(this).addClass('transition');
+    }, function() {
+        $(this).removeClass('transition');
+    });
+});
+</script>
 </body>
 </html>

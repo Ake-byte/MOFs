@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.compuestosmo.app.models.dao.IExpedienteMOFDAO;
 import com.compuestosmo.app.models.dao.IMOFDAO;
+import com.compuestosmo.app.models.entity.ExpedienteMOF;
 import com.compuestosmo.app.models.entity.MOF;
 
 @Service
@@ -14,6 +16,9 @@ public class MOFService implements IMOFService{
 
 	@Autowired
 	private IMOFDAO mofdao;
+	
+	@Autowired
+	private IExpedienteMOFDAO expedientemofdao;
 	
 	@Override
 	@Transactional(readOnly=true)
@@ -38,6 +43,13 @@ public class MOFService implements IMOFService{
 	@Transactional
 	public void delete(Long id) {
 		mofdao.deleteById(id);
+		
+	}
+
+	@Override
+	@Transactional
+	public void saveExpediente(ExpedienteMOF expedientemof) {
+		expedientemofdao.save(expedientemof);
 		
 	}
 

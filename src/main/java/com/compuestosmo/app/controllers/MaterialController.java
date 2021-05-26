@@ -1,12 +1,16 @@
 package com.compuestosmo.app.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 
 import com.compuestosmo.app.models.dao.IClasificacionMOFDAO;
 import com.compuestosmo.app.models.dao.IMOFDAO;
@@ -24,6 +29,7 @@ import com.compuestosmo.app.models.service.IClasificacionMOFService;
 import com.compuestosmo.app.models.service.IMOFService;
 
 @Controller("/mof")
+@SessionAttributes("mof")
 public class MaterialController {
 	
 	@Autowired
@@ -54,7 +60,7 @@ public class MaterialController {
 		}
 		
 		model.put("mof", mof);
-		model.put("titulo", "Ficha MOF: " + mof.getNombreCompuesto());
+		model.put("titulo", "Portada: " + mof.getNombreCompuesto());
 		
 		return "fichaMaterial";
 	}
@@ -66,28 +72,57 @@ public class MaterialController {
 		Iterable<ClasificacionMOF> clasificacion = clasificaciondao.findAll();
 		((Model) model).addAttribute("clasificacion", clasificacion);
 		
-		ClasificacionMOF clasificaciones = new ClasificacionMOF();
-		
-		mof.setClasificacionmof(clasificaciones);
-		
 		model.put("mof", mof);
 		model.put("titulo", "Formulario MOF");
 		return "formMaterial";
 	}
 
-	@PostMapping(value="/formMaterial")
-	public String guardar(MOF mof) {
-	//public String guardar(@RequestParam(value="clasificacionmof", required=false) ClasificacionMOF id, MOF mof) {
-		/*List<ClasificacionMOF> clasificaciones = clasificacionService.findall();
+	
+	@RequestMapping(value="/formMaterial/{id}")
+	public String editar(@PathVariable(value="id") Long id, Map<String, Object> model) {
+		MOF mof = null;
 		
-		for(int i = 0; i < clasificaciones.size(); i++) {
-			if(clasificaciones.get(i).getId().equals(id) ) {
-				mof.setClasificacionmof(id);
-			}
-		}*/
+		Iterable<ClasificacionMOF> clasificacion = clasificaciondao.findAll();
+		((Model) model).addAttribute("clasificacion", clasificacion);
+		
+		if(id>0) {
+			mof = mofService.findOne(id);
+		}else {
+			return "redirect:/listarMateriales";
+		}
+		
+		model.put("mof", mof);
+		model.put("titulo", "Editar MOF");
+		
+		return "formMaterial";
+		
+	}
+	
+	@PostMapping(value="/formMaterial")
+	public String guardar(@Valid MOF mof, BindingResult result, Model model,SessionStatus status) {
+		
+		Iterable<ClasificacionMOF> clasificacion = clasificaciondao.findAll();
+		((Model) model).addAttribute("clasificacion", clasificacion);
+		
+		if(result.hasErrors()) {
+			model.addAttribute("titulo", "Formulario MOF");
+			return "formMaterial";
+		}
+
 		
 		mofdao.save(mof);
+		status.setComplete();
 		
 		return "redirect:listarMateriales";
+	}
+	
+	@RequestMapping(value="/eliminar/{id}")
+	public String eliminar(@PathVariable(value="id") Long id){
+		
+		if(id>0) {
+			mofService.delete(id);
+		}
+		
+		return "redirect:/listarMateriales";
 	}
 }

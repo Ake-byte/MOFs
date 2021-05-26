@@ -11,56 +11,32 @@
 
 
 
-					<form th:action="@{/formMaterial}" th:object="${mof}" method="post"
+					<form th:action="@{/formPrueba}" th:object="${expedientemof}" method="post"
 						enctype="multipart/form-data">
 						<div class="form-group row">
-							<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+							<label for="nombre" class="col-sm-2 col-form-label">Nombre de la Prueba</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control"
-									th:field="*{nombreCompuesto}" />
+									th:field="*{nombrePrueba}" />
 							</div>
 						</div>
-
+						  
 						<div class="form-group row">
-							<label for="descripcion" class="col-sm-2 col-form-label">F&oacute;rmula</label>
+							<label for="file" class="col-sm-2 col-form-label">Imagen</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" th:field="*{formula}" />
-							</div>
-						</div>
-
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">Clasificaci&oacute;n
-							</label>
-							<div class="col-sm-6">
-								<select id="optiontag" name="clasificacion" th:field="*{clasificacionmof}">
-									<option th:each="clasificacionmof : ${clasificacion}"
-										th:value="${clasificacionmof.id}"
-										th:utext="${clasificacionmof.nombreClasificacion}"
-										/>
-								</select>
+								<input type="file" name="file" class="form-control" />
 							</div>
 						</div>
 						
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">Nombre Clasificaci&oacute;n
-							</label>
-							<div class="col-sm-6">
-								<select id="optiontag" th:field="*{nombreClasificacion}">
-									<option th:each="clasificacionmof : ${clasificacion}"
-										th:value="${clasificacionmof.nombreClasificacion}"
-										th:utext="${clasificacionmof.nombreClasificacion}"
-										/>
-								</select>
-							</div>
-						</div>
-
+						
 						<div class="form-group row">
 							<div class="col-sm-6">
 								<input type="submit" value="Guardar" class="btn-primary" />
 							</div>
 						</div>
+						<!--  <input type="hidden" th:value="${mof.id}" th:field="*{mof}" />-->
 						<input type="hidden" th:field="*{id}" />
-						
+						<input type="hidden" th:value="${expedientemof.mof}" th:field="*{mof}" />
 						
 
 					</form>

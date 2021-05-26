@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="clasificacionmof", schema = "public")
@@ -23,9 +24,11 @@ public class ClasificacionMOF implements Serializable{
 	@Column(name = "id_clasificacion")
 	private Long id;
 	
+	//@NotEmpty
 	@Column(name = "nombre_clasificacion")
 	private String nombreClasificacion;
 	
+	//@NotEmpty
 	@Column(name = "descripcion_clasificacion")
 	private String descripcionClasificacion;
 	

@@ -12,7 +12,7 @@
 			<div class="container py-4">
 				<nav class="navbar navbar-light bg-light">
 					<div class="container-fluid">
-						<a th:href="@{/formMaterial}" class="btn btn-primary btn-xs">Crear
+						<a th:href="@{/formPrueba/} + ${mof.id}" class="btn btn-primary btn-xs">Crear
 							Expediente</a>
 						<form class="d-flex">
 							<input class="form-control me-2" type="search"
@@ -25,18 +25,24 @@
 					<thead>
 						<tr>
 							<th>id</th>
-							<th>Nombre del Expediente</th>
-							<th>Investigadores Responsables</th>
+							<th>Nombre Prueba</th>
 							<th>&Uacute;ltima modificaci&oacute;n</th>
+							<th>Modificar</th>
+							<th>Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="expedientes: ${expedientemof}">
+						<tr th:each="expedientes: ${mof.expedientesMOF}">
 							<td><a class="btn btn-primary btn-xs"
 								th:href="@{/expedienteMaterial/} + ${expedientes.id}" th:text="${expedientes.id}"></a></td>
-							<td th:text="${expedientes.nombreExpediente}"></td>
-							<td></td>
+							<td th:text="${expedientes.nombrePrueba}"></td>
 							<td th:text="${expedientes.fecha}"></td>
+							<td><a class="btn btn-primary btn-xs"
+								th:href="@{/formPrueba/} + ${expedientes.id}" th:text="'Modificar'"></a></td>
+							<td><a class="btn btn-danger btn-xs"
+								th:href="@{/eliminarPrueba/} + ${expedientes.id}" th:text="'Eliminar'">
+								<!--  onclick="return confirm('Estás seguro que quieres eliminar?');"-->
+								</a></td>
 						</tr>
 					</tbody>
 				</table>

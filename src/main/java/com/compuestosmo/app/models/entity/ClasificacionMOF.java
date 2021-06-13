@@ -16,7 +16,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name="clasificacionmof", schema = "public")
+@Table(name="clasificacionmof")
 public class ClasificacionMOF implements Serializable{
 
 	@Id

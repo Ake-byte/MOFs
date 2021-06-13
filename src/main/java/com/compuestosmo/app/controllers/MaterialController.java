@@ -44,7 +44,8 @@ public class MaterialController {
 	@Autowired
 	private IClasificacionMOFService clasificacionService;
 	
-	@RequestMapping(value="listarMateriales", method=RequestMethod.GET)
+	//@RequestMapping(value={"/listarMateriales", "/"}, method=RequestMethod.GET)
+	@RequestMapping(value="/listarMateriales", method=RequestMethod.GET)
 	public String listar(Model model) {
 		model.addAttribute("titulo", "Listado de Materiales");
 		model.addAttribute("materiales", mofdao.findAll());
@@ -109,6 +110,17 @@ public class MaterialController {
 			return "formMaterial";
 		}
 
+		List<ClasificacionMOF> nombreClasificacion = clasificacionService.findall();
+		
+		ClasificacionMOF clasificacionmof = mof.getClasificacionmof();
+		
+		for(int i = 0; i < nombreClasificacion.size() ; i++) {
+			if(nombreClasificacion.get(i).equals(clasificacionmof)) {
+				mof.setNombreClasificacion(nombreClasificacion.get(i).getNombreClasificacion());
+				break;
+			}
+		}
+		
 		
 		mofdao.save(mof);
 		status.setComplete();

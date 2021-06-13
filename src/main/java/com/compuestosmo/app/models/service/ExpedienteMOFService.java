@@ -7,13 +7,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.compuestosmo.app.models.dao.IExpedienteMOFDAO;
+import com.compuestosmo.app.models.dao.IPruebasMOFDAO;
 import com.compuestosmo.app.models.entity.ExpedienteMOF;
+import com.compuestosmo.app.models.entity.PruebasMOF;
 
 @Service
 public class ExpedienteMOFService implements IExpedienteMOFService{
 
 	@Autowired
 	private IExpedienteMOFDAO expedienteMOFDAO;
+	
+	@Autowired
+	private IPruebasMOFDAO pruebasMOFDAO;
 	
 	@Override
 	@Transactional(readOnly=true)
@@ -38,6 +43,12 @@ public class ExpedienteMOFService implements IExpedienteMOFService{
 	@Transactional
 	public void delete(Long id) {
 		expedienteMOFDAO.deleteById(id);
+		
+	}
+
+	@Override
+	public void savePrueba(PruebasMOF pruebamof) {
+		pruebasMOFDAO.save(pruebamof);
 		
 	}
 

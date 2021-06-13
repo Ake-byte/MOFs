@@ -11,10 +11,10 @@
 
 
 
-					<form th:action="@{/formPrueba}" th:object="${expedientemof}" method="post"
+					<form th:action="@{/formPrueba}" th:object="${pruebamof}" method="post"
 						enctype="multipart/form-data">
 						<div class="form-group row">
-							<label for="nombre" class="col-sm-2 col-form-label">Nombre de la Prueba</label>
+							<label for="nombre" class="col-sm-2 col-form-label">Nombre de la Figura/Gr&aacute;fica</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control"
 									th:field="*{nombrePrueba}" />
@@ -36,8 +36,7 @@
 						</div>
 						<!--  <input type="hidden" th:value="${mof.id}" th:field="*{mof}" />-->
 						<input type="hidden" th:field="*{id}" />
-						<input type="hidden" th:value="${expedientemof.mof}" th:field="*{mof}" />
-						
+						<input type="hidden" th:value="${pruebamof.expedientes}" th:field="*{expedientes}" />						
 
 					</form>
 				</div>

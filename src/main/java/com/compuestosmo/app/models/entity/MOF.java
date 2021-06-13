@@ -23,7 +23,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "mof", schema = "public")
+@Table(name = "mof")
 public class MOF implements Serializable {
 
 	@Id

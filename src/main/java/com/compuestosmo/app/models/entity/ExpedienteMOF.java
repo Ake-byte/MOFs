@@ -1,8 +1,11 @@
 package com.compuestosmo.app.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -19,7 +23,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="expedientes", schema = "public")
+@Table(name="expedientes")
 public class ExpedienteMOF implements Serializable{
 
 	@Id
@@ -28,16 +32,12 @@ public class ExpedienteMOF implements Serializable{
 	private Long id;
 	
 	//Investigadores Responsables
-	//@NotEmpty
-	@Column(name = "nombre_prueba")
-	private String nombrePrueba;
+
+	@Column(name = "nombre_seccion")
+	private String nombreSeccion;
 	
-	//@NotEmpty
-	@Column(name = "descripcion_prueba")
-	private String descripcionPrueba;
-	
-	private String imagen;
-	
+	@Column(name = "descripcion_seccion")
+	private String descripcionSeccion;
 	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha")
@@ -51,6 +51,13 @@ public class ExpedienteMOF implements Serializable{
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "mof_id")
 	private MOF mof;
+	
+	@OneToMany(mappedBy = "expedientes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<PruebasMOF> pruebasMOF;
+	
+	public ExpedienteMOF() {
+		pruebasMOF = new ArrayList<PruebasMOF>();
+	}
 	
 	public Long getId() {
 		return id;
@@ -82,34 +89,33 @@ public class ExpedienteMOF implements Serializable{
 	}
 	
 	
-
-	public String getNombrePrueba() {
-		return nombrePrueba;
+	public String getNombreSeccion() {
+		return nombreSeccion;
 	}
 
-
-	public void setNombrePrueba(String nombrePrueba) {
-		this.nombrePrueba = nombrePrueba;
+	public void setNombreSeccion(String nombreSeccion) {
+		this.nombreSeccion = nombreSeccion;
 	}
 
-
-	public String getDescripcionPrueba() {
-		return descripcionPrueba;
+	
+	public String getDescripcionSeccion() {
+		return descripcionSeccion;
 	}
 
-
-	public void setDescripcionPrueba(String descripcionPrueba) {
-		this.descripcionPrueba = descripcionPrueba;
+	public void setDescripcionSeccion(String descripcionSeccion) {
+		this.descripcionSeccion = descripcionSeccion;
 	}
 
-
-	public String getImagen() {
-		return imagen;
+	public List<PruebasMOF> getPruebasMOF() {
+		return pruebasMOF;
 	}
 
-
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
+	public void setPruebasMOF(List<PruebasMOF> pruebasMOF) {
+		this.pruebasMOF = pruebasMOF;
+	}
+	
+	public void addPruebas(PruebasMOF pruebaMOF) {
+		pruebasMOF.add(pruebaMOF);
 	}
 
 	private static final long serialVersionUID = 1L;

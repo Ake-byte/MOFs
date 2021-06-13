@@ -1,23 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head">
-<style>
-img.zoom {
-    width: 350px;
-    height: 200px;
-    -webkit-transition: all .2s ease-in-out;
-    -moz-transition: all .2s ease-in-out;
-    -o-transition: all .2s ease-in-out;
-    -ms-transition: all .2s ease-in-out;
-}
- 
-.transition {
-    -webkit-transform: scale(1.8); 
-    -moz-transform: scale(1.8);
-    -o-transform: scale(1.8);
-    transform: scale(1.8);
-}
-</style>
 
 </head>
 <body>
@@ -26,15 +10,18 @@ img.zoom {
 	<div class="container">
 		<div class="card bg-light">
 			<div class="card-header">
-			<h5 th:text="${titulo}"></h5></div>
-			
-				<div class="card-group">
-					<!--  <th:block th:each="expediente: ${expedientemof.detallesExpediente}">-->
+				<h5 th:text="${titulo}"></h5>
+			</div>
+
+			<!-- <div class="card-group">
 						<div class="col-sm-6">
+						<div id="container">
 							<img th:if="${#strings.length(expedientemof.imagen)>0}"
 								class="zoom"
 								th:src="@{'/uploads/' + ${expedientemof.imagen}}"
 								th:alt="${expedientemof.imagen}" />
+						</div>
+							
 							<div class="card-body">
 								<h5 class="card-title" th:text="${expedientemof.nombrePrueba}"></h5>
 								<p class="card-text" th:text="${expedientemof.descripcionPrueba}"></p>
@@ -45,24 +32,59 @@ img.zoom {
 								</p>
 							</div>
 						</div>
-
-					<!--  </th:block>-->
 				</div>
-			
-			
+				 -->
+
+			<div class="card-body">
+				<div class="container py-4">
+					<nav class="navbar navbar-light bg-light">
+						<div class="container-fluid">
+							<a sec:authorize="hasRole('ROLE_ADMIN')"
+								th:href="@{/formPrueba/}+ ${expedientemof.id}"
+								class="btn btn-primary btn-xs">Crear Prueba</a>
+						</div>
+					</nav>
+					<div th:if="${#lists.isEmpty(expedientemof.pruebasMOF)}"
+						class="alert alert-info my-4"
+						th:text="'No hay registros en la secci&oacute;n: ' + ${expedientemof.nombreSeccion}">
+					</div>
+
+					<!--  <table th:if="${not #lists.isEmpty(clasificacion.listaMOFs)}" class="table">-->
+					<table th:if="${not #lists.isEmpty(expedientemof.pruebasMOF)}"
+						class="table">
+						<thead class="table-light">
+							<tr>
+								<th>id</th>
+								<th>Nombre</th>
+								<th>Descripci&oacute;n</th>								
+								<th>Modificar</th>
+								<th>Eliminar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="pruebas: ${expedientemof.pruebasMOF}">
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/fichaMaterial/} + ${pruebas.id}"
+									th:text="${pruebas.id}"></a></td>
+								<td th:text="${pruebas.nombrePrueba}"></td>
+								<th></th>
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/formPrueba/} + ${expedientemof.id} + '/' + ${pruebas.id}"
+									th:text="'Modificar'"></a></td>
+								<td><a class="btn btn-danger btn-xs"
+									th:href="@{/eliminarPrueba/} + ${expedientemof.id} + '/' + ${pruebas.id}"
+									th:text="'Eliminar'"> <!--  onclick="return confirm('Estás seguro que quieres eliminar?');"-->
+								</a></td>
+							</tr>
+						</tbody>
+					</table>
+
+				</div>
+			</div>
 		</div>
 	</div>
-	
+
 	<footer th:replace="layout/layout :: footer"></footer>
-	<!--  <script th:src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>-->
-	<script>
-$(document).ready(function(){
-    $('.zoom').hover(function() {
-        $(this).addClass('transition');
-    }, function() {
-        $(this).removeClass('transition');
-    });
-});
-</script>
+
 </body>
 </html>

@@ -13,7 +13,7 @@
 			</div>
 			<nav class="navbar navbar-light bg-light">
 				<div class="container-fluid">
-					<a th:href="@{/formPrueba/} + ${mof.id}"
+					<a th:href="@{/formSeccion/} + ${mof.id}"
 						class="btn btn-primary btn-xs">Crear Expediente</a>
 				</div>
 			</nav>
@@ -94,13 +94,13 @@
 												<td><a class="btn btn-primary btn-xs"
 													th:href="@{/expedienteMaterial/} + ${expedientes.id}"
 													th:text="${expedientes.id}"></a></td>
-												<td th:text="${expedientes.nombrePrueba}"></td>
+												<td th:text="${expedientes.nombreSeccion}"></td>
 												<td th:text="${expedientes.fecha}"></td>
 												<td><a class="btn btn-primary btn-xs"
-													th:href="@{/formPrueba/} + ${mof.id} + '/' + ${expedientes.id}"
+													th:href="@{/formSeccion/} + ${mof.id} + '/' + ${expedientes.id}"
 													th:text="'Modificar'"></a></td>
 												<td><a class="btn btn-danger btn-xs"
-													th:href="@{/eliminarPrueba/} + ${expedientes.id}"
+													th:href="@{/eliminarSeccion/} + ${mof.id} + '/' + ${expedientes.id}"
 													th:text="'Eliminar'"> <!--  onclick="return confirm('Estás seguro que quieres eliminar?');"-->
 												</a></td>
 											</tr>

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="card bg-light">
+		<div class="card-header" th:text="${titulo}"></div>
+		<div class="card-body">
+			<div class="container py-4">
+				<nav class="navbar navbar-light bg-light">
+					<div class="container-fluid">
+						<form class="d-flex">
+							<input class="form-control me-2" type="search"
+								placeholder="Buscar" aria-label="Search">
+							<button class="btn btn-outline-success" type="submit">Buscar</button>
+						</form>
+					</div>
+				</nav>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>Nombre</th>
+							<th>Apellido Paterno</th>
+							<th>Apellido Materno</th>
+							<th>Correo</th>
+							<th>Directores</th>
+							<th></th>
+							<th>Rol</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
+							<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="usuarios: ${usuario}">
+							<td><a class="btn btn-primary btn-xs"
+								th:text="${usuarios.id}"></a></td>
+							<td th:text="${usuarios.nombre}"></td>
+							<td th:text="${usuarios.apellidoPaterno}"></td>
+							<td th:text="${usuarios.apellidoMaterno}"></td>
+							<td th:text="${usuarios.email}"></td>
+							<td th:text="${usuarios.director1}"></td>
+							<td th:text="${usuarios.director2}"></td>
+							<td th:text="${usuarios.roles}">
+								<!--  <table class="table table-bordered">
+									<th colspan="3">Inner Table</th>
+									<tr th:each="rol: ${usuarios.roles}">
+										<td th:text="${rol.id}"></td>
+										<td th:text="${rol.authority}"></td>
+									</tr>
+								</table> <span th:if="${#lists.contains(usuarios.roles, 'ROLE_USER1')}">Sin
+									Permisos</span> <span
+								th:unless="${#lists.contains(usuarios.roles, 'ROLE_USER1')}">Con
+									permisos</span>
+								-->
+							</td>
+							<td><a class="btn btn-primary btn-xs"
+								sec:authorize="hasRole('ROLE_ADMIN')"
+								th:href="@{/formClasificacion/} " th:text="'Editar'"></a></td>
+							<td><a class="btn btn-danger btn-xs"
+								sec:authorize="hasRole('ROLE_ADMIN')"
+								th:href="@{/eliminarClasificacion/} " th:text="'Eliminar'"
+								onclick="return confirm('Estás seguro que quieres eliminar?');">
+							</a></td>
+						</tr>
+					</tbody>
+				</table>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>id</th>
+							<th>ROL</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!--  <tr th:each="rol: ${usuarios.roles}">
+							<td><a class="btn btn-primary btn-xs"
+								th:text="${rol.id}"></a></td>
+							<td th:text="${rol.idUsuario}"></td>
+								<table class="table table-bordered">
+									<th colspan="3">Inner Table</th>
+									<tr th:each="rol: ${usuarios.roles}">
+										<td th:text="${rol.id}"></td>
+										<td th:text="${rol.authority}"></td>
+									</tr>
+								</table> <span th:if="${#lists.contains(usuarios.roles, 'ROLE_USER1')}">Sin
+									Permisos</span> <span
+								th:unless="${#lists.contains(usuarios.roles, 'ROLE_USER1')}">Con
+									permisos</span>
+								-->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

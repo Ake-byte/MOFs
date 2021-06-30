@@ -11,12 +11,19 @@
 
 
 
-					<form th:action="@{/formSeccion}" th:object="${expedientemof}" method="post">
+					<form th:action="@{/formSeccion}" th:object="${seccionE}" method="post">
 						<div class="form-group row">
 							<label for="nombre" class="col-sm-2 col-form-label">Nombre de la Secci&oacute;n</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control"
 									th:field="*{nombreSeccion}" />
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="nombre" class="col-sm-2 col-form-label">Descripci&oacute;n de la Secci&oacute;n</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control"
+									th:field="*{descripcionSeccion}" />
 							</div>
 						</div>
 						  
@@ -26,9 +33,8 @@
 								<input type="submit" value="Guardar" class="btn-primary" />
 							</div>
 						</div>
-						<!--  <input type="hidden" th:value="${mof.id}" th:field="*{mof}" />-->
 						<input type="hidden" th:field="*{id}" />
-						<input type="hidden" th:value="${expedientemof.mof}" th:field="*{mof}" />
+						<input type="hidden" th:value="${seccionE.expedientes}" th:field="*{expedientes}" />
 						
 
 					</form>

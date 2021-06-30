@@ -11,12 +11,6 @@
 				class="alert alert-info my-4"
 				th:text="'No hay expedientes del compuesto ' + ${mof.nombreCompuesto}">
 			</div>
-			<nav class="navbar navbar-light bg-light">
-				<div class="container-fluid">
-					<a th:href="@{/formSeccion/} + ${mof.id}"
-						class="btn btn-primary btn-xs">Crear Expediente</a>
-				</div>
-			</nav>
 			<div class="card-body" th:each="mof: ${mof}">
 
 				<div class="container">
@@ -33,15 +27,14 @@
 							<li class="nav-item"><a class="nav-link" id="cif-tab"
 								data-toggle="tab" href="#fig3d" role="tab" aria-controls="fig3d"
 								aria-selected="false">Figura 3D</a></li>
+								<!-- https://blokhin.github.io/cif-js-engines/ -->
 							<li class="nav-item"><a class="nav-link" id="patrondif-tab"
 								data-toggle="tab" href="#patrondif" role="tab"
 								aria-controls="patrondif" aria-selected="false">Patr&oacute;n
 									de Difracci&oacute;n</a></li>
 							<li class="nav-item"
-								th:unless="${#lists.isEmpty(mof.expedientesMOF)}"><a
-								class="nav-link" id="expediente-tab" data-toggle="tab"
-								href="#expediente" role="tab" aria-controls="expediente"
-								aria-selected="false">Expediente</a></li>
+								>
+								<a class="nav-link" th:href="@{/listarExpedientes/} + ${mof.id}"> Ver Expediente</a>
 						</ul>
 						<div class="card-body">
 							<div class="tab-content" id="myTabContent">
@@ -79,7 +72,7 @@
 								</div>
 								<div class="tab-pane fade" id="expediente" role="tabpanel"
 									aria-labelledby="expediente-tab">
-									<table class="table table-striped">
+									<!--  <table class="table table-striped">
 										<thead>
 											<tr>
 												<th>id</th>
@@ -101,11 +94,12 @@
 													th:text="'Modificar'"></a></td>
 												<td><a class="btn btn-danger btn-xs"
 													th:href="@{/eliminarSeccion/} + ${mof.id} + '/' + ${expedientes.id}"
-													th:text="'Eliminar'"> <!--  onclick="return confirm('Estás seguro que quieres eliminar?');"-->
+													th:text="'Eliminar'"> 
 												</a></td>
 											</tr>
 										</tbody>
 									</table>
+									-->
 								</div>
 							</div>
 						</div>

@@ -11,6 +11,8 @@ public interface IUsuarioService {
 	public void save(Usuario usuario);
 
 	public Usuario findOne(Long id);
+	
+	public Usuario findByEmail(String email);
 
 	public void delete(Long id);
 }

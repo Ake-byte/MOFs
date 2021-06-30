@@ -2,14 +2,21 @@ package com.compuestosmo.app.controllers;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -25,9 +32,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.compuestosmo.app.models.entity.ExpedienteMOF;
 import com.compuestosmo.app.models.entity.MOF;
+import com.compuestosmo.app.models.entity.PruebasMOF;
+import com.compuestosmo.app.models.entity.SeccionesExpediente;
+import com.compuestosmo.app.models.entity.Usuario;
 import com.compuestosmo.app.models.service.IExpedienteMOFService;
 import com.compuestosmo.app.models.service.IMOFService;
+import com.compuestosmo.app.models.service.IPruebasMOFService;
+import com.compuestosmo.app.models.service.ISeccionesExpedienteService;
 import com.compuestosmo.app.models.service.IUploadFileService;
+import com.compuestosmo.app.models.service.IUsuarioService;
+import com.compuestosmo.app.models.util.PageRender;
 
 @Controller("/expedientemof")
 @SessionAttributes("expedientemof")
@@ -37,30 +51,67 @@ public class ExpedienteController {
 	@Autowired
 	private IMOFService mofService;
 
-
+	@Autowired
+	private IPruebasMOFService pruebasService;
+	
 	@Autowired
 	private IExpedienteMOFService expedienteService;
-
+	
+	@Autowired
+	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private ISeccionesExpedienteService seccionEService;
+	
 
 	@GetMapping(value = "/listarExpedientes/{id}")
 	public String verClasificacion(@PathVariable(value = "id") Long id, Map<String, Object> model) {
 		// ClasificacionMOF clasificacion = clasificacionMOFService.findOne(id);
 		MOF mof = mofService.findOne(id);
-
-		// ExpedienteMOF expediente = new ExpedienteMOF();
+		
+		//Usuario usuario = usuarioService.findOne(id);
+			
+		//
+		
+		//ExpedientesUsuarios expediente = 
 
 		if (mof == null) {
 			return "redirect:/listadoClasificacionMateriales";
 		}
 
 		model.put("mof", mof);
-		model.put("titulo", "Expediente MOF: " + mof.getNombreCompuesto());
+		model.put("titulo", "Expedientes en: " + mof.getNombreCompuesto());
+		//((Model) model).addAttribute("usuario", usuario.getNombre() + " " + usuario.getApellidoPaterno() + " " + usuario.getApellidoMaterno());
 
 		return "listarExpedientes";
 	}
 
 	@GetMapping(value = "/expedienteMaterial/{id}")
-	public String verExpediente(@PathVariable(value = "id") Long id, Map<String, Object> model) {
+	public String verExpediente(@RequestParam(name="page",defaultValue="0") int page,
+			@PathVariable(value = "id") Long id, Map<String, Object> model) {
+		
+		Pageable pageRequest = PageRequest.of(page,4);
+		Page<PruebasMOF> prueba = pruebasService.findAll(pageRequest);
+		PageRender<PruebasMOF> pageRender = new PageRender<PruebasMOF>("/expedienteMaterial/" + id, prueba);
+		
+		//ExpedienteMOF expedienteMOF = expedienteService.findOne(id);
+		SeccionesExpediente expedienteMOF = seccionEService.findOne(id);
+		if (expedienteMOF == null) {
+			return "redirect:/listarExpedientes";
+		}
+
+		//model.put("expedientemof", expedienteMOF);
+		//model.put("titulo", expedienteMOF.getNombreSeccion());
+		((Model) model).addAttribute("prueba", prueba);
+		((Model) model).addAttribute("expedientemof", expedienteMOF);
+		((Model) model).addAttribute("page", pageRender);
+
+		return "expedienteMaterial";
+	}
+	
+	@GetMapping(value = "/verSecciones/{id}")
+	public String verSeccion(@PathVariable(value = "id") Long id, Map<String, Object> model) {
+		
 		ExpedienteMOF expedienteMOF = expedienteService.findOne(id);
 
 		if (expedienteMOF == null) {
@@ -68,14 +119,28 @@ public class ExpedienteController {
 		}
 
 		model.put("expedientemof", expedienteMOF);
-		model.put("titulo", expedienteMOF.getNombreSeccion());
+		model.put("titulo", "Secciones en el expediente de: " + expedienteMOF.getNombreUsuario());
+		//((Model) model).addAttribute("usuario", usuario.getNombre() + " " + usuario.getApellidoPaterno() + " " + usuario.getApellidoMaterno());
 
-		return "expedienteMaterial";
+		return "verSecciones";
 	}
 
-	@GetMapping("/formSeccion/{id}")
-	public String crearSeccion(@PathVariable(value="id") Long mofId, Map<String, Object> model) {
+	@GetMapping("/formExpediente/{id}")
+	public String crearExpediente(@PathVariable(value="id") Long mofId, Map<String, Object> model,
+			Authentication authentication,
+			HttpServletRequest request) {
 		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		List<Usuario> usuarios = usuarioService.findall();
+		Usuario usuario = null;
+		
+		for(int i = 0; i < usuarios.size(); i++) {
+			if(usuarios.get(i).getEmail().equals(auth.getName())) {
+				usuario = usuarios.get(i);
+				break;
+			}
+		}
 		
 		MOF mof = mofService.findOne(mofId);
 		if(mof == null) {
@@ -84,12 +149,51 @@ public class ExpedienteController {
 		
 		ExpedienteMOF expedienteMOF = new ExpedienteMOF();
 		expedienteMOF.setMof(mof);
+		expedienteMOF.setUsers(usuario);
+		String nombreUsuario = usuario.getNombre() + " " + usuario.getApellidoPaterno() + " " + usuario.getApellidoMaterno();
+		expedienteMOF.setNombreUsuario(nombreUsuario);
 		
 		model.put("expedientemof", expedienteMOF);
+		model.put("titulo", "Formulario Expediente");
+		return "formExpediente";
+	}
+	
+	@GetMapping("/formSeccion/{id}")
+	public String crearSeccion(@PathVariable(value="id") Long expedienteId, Map<String, Object> model) {
+		
+		
+		ExpedienteMOF expedienteMOF = expedienteService.findOne(expedienteId);
+		if(expedienteMOF == null) {
+			return "redirect:/listarMateriales";
+		}
+		
+		SeccionesExpediente se = new SeccionesExpediente();
+		se.setExpedientes(expedienteMOF);
+		
+		model.put("seccionE", se);
 		model.put("titulo", "Formulario Sección");
 		return "formSeccion";
 	}
 
+	/*
+	@RequestMapping(value = "/formSeccion/{idMOF}/{id}")
+	public String editarExpediente(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
+		ExpedienteMOF expedienteMOF = null;
+		if (id > 0) {
+			expedienteMOF = expedienteService.findOne(id);
+			if(expedienteMOF == null) {
+				flash.addFlashAttribute("error", "No existe este MOF en base de datos");
+				return "redirect:/listarExpedientes";
+			}
+		} else {
+			
+			return "redirect:/listarExpedientes";
+		}
+		model.put("expedientemof", expedienteMOF);
+		model.put("titulo", "Editar Sección");
+		return "formSeccion";
+	}*/
+	
 	@RequestMapping(value = "/formSeccion/{idMOF}/{id}")
 	public String editar(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
 		ExpedienteMOF expedienteMOF = null;
@@ -109,7 +213,7 @@ public class ExpedienteController {
 	}
 
 	@PostMapping(value = "formSeccion")
-	public String guardar(@Valid ExpedienteMOF expedientemof,
+	public String guardar(@Valid SeccionesExpediente seccionE,
 			BindingResult result, Model model, RedirectAttributes flash,
 			SessionStatus status) {
 			//
@@ -119,14 +223,36 @@ public class ExpedienteController {
 			return "formSeccion";
 		}
 
-		String mensajeFlash = (expedientemof.getId() != null)? "Se han editado datos en el expediente." : "Se ha agregado una sección al expediente";
+		String mensajeFlash = (seccionE.getId() != null)? "Se han editado datos en el expediente." : "Se ha agregado una sección al expediente";
+		expedienteService.saveSeccion(seccionE);
+		
+		Long idExpediente = seccionE.getExpedientes().getId();
+		ExpedienteMOF expedientemof = expedienteService.findOne(idExpediente);
+		
+		status.setComplete();
+		flash.addFlashAttribute("success", mensajeFlash);
+		return "redirect:/verSecciones/" + expedientemof.getId();
+	}
+
+	
+	@PostMapping(value = "formExpediente")
+	public String guardarExpediente(@Valid ExpedienteMOF expedientemof,
+			BindingResult result, Model model, RedirectAttributes flash,
+			SessionStatus status) {
+			//
+
+		if (result.hasErrors()) {
+			model.addAttribute("titulo", "Formulario Nuevo Expediente");
+			return "formSeccion";
+		}
+
+		String mensajeFlash = (expedientemof.getId() != null)? "Se ha agregado un expediente." : "Se ha agregado agregado un expediente";
 		mofService.saveExpediente(expedientemof);
 		
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
-		return "redirect:/fichaMaterial/" + expedientemof.getMof().getId();
+		return "redirect:/listarExpedientes/" + expedientemof.getMof().getId();
 	}
-
 
 	@RequestMapping(value = "/eliminarSeccion/{idMOF}/{id}")
 	public String eliminar(@PathVariable(value = "id") Long id, @PathVariable(value = "idMOF") Long idMOF, RedirectAttributes flash) {

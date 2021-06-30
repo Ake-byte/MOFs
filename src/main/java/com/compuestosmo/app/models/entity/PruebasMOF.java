@@ -43,8 +43,8 @@ public class PruebasMOF implements Serializable{
 	}
 	
 	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "expediente_id")
-	private ExpedienteMOF expedientes;
+	@JoinColumn(name = "seccion_expediente_id")
+	private SeccionesExpediente secciones_expedientes;
 	
 	public Long getId() {
 		return id;
@@ -104,16 +104,17 @@ public class PruebasMOF implements Serializable{
 		this.fecha = fecha;
 	}
 	
+		
 	
 
-	public ExpedienteMOF getExpedientes() {
-		return expedientes;
+	public SeccionesExpediente getSecciones_expedientes() {
+		return secciones_expedientes;
 	}
 
 
 
-	public void setExpedientes(ExpedienteMOF expedientes) {
-		this.expedientes = expedientes;
+	public void setSecciones_expedientes(SeccionesExpediente secciones_expedientes) {
+		this.secciones_expedientes = secciones_expedientes;
 	}
 
 	private static final long serialVersionUID = 1L;

@@ -28,6 +28,7 @@ import com.compuestosmo.app.models.entity.Usuario;
 import com.compuestosmo.app.models.service.IRoleService;
 import com.compuestosmo.app.models.service.IRolesUsuarioService;
 import com.compuestosmo.app.models.service.IUsuarioService;
+import com.compuestosmo.app.models.util.MailSenderService;
 
 @Controller
 public class LoginController {
@@ -43,6 +44,9 @@ public class LoginController {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
+	
+	@Autowired(required = true)
+    private MailSenderService mailService;
 
 	@GetMapping("/login")
 	public String login(@RequestParam(value = "error", required = false) String error,
@@ -77,8 +81,15 @@ public class LoginController {
 	}
 
 	@PostMapping(value = "/register")
-	public String guardar(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status) {
+	public String guardar(@Valid Usuario usuario, RedirectAttributes flash, BindingResult result, Model model, SessionStatus status) throws Exception {
 
+		Usuario usuarioExistente = usuarioService.findByEmail(usuario.getEmail()); 
+		
+		if(usuarioExistente != null) {
+			flash.addFlashAttribute("error", "Ya existe un usuario con ese correo");
+			return "register";
+		}
+		
 		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Registro de Usuario");
 			return "register";
@@ -122,6 +133,8 @@ public class LoginController {
 		
 		roleService.saveUsuario(usuario);
 		roleService.save(role);
+		RolesUsuarios rolUsuario = usuario.getRoles_usuarios();
+		mailService.sendEmail(usuario.getEmail(), "Bienvenido al sistema BD-LNCAE", "Tu permiso actual es: " + rolUsuario.getNombreRol(), usuario);
 		
 
 		status.setComplete();

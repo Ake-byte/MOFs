@@ -31,6 +31,9 @@ public class RolesUsuarios implements Serializable {
 	@Column(name = "descripcion_rol")
 	private String descripcionRol;
 	
+	@Column(name = "nombre_bd")
+	private String nombreBD;
+	
 	@OneToMany(mappedBy="roles_usuarios" ,fetch=FetchType.LAZY, cascade=CascadeType.ALL)
 	//private List<Role> roles;
 	private List<Usuario> usuarios;
@@ -74,8 +77,22 @@ public class RolesUsuarios implements Serializable {
 	public void setDescripcionRol(String descripcionRol) {
 		this.descripcionRol = descripcionRol;
 	}
+	
+	
 
 	
+
+	public String getNombreBD() {
+		return nombreBD;
+	}
+
+
+
+	public void setNombreBD(String nombreBD) {
+		this.nombreBD = nombreBD;
+	}
+
+
 
 	public List<Usuario> getUsuarios() {
 		return usuarios;

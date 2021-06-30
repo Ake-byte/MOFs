@@ -1,9 +1,9 @@
 package com.compuestosmo.app.models.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.PagingAndSortingRepository;
 
 import com.compuestosmo.app.models.entity.PruebasMOF;
 
-public interface IPruebasMOFDAO extends CrudRepository<PruebasMOF, Long>{
+public interface IPruebasMOFDAO extends PagingAndSortingRepository<PruebasMOF, Long>{
 
 }

@@ -12,7 +12,7 @@
 			<div class="container py-4">
 				<nav class="navbar navbar-light bg-light">
 					<div class="container-fluid">
-						<a th:href="@{/formPrueba/} + ${mof.id}" class="btn btn-primary btn-xs">Crear
+						<a th:href="@{/formExpediente/} + ${mof.id}" class="btn btn-primary btn-xs">Crear
 							Expediente</a>
 						<form class="d-flex">
 							<input class="form-control me-2" type="search"
@@ -25,7 +25,7 @@
 					<thead>
 						<tr>
 							<th>id</th>
-							<th>Nombre Prueba</th>
+							<th>Usuario</th>
 							<th>&Uacute;ltima modificaci&oacute;n</th>
 							<th>Modificar</th>
 							<th>Eliminar</th>
@@ -34,9 +34,9 @@
 					<tbody>
 						<tr th:each="expedientes: ${mof.expedientesMOF}">
 							<td><a class="btn btn-primary btn-xs"
-								th:href="@{/expedienteMaterial/} + ${expedientes.id}" th:text="${expedientes.id}"></a></td>
-							<td th:text="${expedientes.nombrePrueba}"></td>
-							<td th:text="${expedientes.fecha}"></td>
+								th:href="@{/verSecciones/} + ${expedientes.id}" th:text="${expedientes.id}"></a></td>
+							<td th:text="${expedientes.nombreUsuario}"></td>
+							<td></td>
 							<td><a class="btn btn-primary btn-xs"
 								th:href="@{/formPrueba/} + ${expedientes.id}" th:text="'Modificar'"></a></td>
 							<td><a class="btn btn-danger btn-xs"

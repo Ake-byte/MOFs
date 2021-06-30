@@ -26,8 +26,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.compuestosmo.app.models.entity.ExpedienteMOF;
 import com.compuestosmo.app.models.entity.MOF;
 import com.compuestosmo.app.models.entity.PruebasMOF;
+import com.compuestosmo.app.models.entity.SeccionesExpediente;
 import com.compuestosmo.app.models.service.IExpedienteMOFService;
 import com.compuestosmo.app.models.service.IPruebasMOFService;
+import com.compuestosmo.app.models.service.ISeccionesExpedienteService;
 import com.compuestosmo.app.models.service.IUploadFileService;
 
 @Controller("/pruebasmof")
@@ -37,7 +39,7 @@ public class PruebaController {
 	private IPruebasMOFService pruebaService;
 	
 	@Autowired
-	private IExpedienteMOFService expedienteService;
+	private ISeccionesExpedienteService seccionesEService;
 	
 	@Autowired
 	private IUploadFileService uploadFileService;
@@ -46,13 +48,14 @@ public class PruebaController {
 	public String crearPrueba(@PathVariable(value="id") Long seccionId, Map<String, Object> model) {
 		
 		
-		ExpedienteMOF expedientemof = expedienteService.findOne(seccionId);
-		if(expedientemof == null) {
+		SeccionesExpediente seccionesE = seccionesEService.findOne(seccionId);
+		if(seccionesE == null) {
 			return "redirect:/listarMateriales";
 		}
 		
 		PruebasMOF pruebaMOF = new PruebasMOF();
-		pruebaMOF.setExpedientes(expedientemof);
+		//pruebaMOF.setExpedientes(expedientemof);
+		pruebaMOF.setSecciones_expedientes(seccionesE);
 		
 		model.put("pruebamof", pruebaMOF);
 		model.put("titulo", "Formulario Prueba");
@@ -109,18 +112,18 @@ public class PruebaController {
 			pruebamof.setImagen("");
 		}
 		String mensajeFlash = (pruebamof.getId() != null)? "Se han editado datos de las pruebas." : "Se ha agregado la prueba al expediente";
-		expedienteService.savePrueba(pruebamof);
+		seccionesEService.savePrueba(pruebamof);
 		
-		Long idExpediente = pruebamof.getExpedientes().getId();
+		Long idSeccion = pruebamof.getSecciones_expedientes().getId();
 		
-		ExpedienteMOF expedientemof = null;
+		SeccionesExpediente seccionesE = null;
 		
-		expedientemof = expedienteService.findOne(idExpediente);
+		seccionesE = seccionesEService.findOne(idSeccion);
 		
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
 		//return "redirect:/fichaMaterial/" + pruebamof.getExpedientes().getId();
-		return "redirect:/expedienteMaterial/" + expedientemof.getId();
+		return "redirect:/expedienteMaterial/" + seccionesE.getId();
 	}
 	
 	@GetMapping(value = "/uploads/{filename:.+}")
@@ -150,9 +153,9 @@ public class PruebaController {
 
 		}
 		
-		ExpedienteMOF expedientemof = prueba.getExpedientes();
+		SeccionesExpediente seccionesE = prueba.getSecciones_expedientes();
 		//MOF mof = expedientemof.getMof();
 		//ExpedienteMOF expedientemof = expedienteService.findOne();
-		return "redirect:/expedienteMaterial/" + expedientemof.getId(); 
+		return "redirect:/expedienteMaterial/" + seccionesE.getId(); 
 	}
 }

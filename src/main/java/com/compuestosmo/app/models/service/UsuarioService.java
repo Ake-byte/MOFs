@@ -38,4 +38,10 @@ public class UsuarioService implements IUsuarioService {
 
 	}
 
+	@Override
+	public Usuario findByEmail(String email) {
+		
+		return usuariodao.findByEmail(email);
+	}
+
 }

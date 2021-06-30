@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.compuestosmo.app.models.dao.IExpedienteMOFDAO;
 import com.compuestosmo.app.models.dao.IPruebasMOFDAO;
+import com.compuestosmo.app.models.dao.ISeccionesExpedienteDAO;
 import com.compuestosmo.app.models.entity.ExpedienteMOF;
 import com.compuestosmo.app.models.entity.PruebasMOF;
+import com.compuestosmo.app.models.entity.SeccionesExpediente;
 
 @Service
 public class ExpedienteMOFService implements IExpedienteMOFService{
@@ -18,7 +20,7 @@ public class ExpedienteMOFService implements IExpedienteMOFService{
 	private IExpedienteMOFDAO expedienteMOFDAO;
 	
 	@Autowired
-	private IPruebasMOFDAO pruebasMOFDAO;
+	private ISeccionesExpedienteDAO seccionesEDAO;
 	
 	@Override
 	@Transactional(readOnly=true)
@@ -47,9 +49,9 @@ public class ExpedienteMOFService implements IExpedienteMOFService{
 	}
 
 	@Override
-	public void savePrueba(PruebasMOF pruebamof) {
-		pruebasMOFDAO.save(pruebamof);
-		
+	public void saveSeccion(SeccionesExpediente seccionExpediente) {
+		// TODO Auto-generated method stub
+		seccionesEDAO.save(seccionExpediente);
 	}
 
 }

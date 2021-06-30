@@ -66,9 +66,15 @@ public class Usuario implements Serializable{
 	@JoinColumn(name = "id_roles")
 	private RolesUsuarios roles_usuarios;
 	
+	//EXPEDIENTE
+	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<ExpedienteMOF> expedientesUMOF;
+	
 	public Usuario() {
 		roles = new ArrayList<Role>();
+		expedientesUMOF = new ArrayList<ExpedienteMOF>();
 	}
+	
 
 	public Long getId() {
 		return id;
@@ -155,12 +161,6 @@ public class Usuario implements Serializable{
 	}
 	
 	
-
-
-
-
-
-
 	public RolesUsuarios getRoles_usuarios() {
 		return roles_usuarios;
 	}
@@ -170,10 +170,18 @@ public class Usuario implements Serializable{
 	}
 
 
+	public List<ExpedienteMOF> getExpedientesUMOF() {
+		return expedientesUMOF;
+	}
 
 
+	public void setExpedientesUMOF(List<ExpedienteMOF> expedientesUMOF) {
+		this.expedientesUMOF = expedientesUMOF;
+	}
 
-
+	public void addExpedientes(ExpedienteMOF expedienteMOF) {
+		expedientesUMOF.add(expedienteMOF);
+	}
 
 
 	private static final long serialVersionUID = 1L;

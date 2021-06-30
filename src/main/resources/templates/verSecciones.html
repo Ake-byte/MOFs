@@ -12,6 +12,8 @@
 			<div class="container py-4">
 				<nav class="navbar navbar-light bg-light">
 					<div class="container-fluid">
+						<a th:href="@{/formSeccion/} + ${expedientemof.id}"
+							class="btn btn-primary btn-xs">Crear Secci&oacute;n</a>
 						<form class="d-flex">
 							<input class="form-control me-2" type="search"
 								placeholder="Buscar" aria-label="Search">
@@ -23,23 +25,26 @@
 					<thead>
 						<tr>
 							<th>id</th>
-							<th>Nombre</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+							<th>Nombre Secci&oacute;n</th>
+							<th>Descripci&oacute;n de la Secci&oacute;n</th>
+							<th>Modificar</th>
+							<th>Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="directores: ${director}">
+						<tr th:each="secciones: ${expedientemof.seccionesExpediente}">
 							<td><a class="btn btn-primary btn-xs"
-								th:href="@{/verDirector/} + ${clasificaciones.id}"
-								th:text="${directores.id}"></a></td>
-							<td th:text="${directores.nombre}"></td>
-							<td><a class="btn btn-primary btn-xs" sec:authorize="hasRole('ROLE_ADMIN')"
-								th:href="@{/formClasificacion/} + ${clasificaciones.id}" th:text="'Editar'"></a></td>
-							<td><a class="btn btn-danger btn-xs" sec:authorize="hasRole('ROLE_ADMIN')"
-								th:href="@{/eliminarClasificacion/} + ${clasificaciones.id}" th:text="'Eliminar'"
-								onclick="return confirm('Estás seguro que quieres eliminar?');">
-							</a></td>
+								th:href="@{/expedienteMaterial/} + ${secciones.id}"
+								th:text="${secciones.id}"></a></td>
+							<td th:text="${secciones.nombreSeccion}"></td>
+							<td th:text="${secciones.descripcionSeccion}"></td>
+							<!--  <td><a class="btn btn-primary btn-xs"
+								th:href="@{/formSeccion/} + ${mof.id} + '/' + ${expedientes.id}"
+								th:text="'Modificar'"></a></td>
+							<td><a class="btn btn-danger btn-xs"
+								th:href="@{/eliminarSeccion/} + ${mof.id} + '/' + ${expedientes.id}"
+								th:text="'Eliminar'"> </a></td>
+								-->
 						</tr>
 					</tbody>
 				</table>

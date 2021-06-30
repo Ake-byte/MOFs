@@ -48,37 +48,61 @@
 						class="alert alert-info my-4"
 						th:text="'No hay registros en la secci&oacute;n: ' + ${expedientemof.nombreSeccion}">
 					</div>
-
-					<!--  <table th:if="${not #lists.isEmpty(clasificacion.listaMOFs)}" class="table">-->
+					
+					<!--  <table  class="table">-->
 					<table th:if="${not #lists.isEmpty(expedientemof.pruebasMOF)}"
 						class="table">
+						
 						<thead class="table-light">
 							<tr>
 								<th>id</th>
+								<th>Imagen</th>
 								<th>Nombre</th>
-								<th>Descripci&oacute;n</th>								
+								<th>Descripci&oacute;n</th>
 								<th>Modificar</th>
 								<th>Eliminar</th>
 							</tr>
 						</thead>
 						<tbody>
+							<!-- 
 							<tr th:each="pruebas: ${expedientemof.pruebasMOF}">
 								<td><a class="btn btn-primary btn-xs"
 									th:href="@{/fichaMaterial/} + ${pruebas.id}"
 									th:text="${pruebas.id}"></a></td>
+								<td><img th:if="${#strings.length(pruebas.imagen)>0}"
+									th:src="@{'/uploads/' + ${pruebas.imagen}}"
+									th:alt="${pruebas.imagen}" /></td>
 								<td th:text="${pruebas.nombrePrueba}"></td>
-								<th></th>
+								<td th:text="${pruebas.descripcionPrueba}"></td>
 								<td><a class="btn btn-primary btn-xs"
 									th:href="@{/formPrueba/} + ${expedientemof.id} + '/' + ${pruebas.id}"
 									th:text="'Modificar'"></a></td>
 								<td><a class="btn btn-danger btn-xs"
 									th:href="@{/eliminarPrueba/} + ${expedientemof.id} + '/' + ${pruebas.id}"
-									th:text="'Eliminar'"> <!--  onclick="return confirm('Estás seguro que quieres eliminar?');"-->
+									th:text="'Eliminar'"> <!--  onclick="return confirm('Estás seguro que quieres eliminar?');"
+								</a></td>
+							</tr>
+							 -->
+							 <tr th:each="pruebas: ${prueba}">
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/fichaMaterial/} + ${pruebas.id}"
+									th:text="${pruebas.id}"></a></td>
+								<td><img th:if="${#strings.length(pruebas.imagen)>0}"
+									th:src="@{'/uploads/' + ${pruebas.imagen}}"
+									th:alt="${pruebas.imagen}" /></td>
+								<td th:text="${pruebas.nombrePrueba}"></td>
+								<td th:text="${pruebas.descripcionPrueba}"></td>
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/formPrueba/} + ${expedientemof.id} + '/' + ${pruebas.id}"
+									th:text="'Modificar'"></a></td>
+								<td><a class="btn btn-danger btn-xs"
+									th:href="@{/eliminarPrueba/} + ${expedientemof.id} + '/' + ${pruebas.id}"
+									th:text="'Eliminar'"> 
 								</a></td>
 							</tr>
 						</tbody>
 					</table>
-
+					<nav th:replace="paginator :: paginator"></nav>
 				</div>
 			</div>
 		</div>

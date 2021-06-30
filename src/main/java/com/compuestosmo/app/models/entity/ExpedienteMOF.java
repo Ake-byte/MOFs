@@ -31,14 +31,6 @@ public class ExpedienteMOF implements Serializable{
 	@Column(name = "expediente_id")
 	private Long id;
 	
-	//Investigadores Responsables
-
-	@Column(name = "nombre_seccion")
-	private String nombreSeccion;
-	
-	@Column(name = "descripcion_seccion")
-	private String descripcionSeccion;
-	
 	@Temporal(TemporalType.DATE)
 	@Column(name = "fecha")
 	private Date fecha;
@@ -52,12 +44,20 @@ public class ExpedienteMOF implements Serializable{
 	@JoinColumn(name = "mof_id")
 	private MOF mof;
 	
+	
+	@Column(name = "nombre_usuario")
+	private String nombreUsuario;
+	
 	@OneToMany(mappedBy = "expedientes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<PruebasMOF> pruebasMOF;
+	private List<SeccionesExpediente> seccionesExpediente;
 	
 	public ExpedienteMOF() {
-		pruebasMOF = new ArrayList<PruebasMOF>();
+		seccionesExpediente = new ArrayList<SeccionesExpediente>();
 	}
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name = "users_id")
+	private Usuario users;
 	
 	public Long getId() {
 		return id;
@@ -89,33 +89,40 @@ public class ExpedienteMOF implements Serializable{
 	}
 	
 	
-	public String getNombreSeccion() {
-		return nombreSeccion;
+	public List<SeccionesExpediente> getSeccionesExpediente() {
+		return seccionesExpediente;
 	}
 
-	public void setNombreSeccion(String nombreSeccion) {
-		this.nombreSeccion = nombreSeccion;
+
+	public void setSeccionesExpediente(List<SeccionesExpediente> seccionesExpediente) {
+		this.seccionesExpediente = seccionesExpediente;
+	}
+
+
+	public void addSeccion(SeccionesExpediente seccionExpediente) {
+		seccionesExpediente.add(seccionExpediente);
 	}
 
 	
-	public String getDescripcionSeccion() {
-		return descripcionSeccion;
+
+	public Usuario getUsers() {
+		return users;
 	}
 
-	public void setDescripcionSeccion(String descripcionSeccion) {
-		this.descripcionSeccion = descripcionSeccion;
-	}
 
-	public List<PruebasMOF> getPruebasMOF() {
-		return pruebasMOF;
-	}
-
-	public void setPruebasMOF(List<PruebasMOF> pruebasMOF) {
-		this.pruebasMOF = pruebasMOF;
+	public void setUsers(Usuario users) {
+		this.users = users;
 	}
 	
-	public void addPruebas(PruebasMOF pruebaMOF) {
-		pruebasMOF.add(pruebaMOF);
+	
+
+	public String getNombreUsuario() {
+		return nombreUsuario;
+	}
+
+
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
 	}
 
 	private static final long serialVersionUID = 1L;

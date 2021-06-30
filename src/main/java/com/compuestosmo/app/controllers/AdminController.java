@@ -25,6 +25,7 @@ import com.compuestosmo.app.models.entity.Usuario;
 import com.compuestosmo.app.models.service.IRoleService;
 import com.compuestosmo.app.models.service.IRolesUsuarioService;
 import com.compuestosmo.app.models.service.IUsuarioService;
+import com.compuestosmo.app.models.util.MailSenderService;
 
 @Controller("/usuarios")
 public class AdminController {
@@ -43,6 +44,10 @@ public class AdminController {
 	
 	@Autowired
 	private IRolesUsuarioService roleService;
+	
+	@Autowired(required = true)
+    private MailSenderService mailService;
+
 	
 	@RequestMapping(value="listadoUsuarios", method=RequestMethod.GET)
 	public String listarUsuarios(Model model) {
@@ -93,7 +98,7 @@ public class AdminController {
 	}
 	
 	@PostMapping(value="/formUsuario")
-	public String guardar(@Valid Usuario usuario, BindingResult result, Model model,SessionStatus status) {
+	public String guardar(@Valid Usuario usuario, BindingResult result, Model model,SessionStatus status) throws Exception {
 		
 		
 		if(result.hasErrors()) {
@@ -103,19 +108,39 @@ public class AdminController {
 		
 		List<Role> role = usuario.getRoles();
 		//Role newrole = new Role();
+		List<RolesUsuarios> nombreRol = roleService.findAll();
+		RolesUsuarios rolUsuario = usuario.getRoles_usuarios();
+		
 		
 		for(int i = 0; i < role.size(); i++) {
 			if(role.get(i).getAuthority().equals("ROLE_USER1")) {
 				//role.remove(i);
 				Role newrole = role.get(i);
-				newrole.setAuthority("ROLE_USER2");
-				newrole.setIdUsuario(usuario.getId());
+				for(int j = 0; j < nombreRol.size(); j++) {
+					if(nombreRol.get(j).equals(rolUsuario)){
+						//newrole.setAuthority("ROLE_USER2");
+						newrole.setAuthority(nombreRol.get(j).getNombreBD());
+						newrole.setIdUsuario(usuario.getId());
+					}
+				}
 				role.set(i, newrole);
 				//role.add(newrole);
 			}
+			/*else {
+				Role newrole = new Role();
+				for(int j = 0; j < nombreRol.size(); j++) {
+					if(nombreRol.get(j).equals(rolUsuario)){
+						//newrole.setAuthority("ROLE_USER2");
+						newrole.setAuthority(nombreRol.get(j).getNombreBD());
+						newrole.setIdUsuario(usuario.getId());
+					}
+				}
+				//role.set(i, newrole);
+				role.add(newrole);
+			}*/
 		}
-		
-		
+		rolUsuario = usuario.getRoles_usuarios();
+		mailService.sendEmail(usuario.getEmail(), "Cambios de permisos en el sistema BD-LNCAE", "Tu permiso actual es: " + rolUsuario.getNombreRol(), usuario);
 		usuarioService.save(usuario);
 		status.setComplete();
 		

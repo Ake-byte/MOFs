@@ -28,8 +28,8 @@ import com.compuestosmo.app.models.entity.MOF;
 import com.compuestosmo.app.models.service.IClasificacionMOFService;
 import com.compuestosmo.app.models.service.IMOFService;
 
-@Controller("/mof")
-@SessionAttributes("mof")
+@Controller
+@RequestMapping("/CompuestoMOF")
 public class MaterialController {
 	
 	@Autowired
@@ -44,12 +44,11 @@ public class MaterialController {
 	@Autowired
 	private IClasificacionMOFService clasificacionService;
 	
-	//@RequestMapping(value={"/listarMateriales", "/"}, method=RequestMethod.GET)
-	@RequestMapping(value="/listarMateriales", method=RequestMethod.GET)
+	@RequestMapping(value="listarMateriales", method=RequestMethod.GET)
 	public String listar(Model model) {
 		model.addAttribute("titulo", "Listado de Materiales");
 		model.addAttribute("materiales", mofdao.findAll());
-		return "listarMateriales";
+		return "CompuestoMOF/listarMateriales";
 	}
 	
 	@GetMapping(value="/fichaMaterial/{id}")
@@ -57,16 +56,16 @@ public class MaterialController {
 		MOF mof = mofService.findOne(id);
 		
 		if(mof == null) {
-			return "redirect:/listarMateriales";
+			return "redirect:/CompuestoMOF/listarMateriales";
 		}
 		
 		model.put("mof", mof);
 		model.put("titulo", "Portada: " + mof.getNombreCompuesto());
 		
-		return "fichaMaterial";
+		return "CompuestoMOF/fichaMaterial";
 	}
 	
-	@RequestMapping(value="/formMaterial")
+	@RequestMapping(value="formMaterial")
 	public String crearFicha(Map<String, Object> model) {
 		MOF mof = new MOF();
 		//List<ClasificacionMOF> clasificacion =  clasificacionService.findall();
@@ -75,7 +74,7 @@ public class MaterialController {
 		
 		model.put("mof", mof);
 		model.put("titulo", "Formulario MOF");
-		return "formMaterial";
+		return "CompuestoMOF/formMaterial";
 	}
 
 	
@@ -95,7 +94,7 @@ public class MaterialController {
 		model.put("mof", mof);
 		model.put("titulo", "Editar MOF");
 		
-		return "formMaterial";
+		return "CompuestoMOF/formMaterial";
 		
 	}
 	
@@ -128,13 +127,13 @@ public class MaterialController {
 		return "redirect:listarMateriales";
 	}
 	
-	@RequestMapping(value="/eliminar/{id}")
+	@RequestMapping(value="eliminar/{id}")
 	public String eliminar(@PathVariable(value="id") Long id){
 		
 		if(id>0) {
 			mofService.delete(id);
 		}
 		
-		return "redirect:/listarMateriales";
+		return "redirect:/CompuestoMOF/listarMateriales";
 	}
 }

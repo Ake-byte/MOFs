@@ -24,12 +24,14 @@
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page" th:href="@{/index}">Inicio</a></li>
 						<li class="nav-item"><a class="nav-link"
-							th:href="@{/listadoClasificacionMateriales}">Clasificaciones</a>
+							th:href="@{/Clasificacion/listadoClasificacionMateriales}">Clasificaciones</a>
 						</li>
 						<li class="nav-item"><a class="nav-link"
-							th:href="@{/listarMateriales}">Materiales</a></li>						
+							th:href="@{/CompuestoMOF/listarMateriales}">Materiales</a></li>						
 						<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a
-							class="nav-link" th:href="@{/listarRoles}">Usuarios</a></li>
+							class="nav-link" th:href="@{/PersonalAutorizado/listarRoles}">Usuarios</a></li>
+						<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a
+							class="nav-link" th:href="@{/PersonalAutorizado/listarRoles}">Expedientes </a></li>
 					</ul>
 					<div sec:authorize="!isAuthenticated()">
 						<a class="btn btn-outline-primary" th:href="@{/login}">

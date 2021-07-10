@@ -34,7 +34,7 @@
 									de Difracci&oacute;n</a></li>
 							<li class="nav-item"
 								>
-								<a class="nav-link" th:href="@{/listarExpedientes/} + ${mof.id}"> Ver Expediente</a>
+								<a class="nav-link" th:href="@{/listarExpedientes/} + ${mof.id}"> Ver Expedientes</a>
 						</ul>
 						<div class="card-body">
 							<div class="tab-content" id="myTabContent">
@@ -72,34 +72,6 @@
 								</div>
 								<div class="tab-pane fade" id="expediente" role="tabpanel"
 									aria-labelledby="expediente-tab">
-									<!--  <table class="table table-striped">
-										<thead>
-											<tr>
-												<th>id</th>
-												<th>Nombre Prueba</th>
-												<th>&Uacute;ltima modificaci&oacute;n</th>
-												<th>Modificar</th>
-												<th>Eliminar</th>
-											</tr>
-										</thead>
-										<tbody>
-											<tr th:each="expedientes: ${mof.expedientesMOF}">
-												<td><a class="btn btn-primary btn-xs"
-													th:href="@{/expedienteMaterial/} + ${expedientes.id}"
-													th:text="${expedientes.id}"></a></td>
-												<td th:text="${expedientes.nombreSeccion}"></td>
-												<td th:text="${expedientes.fecha}"></td>
-												<td><a class="btn btn-primary btn-xs"
-													th:href="@{/formSeccion/} + ${mof.id} + '/' + ${expedientes.id}"
-													th:text="'Modificar'"></a></td>
-												<td><a class="btn btn-danger btn-xs"
-													th:href="@{/eliminarSeccion/} + ${mof.id} + '/' + ${expedientes.id}"
-													th:text="'Eliminar'"> 
-												</a></td>
-											</tr>
-										</tbody>
-									</table>
-									-->
 								</div>
 							</div>
 						</div>

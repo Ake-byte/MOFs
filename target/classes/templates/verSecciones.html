@@ -7,7 +7,12 @@
 	<header th:replace="layout/layout :: header"></header>
 
 	<div class="card bg-light">
-		<div class="card-header" th:text="${titulo}"></div>
+		<div class="card-header">
+		Secciones en el expediente del compuesto  
+		<strong th:text="${nombreCompuesto}" /></strong>. Expediente de 
+		<strong th:text="${autor}" /></strong>
+		</div>
+		<div class="card-header" th:text="${titulo2}"></div>
 		<div class="card-body">
 			<div class="container py-4">
 				<nav class="navbar navbar-light bg-light">

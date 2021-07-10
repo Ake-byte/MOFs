@@ -97,6 +97,8 @@ insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enable
 INSERT INTO authorities (user_id, authority, id_usuario) VALUES(39, 'ROLE_USER2', 39);
 insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enabled,id_roles) values('Juvencio','Vázquez','Samperio','juvencio_ipn@hotmail.com','$2a$10$LU1mTnaiMNINwZ4zDyvhYeQljVTFFLW5bsRBCR6u9b7TPrAEtclIO',TRUE,2);
 INSERT INTO authorities (user_id, authority, id_usuario) VALUES(40, 'ROLE_USER2', 40); 
+insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enabled,id_roles) values('Alan','Franco','Ake','al.fr.ake@gmail.com','$2a$10$bGLQnSbjwAW1uV1whnRZbeoejiFRUIBB0zZN.bo/X6DyqEzXGnyQi',TRUE,2);
+INSERT INTO authorities (user_id, authority, id_usuario) VALUES(41, 'ROLE_USER2', 41); 
 
 INSERT INTO clasificacionmof (nombre_clasificacion, descripcion_clasificacion) VALUES('Clasificacion A', 'Materiales dentro de la clasificacion A');
 INSERT INTO clasificacionmof (nombre_clasificacion, descripcion_clasificacion) VALUES('Clasificacion B', 'Materiales dentro de la clasificacion B');
@@ -107,14 +109,17 @@ INSERT INTO mof (nombre_compuesto, nombre_clasificacion, id_clasificacion) VALUE
 INSERT INTO mof (nombre_compuesto, nombre_clasificacion, id_clasificacion) VALUES('Compuesto D', 'Clasificacion A', 1);
  
 
---INSERT INTO expedientes (fecha, mof_id, users_id, nombre_usuario) VALUES(NOW(), 1,1, 'Franco Ake Alan');
---INSERT INTO expedientes (fecha, mof_id, users_id, nombre_usuario) VALUES(NOW(), 2,1, 'Franco Ake Alan');
---INSERT INTO expedientes (fecha, mof_id, users_id, nombre_usuario) VALUES(NOW(), 1,1,'Perez Perez Juan');
+INSERT INTO expedientes (fecha, mof_id, users_id, nombre_usuario) VALUES(NOW(), 2,40, 'Juvencio Vázquez Samperio');
+INSERT INTO expedientes (fecha, mof_id, users_id, nombre_usuario) VALUES(NOW(), 2,41, 'Alan Franco Ake');
 
---INSERT INTO secciones_expedientes (nombre_seccion, descripcion_seccion, expediente_id) VALUES('Pruebas electricas', 'Se aplicaron pruebas electricas al material', 1);
---INSERT INTO secciones_expedientes (nombre_seccion, descripcion_seccion, expediente_id) VALUES('Pruebas magenticas', 'Se aplicaron pruebas electricas al material', 1);
---INSERT INTO secciones_expedientes (nombre_seccion, descripcion_seccion, expediente_id) VALUES('Pruebas espectroscopicas', 'Se aplicaron pruebas espectroscopicas al material', 1);
---INSERT INTO secciones_expedientes (nombre_seccion, descripcion_seccion, expediente_id) VALUES('Pruebas termicas', 'Se aplicaron pruebas termicas al material', 1);
+
+INSERT INTO secciones_expedientes (nombre_seccion, descripcion_seccion, expediente_id) VALUES('Pruebas electricas', 'Se aplicaron pruebas electricas al material', 1);
+INSERT INTO secciones_expedientes (nombre_seccion, descripcion_seccion, expediente_id) VALUES('Pruebas magenticas', 'Se aplicaron pruebas electricas al material', 1);
+INSERT INTO secciones_expedientes (nombre_seccion, descripcion_seccion, expediente_id) VALUES('Pruebas espectroscopicas', 'Se aplicaron pruebas espectroscopicas al material', 1);
+INSERT INTO secciones_expedientes (nombre_seccion, descripcion_seccion, expediente_id) VALUES('Pruebas termicas', 'Se aplicaron pruebas termicas al material', 1);
+
+INSERT INTO secciones_expedientes (nombre_seccion, descripcion_seccion, expediente_id) VALUES('Pruebas espectroscopicas', 'Se aplicaron pruebas espectroscopicas al material', 2);
+INSERT INTO secciones_expedientes (nombre_seccion, descripcion_seccion, expediente_id) VALUES('Pruebas termicas', 'Se aplicaron pruebas termicas al material', 2);
 
 --INSERT INTO secciones_expedientes (nombre_seccion, descripcion_seccion) VALUES('PRUEBAS ELECTRICAS', 'Usuarios sin permisos.', 'ROLE_USER1');
 

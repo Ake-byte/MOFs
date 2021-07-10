@@ -44,9 +44,13 @@ public class ExpedienteMOF implements Serializable{
 	@JoinColumn(name = "mof_id")
 	private MOF mof;
 	
-	
+	//CREADOR - AUTOR
 	@Column(name = "nombre_usuario")
 	private String nombreUsuario;
+	
+	//INVESTIGADOR QUE MODIFICÓ
+	//@Column(name = "nombre_usuario")
+	//private String nombreUsuario;
 	
 	@OneToMany(mappedBy = "expedientes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<SeccionesExpediente> seccionesExpediente;

@@ -27,7 +27,7 @@ import com.compuestosmo.app.models.service.IRolesUsuarioService;
 import com.compuestosmo.app.models.service.IUsuarioService;
 import com.compuestosmo.app.models.util.MailSenderService;
 
-@Controller("/usuarios")
+@Controller
 public class AdminController {
 
 	@Autowired 
@@ -56,14 +56,14 @@ public class AdminController {
 		return "listadoUsuarios";
 	}
 	
-	@RequestMapping(value="/listarRoles", method=RequestMethod.GET)
+	@RequestMapping(value="/PersonalAutorizado/listarRoles", method=RequestMethod.GET)
 	public String listar(Model model) {
 		model.addAttribute("titulo", "Permisos de Usuario");
 		model.addAttribute("role", roleService.findAll());
 		return "listarRoles";
 	}
 	
-	@GetMapping(value="/verRol/{id}")
+	@GetMapping(value="/PersonalAutorizado/verRol/{id}")
 	public String verClasificacion(@PathVariable(value="id") Long id, Map<String, Object> model) {
 		RolesUsuarios rolesUsuarios = roleService.findOne(id);
 		
@@ -77,7 +77,7 @@ public class AdminController {
 		return "verRol";
 	}
 	
-	@RequestMapping(value="/formUsuario/{id}")
+	@RequestMapping(value="/PersonalAutorizado/formUsuario/{id}")
 	public String editar(@PathVariable(value="id") Long id, Map<String, Object> model) {
 		Usuario usuario = null;
 		
@@ -97,7 +97,7 @@ public class AdminController {
 		
 	}
 	
-	@PostMapping(value="/formUsuario")
+	@PostMapping(value="/PersonalAutorizado/formUsuario")
 	public String guardar(@Valid Usuario usuario, BindingResult result, Model model,SessionStatus status) throws Exception {
 		
 		

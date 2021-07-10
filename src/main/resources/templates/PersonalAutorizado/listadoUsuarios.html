@@ -12,8 +12,6 @@
 			<div class="container py-4">
 				<nav class="navbar navbar-light bg-light">
 					<div class="container-fluid">
-						<a th:href="@{/formClasificacion}" class="btn btn-primary btn-xs">Crear
-							Clasificaci&oacute;n</a>
 						<form class="d-flex">
 							<input class="form-control me-2" type="search"
 								placeholder="Buscar" aria-label="Search">
@@ -26,22 +24,34 @@
 						<tr>
 							<th>id</th>
 							<th>Nombre</th>
-							<th>Descripci&oacute;n</th>
+							<th>Apellido Paterno</th>
+							<th>Apellido Materno</th>
+							<th>Correo</th>
+							<th>Directores</th>
+							<th></th>
+							<th>Rol</th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
 							<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="clasificaciones: ${clasificacion}">
+						<tr th:each="usuarios: ${usuario}">
 							<td><a class="btn btn-primary btn-xs"
-								th:href="@{/verClasificacion/} + ${clasificaciones.id}"
-								th:text="${clasificaciones.id}"></a></td>
-							<td th:text="${clasificaciones.nombreClasificacion}"></td>
-							<td th:text="${clasificaciones.descripcionClasificacion}"></td>
-							<td><a class="btn btn-primary btn-xs" sec:authorize="hasRole('ROLE_ADMIN')"
-								th:href="@{/formClasificacion/} + ${clasificaciones.id}" th:text="'Editar'"></a></td>
-							<td><a class="btn btn-danger btn-xs" sec:authorize="hasRole('ROLE_ADMIN')"
-								th:href="@{/eliminarClasificacion/} + ${clasificaciones.id}" th:text="'Eliminar'"
+								th:text="${usuarios.id}"></a></td>
+							<td th:text="${usuarios.nombre}"></td>
+							<td th:text="${usuarios.apellidoPaterno}"></td>
+							<td th:text="${usuarios.apellidoMaterno}"></td>
+							<td th:text="${usuarios.email}"></td>
+							<td th:text="${usuarios.director1}"></td>
+							<td th:text="${usuarios.director2}"></td>
+							<td th:text="${usuarios.roles}">
+							</td>
+							<td><a class="btn btn-primary btn-xs"
+								sec:authorize="hasRole('ROLE_ADMIN')"
+								th:href="@{/formClasificacion/} " th:text="'Editar'"></a></td>
+							<td><a class="btn btn-danger btn-xs"
+								sec:authorize="hasRole('ROLE_ADMIN')"
+								th:href="@{/eliminarClasificacion/} " th:text="'Eliminar'"
 								onclick="return confirm('Estás seguro que quieres eliminar?');">
 							</a></td>
 						</tr>

@@ -11,7 +11,7 @@
 
 
 
-					<form th:action="@{/formMaterial}" th:object="${mof}" method="post"
+					<form th:action="@{/CompuestoMOF/formMaterial}" th:object="${mof}" method="post"
 						enctype="multipart/form-data">
 						<div class="form-group row">
 							<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
@@ -43,21 +43,6 @@
 								</select> 
 							</div>
 						</div>
-
-						<!--      
-						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">Nombre Clasificaci&oacute;n
-							</label>
-							<div class="col-sm-6">
-								<select id="optiontag" name="clasificacion" th:field="*{nombreClasificacion}">
-									<option th:each="clasificacionmof : ${clasificacion}"
-										th:value="${clasificacionmof.nombreClasificacion}"
-										th:utext="${clasificacionmof.nombreClasificacion}"
-										/>
-								</select>
-							</div>
-						</div>
-						-->
 
 						<div class="form-group row">
 							<label for="descripcion" class="col-sm-2 col-form-label">Directores</label>
@@ -126,6 +111,5 @@
 	</div>
 	
 	<footer th:replace="layout/layout :: footer"></footer>
-	<script th:src="@{/js/scriptclasificacion.js}"></script>
 </body>
 </html>

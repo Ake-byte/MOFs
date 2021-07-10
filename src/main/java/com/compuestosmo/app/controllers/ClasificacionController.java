@@ -21,7 +21,8 @@ import com.compuestosmo.app.models.entity.ClasificacionMOF;
 import com.compuestosmo.app.models.entity.MOF;
 import com.compuestosmo.app.models.service.IClasificacionMOFService;
 
-@Controller("/clasificacion")
+@Controller
+@RequestMapping("/Clasificacion")
 public class ClasificacionController {
 
 	@Autowired
@@ -34,7 +35,7 @@ public class ClasificacionController {
 	public String listar(Model model) {
 		model.addAttribute("titulo", "Clasificación de Materiales");
 		model.addAttribute("clasificacion", clasificacionMOFdao.findAll());
-		return "listadoClasificacionMateriales";
+		return "Clasificacion/listadoClasificacionMateriales";
 	}
 	
 	@GetMapping(value="/verClasificacion/{id}")
@@ -42,23 +43,23 @@ public class ClasificacionController {
 		ClasificacionMOF clasificacion = clasificacionMOFService.findOne(id);
 		
 		if(clasificacion == null) {
-			return "redirect:/listadoClasificacionMateriales";
+			return "redirect:/Clasificacion/listadoClasificacionMateriales";
 		}
 		
 		model.put("clasificacion", clasificacion);
 		model.put("titulo", "Clasificación MOF: " + clasificacion.getNombreClasificacion());
 		
-		return "verClasificacion";
+		return "Clasificacion/verClasificacion";
 	}
 	
 	@Secured("ROLE_ADMIN")
-	@RequestMapping(value="/formClasificacion")
+	@RequestMapping(value="formClasificacion")
 	public String crearClasificacion(Map<String, Object> model) {
 		ClasificacionMOF clasificacionmof = new ClasificacionMOF();
 		
 		model.put("clasificacionmof", clasificacionmof);
 		model.put("titulo", "Formulario Clasificación");
-		return "formClasificacion";
+		return "Clasificacion/formClasificacion";
 	}
 	
 	@RequestMapping(value="/formClasificacion/{id}")
@@ -68,13 +69,13 @@ public class ClasificacionController {
 		if(id>0) {
 			clasificacionmof = clasificacionMOFService.findOne(id);
 		}else {
-			return "redirect:/listadoClasificacionMateriales";
+			return "redirect:/Clasificacion/listadoClasificacionMateriales";
 		}
 		
 		model.put("clasificacionmof", clasificacionmof);
 		model.put("titulo", "Editar Clasificación MOF");
 		
-		return "formClasificacion";
+		return "Clasificacion/formClasificacion";
 		
 	}
 	
@@ -84,7 +85,7 @@ public class ClasificacionController {
 		
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario Clasificación MOF");
-			return "formClasificacion";
+			return "Clasificacion/formClasificacion";
 		}
 
 		
@@ -94,14 +95,14 @@ public class ClasificacionController {
 		return "redirect:listadoClasificacionMateriales";
 	}
 	
-	@RequestMapping(value="/eliminarClasificacion/{id}")
+	@RequestMapping(value="eliminarClasificacion/{id}")
 	public String eliminar(@PathVariable(value="id") Long id){
 		
 		if(id>0) {
 			clasificacionMOFService.delete(id);
 		}
 		
-		return "redirect:/listadoClasificacionMateriales";
+		return "redirect:/Clasificacion/listadoClasificacionMateriales";
 	}
 
 	

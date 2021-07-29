@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.compuestosmo.app.models.dao.IInvestigadoresDAO;
 import com.compuestosmo.app.models.dao.IRoleDAO;
 import com.compuestosmo.app.models.dao.IUsuarioDAO;
+import com.compuestosmo.app.models.entity.Investigador;
 import com.compuestosmo.app.models.entity.Role;
 import com.compuestosmo.app.models.entity.Usuario;
 
@@ -20,6 +22,9 @@ public class RoleService implements IRoleService{
 	
 	@Autowired
 	private IUsuarioDAO usuarioDAO;
+	
+	@Autowired
+	private IInvestigadoresDAO investigadorDAO;
 	
 	@Override
 	public List<Role> findAll() {
@@ -35,6 +40,7 @@ public class RoleService implements IRoleService{
 	}
 
 	@Override
+	@Transactional
 	public void saveUsuario(Usuario usuario) {
 		// TODO Auto-generated method stub
 		usuarioDAO.save(usuario);
@@ -51,6 +57,13 @@ public class RoleService implements IRoleService{
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		roleDAO.deleteById(id);
+	}
+
+	@Override
+	@Transactional
+	public void saveInvestigador(Investigador investigador) {
+		// TODO Auto-generated method stub
+		investigadorDAO.save(investigador);
 	}
 
 }

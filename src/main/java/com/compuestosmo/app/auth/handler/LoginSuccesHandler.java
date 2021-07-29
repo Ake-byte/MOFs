@@ -1,34 +1,56 @@
 package com.compuestosmo.app.auth.handler;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.FlashMap;
 import org.springframework.web.servlet.support.SessionFlashMapManager;
 
+import com.compuestosmo.app.models.entity.Usuario;
+import com.compuestosmo.app.models.service.IUsuarioService;
+
 @Component
-public class LoginSuccesHandler extends SimpleUrlAuthenticationSuccessHandler{
+public class LoginSuccesHandler extends SimpleUrlAuthenticationSuccessHandler {
+
+	@Autowired
+	private IUsuarioService usuarioService;
 
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-		
+
 		SessionFlashMapManager flashMapManager = new SessionFlashMapManager();
-		
+
 		FlashMap flashMap = new FlashMap();
-		
-		flashMap.put("success", "Hola " + authentication.getName() + ", has iniciado sesión con éxito!");
-		
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		List<Usuario> usuarios = usuarioService.findall();
+		Usuario usuario = null;
+
+		for (int i = 0; i < usuarios.size(); i++) {
+			if (usuarios.get(i).getEmail().equals(auth.getName())) {
+				usuario = usuarios.get(i);
+				break;
+			}
+		}
+
+		flashMap.put("success", "Bienvenido " + usuario.getNombre() + " " 
+												+ usuario.getApellidoPaterno() + " "
+													+ usuario.getApellidoMaterno() + ", has iniciado sesión con éxito.");
+
 		flashMapManager.saveOutputFlashMap(flashMap, request, response);
-		
+
 		super.onAuthenticationSuccess(request, response, authentication);
 	}
 
-	
 }

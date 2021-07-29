@@ -7,16 +7,13 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name="users")
@@ -27,52 +24,40 @@ public class Usuario implements Serializable{
 	@Column(name = "user_id")
 	private Long id;
 	
-	//@NotEmpty
 	@Column(name = "nombre")
 	private String nombre;
 	
-	//@NotEmpty
 	@Column(name = "apellido_paterno")
 	private String apellidoPaterno;
 	
-	//@NotEmpty
 	@Column(name = "apellido_materno")
 	private String apellidoMaterno;
 	
-	//@NotEmpty
 	@Column(name = "email", unique=true)
 	private String email;	
-	
-	//@NotEmpty
-	@Column(name = "director1")
-	private String director1;
-	
-	@Column(name = "director2")
-	private String director2;
 	
 	@Column(name = "pwd", length=100)
 	private String password;
 	
 	private Boolean enabled;
 	
+	//@OneToMany(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    //private List<Role> roles;
+	private Role roles;
+	
+	@Column(name = "nombre_role")
+	private String nombreRole;
+	
+	//PERMISOS A EXPEDIENTES QUE TIENE EL USUARIO
 	@OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
-    private List<Role> roles;
-	
-	//@Column(name = "nombre_rol")
-	//private String nombreRol;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_roles")
-	private RolesUsuarios roles_usuarios;
-	
-	//EXPEDIENTE
-	@OneToMany(mappedBy = "users", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<ExpedienteMOF> expedientesUMOF;
+    private List<PermisosExpediente> permisosExpediente;
 	
 	public Usuario() {
-		roles = new ArrayList<Role>();
-		expedientesUMOF = new ArrayList<ExpedienteMOF>();
+		//roles = new ArrayList<Role>();
+		permisosExpediente = new ArrayList<PermisosExpediente>();
 	}
 	
 
@@ -116,22 +101,6 @@ public class Usuario implements Serializable{
 		this.email = email;
 	}
 
-	public String getDirector1() {
-		return director1;
-	}
-
-	public void setDirector1(String director1) {
-		this.director1 = director1;
-	}
-
-	public String getDirector2() {
-		return director2;
-	}
-
-	public void setDirector2(String director2) {
-		this.director2 = director2;
-	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -147,7 +116,7 @@ public class Usuario implements Serializable{
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-
+/*
 	public List<Role> getRoles() {
 		return roles;
 	}
@@ -159,28 +128,40 @@ public class Usuario implements Serializable{
 	public void addRoles(Role role) {
 		roles.add(role);
 	}
+*/
 	
 	
-	public RolesUsuarios getRoles_usuarios() {
-		return roles_usuarios;
-	}
-
-	public void setRoles_usuarios(RolesUsuarios roles_usuarios) {
-		this.roles_usuarios = roles_usuarios;
+	public String getNombreRole() {
+		return nombreRole;
 	}
 
 
-	public List<ExpedienteMOF> getExpedientesUMOF() {
-		return expedientesUMOF;
+	public Role getRoles() {
+		return roles;
 	}
 
 
-	public void setExpedientesUMOF(List<ExpedienteMOF> expedientesUMOF) {
-		this.expedientesUMOF = expedientesUMOF;
+	public void setRoles(Role roles) {
+		this.roles = roles;
 	}
 
-	public void addExpedientes(ExpedienteMOF expedienteMOF) {
-		expedientesUMOF.add(expedienteMOF);
+
+	public void setNombreRole(String nombreRole) {
+		this.nombreRole = nombreRole;
+	}
+		
+
+	public List<PermisosExpediente> getPermisosExpediente() {
+		return permisosExpediente;
+	}
+
+
+	public void setPermisosExpediente(List<PermisosExpediente> permisosExpediente) {
+		this.permisosExpediente = permisosExpediente;
+	}
+
+	public void addPermisoExpediente(PermisosExpediente permisoExpediente) {
+		permisosExpediente.add(permisoExpediente);
 	}
 
 

@@ -6,7 +6,9 @@
 </head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
-
+	<div class="container py-4">
+		<header th:replace="buscador :: header"></header>
+	</div>
 	<div class="container">
 		<div class="card bg-light">
 			<div class="card-header">
@@ -17,8 +19,7 @@
 				<div class="container py-4">
 					<nav class="navbar navbar-light bg-light">
 						<div class="container-fluid">
-							<a 
-								th:href="@{/formPrueba/}+ ${expedientemof.id}"
+							<a th:href="@{/formPrueba/}+ ${expedientemof.id}"
 								class="btn btn-primary btn-xs">Crear Prueba</a>
 						</div>
 					</nav>
@@ -26,11 +27,11 @@
 						class="alert alert-info my-4"
 						th:text="'No hay registros en la secci&oacute;n: ' + ${expedientemof.nombreSeccion}">
 					</div>
-					
+
 					<!--  <table  class="table">-->
 					<table th:if="${not #lists.isEmpty(expedientemof.pruebasMOF)}"
 						class="table">
-						
+
 						<thead class="table-light">
 							<tr>
 								<th>id</th>
@@ -42,7 +43,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							 <tr th:each="pruebas: ${prueba}">
+							<tr th:each="pruebas: ${prueba}">
 								<td><a class="btn btn-primary btn-xs"
 									th:href="@{/fichaMaterial/} + ${pruebas.id}"
 									th:text="${pruebas.id}"></a></td>
@@ -56,14 +57,13 @@
 									th:text="'Modificar'"></a></td>
 								<td><a class="btn btn-danger btn-xs"
 									th:href="@{/eliminarPrueba/} + ${expedientemof.id} + '/' + ${pruebas.id}"
-									th:text="'Eliminar'"> 
-								</a></td>
+									th:text="'Eliminar'"> </a></td>
 							</tr>
 						</tbody>
 					</table>
-					 
+
 					<nav th:replace="paginator :: paginator"></nav>
-					
+
 				</div>
 			</div>
 		</div>

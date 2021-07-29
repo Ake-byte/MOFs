@@ -7,10 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.compuestosmo.app.models.dao.IExpedienteMOFDAO;
-import com.compuestosmo.app.models.dao.IPruebasMOFDAO;
 import com.compuestosmo.app.models.dao.ISeccionesExpedienteDAO;
 import com.compuestosmo.app.models.entity.ExpedienteMOF;
-import com.compuestosmo.app.models.entity.PruebasMOF;
 import com.compuestosmo.app.models.entity.SeccionesExpediente;
 
 @Service
@@ -49,6 +47,7 @@ public class ExpedienteMOFService implements IExpedienteMOFService{
 	}
 
 	@Override
+	@Transactional
 	public void saveSeccion(SeccionesExpediente seccionExpediente) {
 		// TODO Auto-generated method stub
 		seccionesEDAO.save(seccionExpediente);

@@ -44,24 +44,28 @@ public class ExpedienteMOF implements Serializable{
 	@JoinColumn(name = "mof_id")
 	private MOF mof;
 	
-	//CREADOR - AUTOR
+	//CREADOR - AUTOR DEL EXPEDIENTE
 	@Column(name = "nombre_usuario")
 	private String nombreUsuario;
 	
-	//INVESTIGADOR QUE MODIFICÓ
-	//@Column(name = "nombre_usuario")
-	//private String nombreUsuario;
+	//ULTIMO USUARIO QUE REALIZÓ MODIFICACIONES EN EL EXPEDIENTE INVESTIGADOR QUE MODIFICÓ
+	@Column(name = "ultimo_usuario")
+	private String nombreUltimoUsuario;
 	
 	@OneToMany(mappedBy = "expedientes", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List<SeccionesExpediente> seccionesExpediente;
 	
+	
+	@OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "expediente_id")
+    private List<PermisosExpediente> permisosExpediente;
+	
 	public ExpedienteMOF() {
 		seccionesExpediente = new ArrayList<SeccionesExpediente>();
+		permisosExpediente = new ArrayList<PermisosExpediente>();
 	}
 	
-	@ManyToOne(fetch=FetchType.LAZY)
-	@JoinColumn(name = "users_id")
-	private Usuario users;
+	
 	
 	public Long getId() {
 		return id;
@@ -106,17 +110,6 @@ public class ExpedienteMOF implements Serializable{
 	public void addSeccion(SeccionesExpediente seccionExpediente) {
 		seccionesExpediente.add(seccionExpediente);
 	}
-
-	
-
-	public Usuario getUsers() {
-		return users;
-	}
-
-
-	public void setUsers(Usuario users) {
-		this.users = users;
-	}
 	
 	
 
@@ -129,6 +122,33 @@ public class ExpedienteMOF implements Serializable{
 		this.nombreUsuario = nombreUsuario;
 	}
 
+	
+	
+	public String getNombreUltimoUsuario() {
+		return nombreUltimoUsuario;
+	}
+
+
+
+	public void setNombreUltimoUsuario(String nombreUltimoUsuario) {
+		this.nombreUltimoUsuario = nombreUltimoUsuario;
+	}
+
+
+
+	public List<PermisosExpediente> getPermisosExpediente() {
+		return permisosExpediente;
+	}
+
+
+
+	public void setPermisosExpediente(List<PermisosExpediente> permisosExpediente) {
+		this.permisosExpediente = permisosExpediente;
+	}
+
+	public void addPermisoExpediente(PermisosExpediente permisoExpediente) {
+		permisosExpediente.add(permisoExpediente);
+	}
 	private static final long serialVersionUID = 1L;
 
 }

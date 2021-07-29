@@ -5,21 +5,19 @@
 
 <body>
 	<header th:replace="layout/layout :: header"></header>
+	<div class="container py-4">
+		<header th:replace="buscador :: header"></header>
+	</div>
 	<div class="container">
 		<div class="card bg-light">
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
-				<div class="container py-4">
+				<div class="container py-2">
 					<nav class="navbar navbar-light bg-light">
 						<div class="container-fluid">
 							<a sec:authorize="hasRole('ROLE_ADMIN')"
 								th:href="@{/CompuestoMOF/formMaterial}"
 								class="btn btn-primary btn-xs">Crear Registro</a>
-							<form class="d-flex">
-								<input class="form-control me-2" type="search"
-									placeholder="Buscar" aria-label="Search">
-								<button class="btn btn-outline-success" type="submit">Buscar</button>
-							</form>
 						</div>
 					</nav>
 					<table class="table table-striped">
@@ -40,7 +38,7 @@
 									th:href="@{/CompuestoMOF/fichaMaterial/} + ${mof.id}"
 									th:text="${mof.id}"></a></td>
 								<td th:text="${mof.nombreCompuesto}"></td>
-								<td th:text="${mof.nombreClasificacion}"></td>
+								<td th:text="${mof.clasificacionmof.nombreClasificacion}"></td>
 								<td></td>
 								<td></td>
 								<td><a class="btn btn-primary btn-xs"

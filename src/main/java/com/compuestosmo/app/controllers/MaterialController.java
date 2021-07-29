@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -25,8 +26,10 @@ import com.compuestosmo.app.models.dao.IClasificacionMOFDAO;
 import com.compuestosmo.app.models.dao.IMOFDAO;
 import com.compuestosmo.app.models.entity.ClasificacionMOF;
 import com.compuestosmo.app.models.entity.MOF;
+import com.compuestosmo.app.models.entity.Usuario;
 import com.compuestosmo.app.models.service.IClasificacionMOFService;
 import com.compuestosmo.app.models.service.IMOFService;
+import com.compuestosmo.app.models.service.IUsuarioService;
 
 @Controller
 @RequestMapping("/CompuestoMOF")
@@ -43,6 +46,9 @@ public class MaterialController {
 	
 	@Autowired
 	private IClasificacionMOFService clasificacionService;
+	
+	@Autowired
+	private IUsuarioService usuarioService;
 	
 	@RequestMapping(value="listarMateriales", method=RequestMethod.GET)
 	public String listar(Model model) {
@@ -108,18 +114,6 @@ public class MaterialController {
 			model.addAttribute("titulo", "Formulario MOF");
 			return "formMaterial";
 		}
-
-		List<ClasificacionMOF> nombreClasificacion = clasificacionService.findall();
-		
-		ClasificacionMOF clasificacionmof = mof.getClasificacionmof();
-		
-		for(int i = 0; i < nombreClasificacion.size() ; i++) {
-			if(nombreClasificacion.get(i).equals(clasificacionmof)) {
-				mof.setNombreClasificacion(nombreClasificacion.get(i).getNombreClasificacion());
-				break;
-			}
-		}
-		
 		
 		mofdao.save(mof);
 		status.setComplete();
@@ -135,5 +129,10 @@ public class MaterialController {
 		}
 		
 		return "redirect:/CompuestoMOF/listarMateriales";
+	}
+	
+	@GetMapping(value = "/buscar-investigador/{term}", produces = { "application/json" })
+	public @ResponseBody List<Usuario> cargarUsuarios(@PathVariable String term) {
+		return usuarioService.findByNombreU(term);
 	}
 }

@@ -11,22 +11,27 @@
 
 
 
-					<form th:action="@{/CompuestoMOF/formMaterial}" th:object="${mof}" method="post"
-						enctype="multipart/form-data">
+					<form th:action="@{/CompuestoMOF/formMaterial}" th:object="${mof}"
+						method="post" enctype="multipart/form-data">
 						<div class="form-group row">
 							<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" th:errorclass="'form-control alert-danger'"
-									th:field="*{nombreCompuesto}" />
-									<small class="form-text text-danger" th:if="${#fields.hasErrors('nombreCompuesto')}" th:errors="*{nombreCompuesto}"></small>
+								<input type="text" class="form-control"
+									th:errorclass="'form-control alert-danger'"
+									th:field="*{nombreCompuesto}" /> <small
+									class="form-text text-danger"
+									th:if="${#fields.hasErrors('nombreCompuesto')}"
+									th:errors="*{nombreCompuesto}"></small>
 							</div>
 						</div>
 
 						<div class="form-group row">
 							<label for="descripcion" class="col-sm-2 col-form-label">F&oacute;rmula</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" th:errorclass="'form-control alert-danger'" th:field="*{formula}" />
-								<small class="form-text text-danger" th:if="${#fields.hasErrors('formula')}" th:errors="*{formula}"></small>
+								<input type="text" class="form-control"
+									th:errorclass="'form-control alert-danger'"
+									th:field="*{formula}" /> <small class="form-text text-danger"
+									th:if="${#fields.hasErrors('formula')}" th:errors="*{formula}"></small>
 							</div>
 						</div>
 
@@ -36,11 +41,11 @@
 							</label>
 							<div class="col-sm-6">
 								<select id="clasificacion" name="clasificacion"
-									th:field="*{clasificacionmof}" >
+									th:field="*{clasificacionmof}">
 									<option th:each="clasificacionmof : ${clasificacion}"
 										th:value="${clasificacionmof.id}"
 										th:utext="${clasificacionmof.nombreClasificacion}" />
-								</select> 
+								</select>
 							</div>
 						</div>
 
@@ -96,11 +101,21 @@
 						</div>
 
 						<div class="form-group row">
+							<label for="buscar_producto" class="col-sm-2 col-form-label"
+								th:text="'Investigador Responsable'"></label>
+							<div class="col-sm-6">
+								<input type="text" name="buscar_investigador" id="buscar_investigador"
+									class="form-control" />
+							</div>
+						</div>
+
+
+						<div class="form-group row">
 							<div class="col-sm-6">
 								<input type="submit" value="Guardar" class="btn-primary" />
 							</div>
 						</div>
-						
+
 						<input type="hidden" th:field="*{id}" />
 
 
@@ -109,7 +124,8 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<footer th:replace="layout/layout :: footer"></footer>
+	<script th:replace="CompuestoMOF/js/autocompletado :: javascript"></script>
 </body>
 </html>

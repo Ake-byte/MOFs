@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body" th:each="mof: ${mof}">
+
+				<div class="container">
+					<div class="card bg-light">
+						<ul class="nav nav-tabs" id="myTab" role="tablist">
+							<li class="nav-item"><a class="nav-link active"
+								id="info-tab" data-toggle="tab" href="#info" role="tab"
+								aria-controls="home" aria-selected="true">Datos Personales</a></li>
+							<li class="nav-item">
+								<a class="nav-link" > Ver Expedientes</a>
+							<li class="nav-item">
+								<a class="nav-link" > Ver solicitudes a Expedientes</a>
+						</ul>
+						<div class="card-body">
+							<div class="tab-content" id="myTabContent">
+								<div class="tab-pane fade show active" id="info" role="tabpanel"
+									aria-labelledby="info-tab">
+									<div class="card">
+										<ul class="list-group list-group-flush">
+											<li class="list-group-item"
+												th:text="'Nombre: '">
+											<li class="list-group-item"
+												th:text="'Correo: '"></li>
+											<li class="list-group-item"
+												th:text="Cambiar Contraseña' + ${mof.articulo}"></li>
+										</ul>
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

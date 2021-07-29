@@ -5,28 +5,32 @@
 
 <body>
 	<header th:replace="layout/layout :: header"></header>
+	<div class="container py-4">
+		<header th:replace="buscador :: header"></header>
+	</div>
+	<div sec:authorize="hasRole('ROLE_USER1')" class="container">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+				<div class="container py-4">
+					<div class="card bg-info text-white">
+						<div class="card-header">A&uacute;n no tienes permisos para acceder al sistema.</div>
+						<div class="card-body">
+							<h5 class="card-title">
+								<span th:text="${#authentication.name}"></span>. Debes de esperar a que personal autorizado te valide en el sistema. 
+							</h5>
+							<a th:href="@{/index}" class="btn btn-outline-light"
+								role="button">Ir al inicio</a>
 
-	<div class="card bg-light">
-		<div class="card-header" th:text="${titulo}"></div>
-		<div class="card-body">
-			<div class="container py-4">
-				<nav class="navbar navbar-light bg-light">
-					<div class="container-fluid">
-						<form class="d-flex">
-							<input class="form-control me-2" type="search"
-								placeholder="Buscar" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Buscar</button>
-						</form>
+						</div>
 					</div>
-				</nav>
-				
-			</div>
+				</div>
 
+			</div>
 		</div>
 	</div>
 
-	
 	<footer th:replace="layout/layout :: footer"></footer>
-	
+
 </body>
 </html>

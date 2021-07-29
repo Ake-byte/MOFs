@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<script type="text/javascript" th:fragment="javascript">
+		$(document).ready(function() {
+			$("#buscar_investigador").autocomplete({
+				source : function(request, response) {
+					$.ajax({
+						url : "/CompuestoMOF/buscar-investigador/" + request.term,
+						dataType : "json",
+						data : {
+							term : request.term
+						},
+						success : function(data) {
+							response($.map(data, function(item) {
+								return {
+									value : item.id,
+									label : item.nombre,
+								};
+							}));
+						},
+					});
+				},
+				select : function(event, ui) {
+					$("#buscar_investigador").val(ui.item.label);
+
+					return false;
+				}
+			});
+		});
+	</script>
+</body>
+</html>

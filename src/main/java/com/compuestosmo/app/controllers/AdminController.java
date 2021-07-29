@@ -1,160 +1,255 @@
 package com.compuestosmo.app.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
-import com.compuestosmo.app.models.dao.IDirectoresDAO;
-import com.compuestosmo.app.models.dao.IUsuarioDAO;
-import com.compuestosmo.app.models.entity.ClasificacionMOF;
+import com.compuestosmo.app.models.entity.ExpedienteMOF;
+import com.compuestosmo.app.models.entity.Investigador;
+import com.compuestosmo.app.models.entity.PermisosExpediente;
 import com.compuestosmo.app.models.entity.Role;
-import com.compuestosmo.app.models.entity.RolesUsuarios;
 import com.compuestosmo.app.models.entity.Usuario;
+import com.compuestosmo.app.models.service.IExpedienteMOFService;
+import com.compuestosmo.app.models.service.IInvestigadoresService;
+import com.compuestosmo.app.models.service.IPermisosExpedientesService;
 import com.compuestosmo.app.models.service.IRoleService;
-import com.compuestosmo.app.models.service.IRolesUsuarioService;
 import com.compuestosmo.app.models.service.IUsuarioService;
+import com.compuestosmo.app.models.service.UsuarioService;
 import com.compuestosmo.app.models.util.MailSenderService;
+import com.compuestosmo.app.models.util.PageRender;
 
 @Controller
+@RequestMapping("/PersonalAutorizado")
 public class AdminController {
 
-	@Autowired 
-	private IUsuarioDAO usuariodao;
-	
-	@Autowired 
+	@Autowired
 	private IUsuarioService usuarioService;
-	
-	@Autowired 
-	private IDirectoresDAO directoresdao;
-	
-	@Autowired
-	private IRoleService rolesService;
-	
-	@Autowired
-	private IRolesUsuarioService roleService;
-	
-	@Autowired(required = true)
-    private MailSenderService mailService;
 
-	
-	@RequestMapping(value="listadoUsuarios", method=RequestMethod.GET)
-	public String listarUsuarios(Model model) {
-		model.addAttribute("titulo", "Usuarios registrados");
-		model.addAttribute("usuario", usuariodao.findAll());
-		return "listadoUsuarios";
+	@Autowired
+	private IExpedienteMOFService expedienteService;
+
+	@Autowired
+	private IRoleService roleService;
+
+	@Autowired(required = true)
+	private MailSenderService mailService;
+
+	@Autowired
+	private IPermisosExpedientesService permisosE;
+
+	@Autowired
+	private IInvestigadoresService investigadorS;
+
+	@Autowired
+	private IPermisosExpedientesService permisoS;
+
+	@RequestMapping(value = "peticionesExpedientes", method = RequestMethod.GET)
+	public String verExpedientesUsuarios(Model model) {
+		model.addAttribute("titulo", "Solicitudes de usuarios para modificar expedientes.");
+		model.addAttribute("peticion", permisoS.findAllEnabled());
+		return "PersonalAutorizado/peticionesExpedientes";
 	}
-	
-	@RequestMapping(value="/PersonalAutorizado/listarRoles", method=RequestMethod.GET)
+
+	@RequestMapping(value = "listarRoles", method = RequestMethod.GET)
 	public String listar(Model model) {
 		model.addAttribute("titulo", "Permisos de Usuario");
-		model.addAttribute("role", roleService.findAll());
-		return "listarRoles";
+		return "PersonalAutorizado/listarRoles";
 	}
-	
-	@GetMapping(value="/PersonalAutorizado/verRol/{id}")
-	public String verClasificacion(@PathVariable(value="id") Long id, Map<String, Object> model) {
-		RolesUsuarios rolesUsuarios = roleService.findOne(id);
-		
-		if(rolesUsuarios == null) {
-			return "redirect:/index";
-		}
-		
-		model.put("rol", rolesUsuarios);
-		model.put("titulo", "Usuarios con Rol: " + rolesUsuarios.getNombreRol());
-		
-		return "verRol";
+
+	@RequestMapping(value = "/verPersonalAutorizado", method = RequestMethod.GET)
+	public String verPersonalAutorizado(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+		Pageable pageRequest = PageRequest.of(page, 10);
+		Page<Role> usuarios = usuarioService.findUsuarioByRole("ROLE_ADMIN", pageRequest);
+		PageRender<Role> pageRender = new PageRender<Role>("/PersonalAutorizado/verPersonalAutorizado", usuarios);
+
+		model.addAttribute("titulo", "Personal Autorizado");
+		model.addAttribute("role", usuarios);
+		model.addAttribute("page", pageRender);
+		return "PersonalAutorizado/verRol";
 	}
-	
-	@RequestMapping(value="/PersonalAutorizado/formUsuario/{id}")
-	public String editar(@PathVariable(value="id") Long id, Map<String, Object> model) {
+
+	@RequestMapping(value = "/verUsuariosRegistrados", method = RequestMethod.GET)
+	public String verUsuariosRegistrados(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+		Pageable pageRequest = PageRequest.of(page, 10);
+		Page<Role> usuarios = usuarioService.findUsuarioByRole("ROLE_USER1", pageRequest);
+		PageRender<Role> pageRender = new PageRender<Role>("/PersonalAutorizado/verUsuariosRegistrados", usuarios);
+
+		model.addAttribute("titulo", "Usuarios Registrados");
+		model.addAttribute("role", usuarios);
+		model.addAttribute("page", pageRender);
+
+		return "PersonalAutorizado/verRol";
+	}
+
+	@RequestMapping(value = "/verInvestigadores", method = RequestMethod.GET)
+	public String verInvestigadores(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+
+		Pageable pageRequest = PageRequest.of(page, 10);
+		Page<Role> usuarios = usuarioService.findUsuarioByRole("ROLE_USER2", pageRequest);
+		PageRender<Role> pageRender = new PageRender<Role>("/PersonalAutorizado/verInvestigadores", usuarios);
+
+		model.addAttribute("titulo", "Investigadores");
+		model.addAttribute("role", usuarios);
+		model.addAttribute("page", pageRender);
+
+		return "PersonalAutorizado/verRol";
+	}
+
+	@RequestMapping(value = "/verDirectoresTesis", method = RequestMethod.GET)
+	public String verDirectoresTesis(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+		Pageable pageRequest = PageRequest.of(page, 10);
+		Page<Role> usuarios = usuarioService.findUsuarioByRole("ROLE_USER3", pageRequest);
+		PageRender<Role> pageRender = new PageRender<Role>("/PersonalAutorizado/verDirectoresTesis", usuarios);
+
+		model.addAttribute("titulo", "Directores de Tesis");
+		model.addAttribute("role", usuarios);
+		model.addAttribute("page", pageRender);
+		return "PersonalAutorizado/verRol";
+	}
+
+	@RequestMapping(value = "/formUsuario/{id}")
+	public String editar(@PathVariable(value = "id") Long id, Map<String, Object> model) {
 		Usuario usuario = null;
-		
-		Iterable<RolesUsuarios> rol = roleService.findAll();
-		((Model) model).addAttribute("rol", rol);
-		
-		if(id>0) {
+
+		if (id > 0) {
 			usuario = usuarioService.findOne(id);
-		}else {
-			return "redirect:/listarRoles";
+			model.put("usuario", usuario);
+		} else {
+			return "redirect:/PersonalAutorizado/listarRoles";
 		}
-		
-		model.put("usuario", usuario);
+
+		List<String> permisosUsuario = new ArrayList<>();
+		permisosUsuario.add("Usuario Registrado");
+		permisosUsuario.add("Investigador");
+		permisosUsuario.add("Director de Tesis");
+		permisosUsuario.add("Personal Autorizado");
+
+		model.put("permisos", permisosUsuario);
 		model.put("titulo", "Editar Rol de Usuario");
-		
-		return "formUsuario";
-		
+
+		return "PersonalAutorizado/formUsuario";
+
 	}
-	
-	@PostMapping(value="/PersonalAutorizado/formUsuario")
-	public String guardar(@Valid Usuario usuario, BindingResult result, Model model,SessionStatus status) throws Exception {
-		
-		
-		if(result.hasErrors()) {
+
+	@PostMapping(value = "formUsuario")
+	public String guardar(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status)
+			throws Exception {
+
+		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Editar Rol de Usuario");
 			return "formUsuario";
 		}
-		
-		List<Role> role = usuario.getRoles();
-		//Role newrole = new Role();
-		List<RolesUsuarios> nombreRol = roleService.findAll();
-		RolesUsuarios rolUsuario = usuario.getRoles_usuarios();
-		
-		
-		for(int i = 0; i < role.size(); i++) {
-			if(role.get(i).getAuthority().equals("ROLE_USER1")) {
-				//role.remove(i);
-				Role newrole = role.get(i);
-				for(int j = 0; j < nombreRol.size(); j++) {
-					if(nombreRol.get(j).equals(rolUsuario)){
-						//newrole.setAuthority("ROLE_USER2");
-						newrole.setAuthority(nombreRol.get(j).getNombreBD());
-						newrole.setIdUsuario(usuario.getId());
-					}
-				}
-				role.set(i, newrole);
-				//role.add(newrole);
+
+		// List <Role> roles = usuario.getRoles();
+		Role roles = usuario.getRoles();
+		// Role newRole = roles.get(0);
+
+		List<Role> role = roleService.findAll();
+		Long idRoleUsuario;
+		Role roleUsuario = null;
+		for (int i = 0; i < role.size(); i++) {
+			if (role.get(i).getUsers().getId().equals(usuario.getId())) {
+				idRoleUsuario = usuario.getId();
+				roleUsuario = roleService.findOne(idRoleUsuario);
+				break;
 			}
-			/*else {
-				Role newrole = new Role();
-				for(int j = 0; j < nombreRol.size(); j++) {
-					if(nombreRol.get(j).equals(rolUsuario)){
-						//newrole.setAuthority("ROLE_USER2");
-						newrole.setAuthority(nombreRol.get(j).getNombreBD());
-						newrole.setIdUsuario(usuario.getId());
-					}
-				}
-				//role.set(i, newrole);
-				role.add(newrole);
-			}*/
 		}
-		rolUsuario = usuario.getRoles_usuarios();
-		mailService.sendEmail(usuario.getEmail(), "Cambios de permisos en el sistema BD-LNCAE", "Tu permiso actual es: " + rolUsuario.getNombreRol(), usuario);
+
+		switch (usuario.getNombreRole()) {
+
+		case "Usuario Registrado":
+			// newRole.setAuthority("ROLE_USER1");
+			// roles.set(0, newRole);
+			roles.setAuthority("ROLE_USER1");
+			break;
+
+		case "Investigador":
+			// newRole.setAuthority("ROLE_USER2");
+			// roles.set(0, newRole);
+			roles.setAuthority("ROLE_USER2");
+			List<Investigador> investigadores = investigadorS.findall();
+			Investigador investigador = new Investigador();
+
+			if (roleUsuario != null) {
+				investigadorS.save(investigador);
+				investigadorS.saveUsuarioRole(roleUsuario);
+				// newRole.setInvestigador(investigador);
+				// roles.setInvestigador(investigador);
+				investigadores.add(investigador);
+
+			} else {
+				return "redirect:/PersonalAutorizado/listarRoles";
+			}
+
+			break;
+
+		case "Director de Tesis":
+			// newRole.setAuthority("ROLE_USER3");
+			// roles.set(0, newRole);
+			roles.setAuthority("ROLE_USER3");
+			break;
+
+		case "Personal Autorizado":
+			// newRole.setAuthority("ROLE_ADMIN");
+			// roles.set(0, newRole);
+			roles.setAuthority("ROLE_ADMIN");
+			break;
+
+		default:
+			break;
+		}
+
+		mailService.sendEmail(usuario.getEmail(), "Cambios de permisos en el sistema BD-LNCAE",
+				"Tu permiso actual es: " + usuario.getNombreRole(), usuario);
 		usuarioService.save(usuario);
 		status.setComplete();
-		
-		return "redirect:listarRoles";
-	}
-	
-	@RequestMapping(value="/eliminarUsuario/{id}")
-	public String eliminar(@PathVariable(value="id") Long id){
-		
-		if(id>0) {
-			usuarioService.delete(id);
-		}
-		
-		return "redirect:/listarRoles";
+
+		return "redirect:/PersonalAutorizado/listarRoles";
 	}
 
+	@RequestMapping(value = "/eliminarUsuario/{id}")
+	public String eliminar(@PathVariable(value = "id") Long id) {
+
+		if (id > 0) {
+			usuarioService.delete(id);
+		}
+
+		return "redirect:/PersonalAutorizado/listarRoles";
+	}
+
+	@RequestMapping(value = "/autorizarPermiso/{id_permiso}")
+	public String autorizarExpediente(@PathVariable(value = "id_permiso") Long idPermiso) throws Exception {
+
+		PermisosExpediente permisoSolicitado = permisoS.findOne(idPermiso);
+		
+		ExpedienteMOF expedientemof = permisoSolicitado.getExpedientes();
+		Usuario usuario = permisoSolicitado.getUsers();
+		
+		// Asignar Expediente al usuario que lo solicitó
+		permisoSolicitado.setPermiso(true);
+		usuarioService.save(usuario);
+		
+
+		mailService.sendEmail(usuario.getEmail(), "SOLICITUD PARA EDITAR EXPEDIENTE",
+				"Se ha aprobado tu solicitud para editar el expediente de " + expedientemof.getNombreUsuario()
+						+ " del compuesto: " + expedientemof.getMof().getNombreCompuesto(),
+				usuario);
+		return "redirect:/PersonalAutorizado/listarRoles";
+	}
 }

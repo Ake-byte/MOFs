@@ -5,53 +5,53 @@
 
 <body>
 	<header th:replace="layout/layout :: header"></header>
-
-	<div class="card bg-light">
-		<div class="card-header" th:text="${titulo}"></div>
-		<div class="card-body">
-			<div class="container py-4">
-				<nav class="navbar navbar-light bg-light">
-					<div class="container-fluid">
-						<a th:href="@{/formExpediente/} + ${mof.id}" class="btn btn-primary btn-xs">Crear
-							Expediente</a>
-						<form class="d-flex">
-							<input class="form-control me-2" type="search"
-								placeholder="Buscar" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Buscar</button>
-						</form>
-					</div>
-				</nav>
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>id</th>
-							<th>Usuario</th>
-							<th>&Uacute;ltima modificaci&oacute;n</th>
-							<th>Modificar</th>
-							<th>Eliminar</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="expedientes: ${mof.expedientesMOF}">
-							<td><a class="btn btn-primary btn-xs"
-								th:href="@{/verSecciones/} + ${expedientes.id}" th:text="${expedientes.id}"></a></td>
-							<td th:text="${expedientes.nombreUsuario}"></td>
-							<td></td>
-							<td><a class="btn btn-primary btn-xs"
-								th:href="@{/formPrueba/} + ${expedientes.id}" th:text="'Modificar'"></a></td>
-							<td><a class="btn btn-danger btn-xs"
-								th:href="@{/eliminarPrueba/} + ${expedientes.id}" th:text="'Eliminar'">
-								<!--  onclick="return confirm('Estás seguro que quieres eliminar?');"-->
+	<div class="container py-4">
+		<header th:replace="buscador :: header"></header>
+	</div>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+				<div class="container py-4">
+					<nav class="navbar navbar-light bg-light">
+						<div class="container-fluid">
+							<a th:href="@{/formExpediente/} + ${mof.id}"
+								class="btn btn-primary btn-xs">Crear Expediente</a>
+						</div>
+					</nav>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>id</th>
+								<th>Usuario</th>
+								<th>&Uacute;ltima modificaci&oacute;n</th>
+								<th>Solicitar Permiso para Editar</th>
+								<th>Eliminar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="expedientes: ${mof.expedientesMOF}">
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/verSecciones/} + ${expedientes.id}"
+									th:text="${expedientes.id}"></a></td>
+								<td th:text="${expedientes.nombreUsuario}"></td>
+								<td></td>
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/solicitarPermiso/} + ${expedientes.id}"
+									th:text="'Solicitar Permiso'"></a></td>
+								<td><a class="btn btn-danger btn-xs"
+									th:href="@{/eliminarPrueba/} + ${expedientes.id}"
+									th:text="'Eliminar'"> <!--  onclick="return confirm('Estás seguro que quieres eliminar?');"-->
 								</a></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 
+			</div>
 		</div>
 	</div>
-	
 	<footer th:replace="layout/layout :: footer"></footer>
-	
+
 </body>
 </html>

@@ -5,23 +5,14 @@
 
 <body>
 	<header th:replace="layout/layout :: header"></header>
+	<div class="container py-4">
+		<header th:replace="buscador :: header"></header>
+	</div>
 	<div class="container">
 		<div class="card bg-light">
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
 				<div class="container py-4">
-					<nav class="navbar navbar-light bg-light">
-						<div class="container-fluid">
-							<a sec:authorize="hasRole('ROLE_ADMIN')"
-								th:href="@{/Clasificacion/formClasificacion}"
-								class="btn btn-primary btn-xs">Crear Clasificaci&oacute;n</a>
-							<form class="d-flex">
-								<input class="form-control me-2" type="search"
-									placeholder="Buscar" aria-label="Search">
-								<button class="btn btn-outline-success" type="submit">Buscar</button>
-							</form>
-						</div>
-					</nav>
 					<table class="table table-striped">
 						<thead>
 							<tr>

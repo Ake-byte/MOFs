@@ -35,11 +35,6 @@ public class MOF implements Serializable {
 	@Column(name = "nombre_compuesto")
 	private String nombreCompuesto;
 
-	// Clasificación
-	//@NotEmpty
-	@Column(name = "nombre_clasificacion")
-	private String nombreClasificacion;
-
 	// Directores
 
 	// Investigador Responsable
@@ -47,6 +42,7 @@ public class MOF implements Serializable {
 	private String formula;
 
 	// Archivo - CIF
+	
 	//@NotEmpty
 	private String aplicaciones; // Propósito/Aplicaciones del MOF
 
@@ -101,15 +97,6 @@ public class MOF implements Serializable {
 	public void setNombreCompuesto(String nombreCompuesto) {
 		this.nombreCompuesto = nombreCompuesto;
 	}
-
-	public String getNombreClasificacion() {
-		return nombreClasificacion;
-	}
-
-	public void setNombreClasificacion(String nombreClasificacion) {
-		this.nombreClasificacion = nombreClasificacion;
-	}
-
 	
 
 	public ClasificacionMOF getClasificacionmof() {

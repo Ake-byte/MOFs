@@ -35,6 +35,7 @@ public class SeccionesExpedienteService implements ISeccionesExpedienteService {
 	}
 
 	@Override
+	@Transactional
 	public void savePrueba(PruebasMOF pruebamof) {
 		// TODO Auto-generated method stub
 		pruebasMOFDAO.save(pruebamof);
@@ -48,6 +49,7 @@ public class SeccionesExpedienteService implements ISeccionesExpedienteService {
 	}
 
 	@Override
+	@Transactional
 	public void delete(Long id) {
 		// TODO Auto-generated method stub
 		seccionesEDAO.deleteById(id);

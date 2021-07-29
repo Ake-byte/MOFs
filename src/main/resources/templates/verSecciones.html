@@ -5,59 +5,57 @@
 
 <body>
 	<header th:replace="layout/layout :: header"></header>
-
-	<div class="card bg-light">
-		<div class="card-header">
-		Secciones en el expediente del compuesto  
-		<strong th:text="${nombreCompuesto}" /></strong>. Expediente de 
-		<strong th:text="${autor}" /></strong>
-		</div>
-		<div class="card-header" th:text="${titulo2}"></div>
-		<div class="card-body">
-			<div class="container py-4">
-				<nav class="navbar navbar-light bg-light">
-					<div class="container-fluid">
-						<a th:href="@{/formSeccion/} + ${expedientemof.id}"
-							class="btn btn-primary btn-xs">Crear Secci&oacute;n</a>
-						<form class="d-flex">
-							<input class="form-control me-2" type="search"
-								placeholder="Buscar" aria-label="Search">
-							<button class="btn btn-outline-success" type="submit">Buscar</button>
-						</form>
-					</div>
-				</nav>
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>id</th>
-							<th>Nombre Secci&oacute;n</th>
-							<th>Descripci&oacute;n de la Secci&oacute;n</th>
-							<th>Modificar</th>
-							<th>Eliminar</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="secciones: ${expedientemof.seccionesExpediente}">
-							<td><a class="btn btn-primary btn-xs"
-								th:href="@{/expedienteMaterial/} + ${secciones.id}"
-								th:text="${secciones.id}"></a></td>
-							<td th:text="${secciones.nombreSeccion}"></td>
-							<td th:text="${secciones.descripcionSeccion}"></td>
-							<!--  <td><a class="btn btn-primary btn-xs"
+	<div class="container py-4">
+		<header th:replace="buscador :: header"></header>
+	</div>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header">
+				Secciones en el expediente del compuesto <strong
+					th:text="${nombreCompuesto}" /></strong>. Expediente de <strong
+					th:text="${autor}" /></strong>
+			</div>
+			<div class="card-header" th:text="${titulo2}"></div>
+			<div class="card-body">
+				<div class="container py-4">
+					<nav class="navbar navbar-light bg-light">
+						<div class="container-fluid">
+							<a th:href="@{/formSeccion/} + ${expedientemof.id}"
+								class="btn btn-primary btn-xs">Crear Secci&oacute;n</a>
+						</div>
+					</nav>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>id</th>
+								<th>Nombre Secci&oacute;n</th>
+								<th>Descripci&oacute;n de la Secci&oacute;n</th>
+								<th>Modificar</th>
+								<th>Eliminar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="secciones: ${expedientemof.seccionesExpediente}">
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/expedienteMaterial/} + ${secciones.id}"
+									th:text="${secciones.id}"></a></td>
+								<td th:text="${secciones.nombreSeccion}"></td>
+								<td th:text="${secciones.descripcionSeccion}"></td>
+								<!--  <td><a class="btn btn-primary btn-xs"
 								th:href="@{/formSeccion/} + ${mof.id} + '/' + ${expedientes.id}"
 								th:text="'Modificar'"></a></td>
 							<td><a class="btn btn-danger btn-xs"
 								th:href="@{/eliminarSeccion/} + ${mof.id} + '/' + ${expedientes.id}"
 								th:text="'Eliminar'"> </a></td>
 								-->
-						</tr>
-					</tbody>
-				</table>
-			</div>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 
+			</div>
 		</div>
 	</div>
-
 	<footer th:replace="layout/layout :: footer"></footer>
 
 </body>

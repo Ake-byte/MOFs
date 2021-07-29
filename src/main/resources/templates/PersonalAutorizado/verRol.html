@@ -4,6 +4,9 @@
 <head th:replace="layout/layout :: head"></head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
+	<div class="container py-4">
+		<header th:replace="buscador :: header"></header>
+	</div>
 	<div class="container">
 		<div class="card bg-light">
 			<div class="card-header" th:text="${titulo}"></div>
@@ -14,38 +17,36 @@
 				<table class="table">
 					<thead class="table-light">
 						<tr>
-							<th>id</th>
-							<th>Nombre</th>
-							<th>Apellido Paterno</th>
-							<th>Apellido Materno</th>
-							<th>Email</th>
-							<th>Directores</th>
-							<th>Cambiar Rol</th>
+							<th>Ver Datos</th>
+							<th>Nombre de Usuario</th>
+							<th>Correo electr&oacute;nico</th>
+							<th>Cambiar Permiso</th>
+							<th>Deshabilitar</th>
 							<th>Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="usuario: ${rol.usuarios}">
-							<td><a class="btn btn-primary btn-xs" th:text="${usuario.id}"></a></td>
-							<td th:text="${usuario.nombre}"></td>
-							<td th:text="${usuario.apellidoPaterno}"></td>
-							<td th:text="${usuario.apellidoMaterno}"></td>
-							<td th:text="${usuario.email}"></td>
-							<th></th>
+						<tr th:each="usuario: ${role}">
+							<td><a class="btn btn-primary btn-xs"><img
+									th:src="@{/images/ver.png}" width="35" height="25"></a></td>
+							<td
+								th:text="${usuario.users.nombre} + ' ' + ${usuario.users.apellidoPaterno} + ' ' + ${usuario.users.apellidoMaterno}"></td>
+							<td th:text="${usuario.users.email}"></td>
 							<td><a class="btn btn-primary btn-xs"
 								sec:authorize="hasRole('ROLE_ADMIN')"
-								th:href="@{/formUsuario/} + ${usuario.id}"
-								th:text="'Editar'"></a></td>
+								th:href="@{/PersonalAutorizado/formUsuario/} + ${usuario.users.id}"><img
+									th:src="@{/images/editar.png}" width="35" height="25"></a></td>
+							<td></td>
 							<td><a class="btn btn-danger btn-xs"
 								sec:authorize="hasRole('ROLE_ADMIN')"
-								th:href="@{/eliminarUsuario/} + ${usuario.id}"
-								th:text="'Eliminar'"
+								th:href="@{/PersonalAutorizado/eliminarUsuario/} + ${usuario.users.id}"
 								onclick="return confirm('Estás seguro que quieres eliminar?');">
+									<img th:src="@{/images/eliminarU.png}" width="35" height="25">
 							</a></td>
 						</tr>
 					</tbody>
 				</table>
-
+				<nav th:replace="paginator :: paginator"></nav>
 
 			</div>
 		</div>

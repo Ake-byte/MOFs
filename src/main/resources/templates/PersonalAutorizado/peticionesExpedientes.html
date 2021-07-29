@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container py-4">
+		<header th:replace="buscador :: header"></header>
+	</div>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+				<div class="container py-4">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>id</th>
+								<th>Nombre de Usuario</th>
+								<th>Expediente Solicitado</th>
+								<th>Compuesto Asociado</th>
+								<th>Autorizar Solicitud</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="peticion: ${peticion}">
+								<td><a class="btn btn-primary btn-xs"
+									th:text="${peticion.id}"></a></td>
+								<td th:text="${peticion.users.nombre} + ' ' + ${peticion.users.apellidoPaterno} + ' ' + ${peticion.users.apellidoMaterno}"></td>
+								<td th:text="${peticion.expedientes.nombreUsuario}"></td>
+								<td th:text="${peticion.expedientes.mof.nombreCompuesto}"></td>
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/PersonalAutorizado/autorizarPermiso/} + ${peticion.id}"
+									th:text="'Autorizar'"></a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

@@ -52,7 +52,7 @@ public class MailSenderService {
 		attributes.add("Bienvenido al sistema BD-LNCAE: " + user.getNombre() + " " + user.getApellidoPaterno() + " " + user.getApellidoMaterno());
 		attributes.add("Tu usuario es: " + user.getEmail());
 		attributes.add("Tu contraseña: " + user.getPassword());
-		attributes.add("Tu rol actual es: " + user.getRoles_usuarios());
+		//attributes.add("Tu rol actual es: " + user.getRoles_usuarios());
 
 		content.setFeatures(attributes);
 		content.setMessage("Este es un correo de bienvenida al sistema.");

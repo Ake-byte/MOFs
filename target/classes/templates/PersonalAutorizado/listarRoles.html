@@ -5,31 +5,60 @@
 
 <body>
 	<header th:replace="layout/layout :: header"></header>
-
-	<div class="card bg-light">
-		<div class="card-header" th:text="${titulo}"></div>
-		<div class="card-body">
-			<div class="container py-4">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>Ver Usuarios con Rol:</th>
-							<th>Nombre Rol</th>
-							<th>Descripci&oacute;n Rol</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="role: ${role}">
-							<td><a class="btn btn-primary btn-xs"
-							th:href="@{/verRol/} + ${role.id}"
-							th:text="${role.id}"></a></td>
-							<td th:text="${role.nombreRol}"></td>
-							<td th:text="${role.descripcionRol}"></td>
-						</tr>
-					</tbody>
-				</table>
+	<div class="container py-4">
+		<header th:replace="buscador :: header"></header>
+	</div>
+	<div class="container">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+				<div class="container py-4">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th></th>
+								<th>Tipo de Usuario</th>
+								<th>Descripci&oacute;n Rol</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/PersonalAutorizado/verUsuariosRegistrados}"
+									th:text="Ver"></a></td>
+								<td>Usuario Registrado</td>
+								<td>Usuarios que necesitan ser validados en el sistema.
+									Estos usuarios no pueden realizar ninguna funci&oacute;n en el
+									sistema. Personal autorizado debe de asignarles un permiso</td>
+							</tr>
+							<tr>
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/PersonalAutorizado/verInvestigadores}"
+									th:text="Ver"></a></td>
+								<td>Investigador</td>
+								<td>Usuarios con este permiso pueden crear expedientes de
+									los compuestos</td>
+							</tr>
+							<tr>
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/PersonalAutorizado/verDirectoresTesis}"
+									th:text="Ver"></a></td>
+								<td>Director de Tesis</td>
+								<td>Usuarios que son directores de tesis de los
+									investigadores</td>
+							</tr>
+							<tr>
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/PersonalAutorizado/verPersonalAutorizado}"
+									th:text="Ver"></a></td>
+								<td>Personal Autorizado</td>
+								<td>Usuario que puede asignar permisos a los usuarios y
+									modificar expedientes de los compuestos</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
-
 		</div>
 	</div>
 

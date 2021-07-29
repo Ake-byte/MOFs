@@ -20,13 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.compuestosmo.app.models.entity.ClasificacionMOF;
-import com.compuestosmo.app.models.entity.MOF;
 import com.compuestosmo.app.models.entity.Role;
-import com.compuestosmo.app.models.entity.RolesUsuarios;
 import com.compuestosmo.app.models.entity.Usuario;
 import com.compuestosmo.app.models.service.IRoleService;
-import com.compuestosmo.app.models.service.IRolesUsuarioService;
 import com.compuestosmo.app.models.service.IUsuarioService;
 import com.compuestosmo.app.models.util.MailSenderService;
 
@@ -39,8 +35,6 @@ public class LoginController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
-	@Autowired
-	private IRolesUsuarioService roleUsuarioService;
 	
 	@Autowired
 	private IUsuarioService usuarioService;
@@ -72,8 +66,6 @@ public class LoginController {
 	@GetMapping(value = "/register")
 	public String register(Map<String, Object> model) {
 		Usuario usuario = new Usuario();
-		//Iterable<RolesUsuarios> roles = roleUsuarioService.findAll();
-		//((Model) model).addAttribute("rol", rol);
 		
 		model.put("usuario", usuario);
 		model.put("titulo", "Registro de Usuario");
@@ -83,11 +75,13 @@ public class LoginController {
 	@PostMapping(value = "/register")
 	public String guardar(@Valid Usuario usuario, RedirectAttributes flash, BindingResult result, Model model, SessionStatus status) throws Exception {
 
-		Usuario usuarioExistente = usuarioService.findByEmail(usuario.getEmail()); 
+		List<Usuario> usuarios = usuarioService.findall();
 		
-		if(usuarioExistente != null) {
-			flash.addFlashAttribute("error", "Ya existe un usuario con ese correo");
-			return "register";
+		for(int i = 0; i < usuarios.size(); i++) {
+			if(usuarios.get(i).getEmail().equals(usuario.getEmail())) {
+				flash.addFlashAttribute("error", "Ya existe un usuario con esa dirección de correo electrónico.");
+				return "redirect:/register";
+			}
 		}
 		
 		if (result.hasErrors()) {
@@ -98,30 +92,11 @@ public class LoginController {
 		Role role = new Role();
 
 		role.setAuthority("ROLE_USER1");
+		role.setUsers(usuario);
 
-		List<Role> roles = new ArrayList<>();
 
-		roles.add(role);
-		
-		
-		List<Usuario> numusuarios = usuarioService.findall();
-		Long numid = (long) numusuarios.size();
-		role.setIdUsuario(numid+1);
-		
-		
-		//List<RolesUsuarios> numroles = roleUsuarioService.findAll();
-		RolesUsuarios rolesusuarios = roleUsuarioService.findOne((long) 1);
-		
-		usuario.setRoles_usuarios(rolesusuarios);
-		
-		//RolesUsuarios idrol = numroles.get(0).getId();
-		//usuario.setRole(idrol);
-		
-
-		usuario.setRoles(roles);
+		usuario.setRoles(role);
 		usuario.setEnabled(true);
-
-		// String password = "12345";
 
 		String password = usuario.getPassword();
 
@@ -133,8 +108,7 @@ public class LoginController {
 		
 		roleService.saveUsuario(usuario);
 		roleService.save(role);
-		RolesUsuarios rolUsuario = usuario.getRoles_usuarios();
-		mailService.sendEmail(usuario.getEmail(), "Bienvenido al sistema BD-LNCAE", "Tu permiso actual es: " + rolUsuario.getNombreRol(), usuario);
+		mailService.sendEmail(usuario.getEmail(), "Bienvenido al sistema BD-LNCAE", "Tu permiso actual es: Usuario Registrado", usuario);
 		
 
 		status.setComplete();

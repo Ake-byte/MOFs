@@ -6,7 +6,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import com.compuestosmo.app.models.entity.PruebasMOF;
-import com.compuestosmo.app.models.entity.SeccionesExpediente;
 
 
 public interface IPruebasMOFService {

@@ -1,6 +1,8 @@
 package com.compuestosmo.app.models.entity;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,38 +13,41 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="authorities", uniqueConstraints= {@UniqueConstraint(columnNames = { "user_id", "authority" })})
+@Table(name="roles", uniqueConstraints= {@UniqueConstraint(columnNames = { "user_id", "authority" })})
 public class Role implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "role_id")
     private Long id;
 
     @Column(name = "authority")
     private String authority;
     
-    @Column(name = "id_usuario")
-	private Long idUsuario;
-    
     //FK - Role Usuario
-    @ManyToOne(fetch = FetchType.LAZY)
+    //@ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
     private Usuario users;
     
-    //FK - Role Lista de Roles
-    /*
-    @ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_roles")
-	private RolesUsuarios roles;
-	*/
+    @OneToMany(mappedBy = "roles", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+   // @JoinColumn(name = "investigador_id")
+    
+    //private Investigador investigador;
+    private List<Investigador> investigadores;
+    
+    public Role() {
+    	investigadores = new ArrayList<Investigador>();
+    }
+    
 	public Long getId() {
 		return id;
 	}
@@ -59,16 +64,6 @@ public class Role implements Serializable{
 		this.authority = authority;
 	}
 
-	
-
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
-
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-
 	public Usuario getUsers() {
 		return users;
 	}
@@ -76,16 +71,17 @@ public class Role implements Serializable{
 	public void setUsers(Usuario users) {
 		this.users = users;
 	}
-	/*
-	public RolesUsuarios getRoles() {
-		return roles;
+
+	public List<Investigador> getInvestigadores() {
+		return investigadores;
 	}
 
-	public void setRoles(RolesUsuarios roles) {
-		this.roles = roles;
+	public void setInvestigadores(List<Investigador> investigadores) {
+		this.investigadores = investigadores;
 	}
-	*/
 
+	
+	
 	
 
 }

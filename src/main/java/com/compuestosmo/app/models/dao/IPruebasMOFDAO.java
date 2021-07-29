@@ -9,7 +9,6 @@ import com.compuestosmo.app.models.entity.PruebasMOF;
 
 public interface IPruebasMOFDAO extends PagingAndSortingRepository<PruebasMOF, Long>{
 
-	//public PruebasMOF findPruebasById(Long id, Pageable pageable );
 	@Query("select p from PruebasMOF p where p.secciones_expedientes.id = ?1")
 	public Page<PruebasMOF> findPruebasById(Long id, Pageable pageable);
 }

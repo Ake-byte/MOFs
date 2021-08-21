@@ -7,7 +7,7 @@
 	<div class="container">
 		<div class="card bg-light">
 			<div class="card-header" th:text="${titulo}"></div>
-			<div class="card-body" th:each="mof: ${mof}">
+			<div class="card-body" th:each="usuario: ${usuario}">
 
 				<div class="container">
 					<div class="card bg-light">
@@ -27,12 +27,18 @@
 									<div class="card">
 										<ul class="list-group list-group-flush">
 											<li class="list-group-item"
-												th:text="'Nombre: '">
+												th:text="'Nombre: ' + ${usuario.nombre} + ' '+ ${usuario.apellidoPaterno} + ' ' + ${usuario.apellidoMaterno}">
 											<li class="list-group-item"
-												th:text="'Correo: '"></li>
+												th:text="'Correo: '+ ${usuario.email}"></li>
 											<li class="list-group-item"
-												th:text="Cambiar Contraseña' + ${mof.articulo}"></li>
+												th:text="'Permisos en el sistema: ' + ${usuario.roles.authorityName}"></li>
 										</ul>
+									</div>
+									<div>
+									<p>
+										<a class="btn btn-primary btn-xs"
+										th:href="@{/Usuario/editarDatos/} + ${usuario.id}">Editar datos</a>
+									</p>
 									</div>
 
 								</div>

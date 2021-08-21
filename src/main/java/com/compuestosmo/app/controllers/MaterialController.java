@@ -1,9 +1,7 @@
 package com.compuestosmo.app.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -12,14 +10,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.compuestosmo.app.models.dao.IClasificacionMOFDAO;
@@ -27,7 +22,6 @@ import com.compuestosmo.app.models.dao.IMOFDAO;
 import com.compuestosmo.app.models.entity.ClasificacionMOF;
 import com.compuestosmo.app.models.entity.MOF;
 import com.compuestosmo.app.models.entity.Usuario;
-import com.compuestosmo.app.models.service.IClasificacionMOFService;
 import com.compuestosmo.app.models.service.IMOFService;
 import com.compuestosmo.app.models.service.IUsuarioService;
 
@@ -43,9 +37,6 @@ public class MaterialController {
 	
 	@Autowired
 	private IClasificacionMOFDAO clasificaciondao;
-	
-	@Autowired
-	private IClasificacionMOFService clasificacionService;
 	
 	@Autowired
 	private IUsuarioService usuarioService;

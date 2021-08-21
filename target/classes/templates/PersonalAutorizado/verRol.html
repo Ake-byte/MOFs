@@ -8,9 +8,11 @@
 		<header th:replace="buscador :: header"></header>
 	</div>
 	<div class="container">
-		<div class="card bg-light">
-			<div class="card-header" th:text="${titulo}"></div>
-
+		<div class="card bg-light mb-3" style="border-color: #483D8B">
+			<div class="card-header text-white mb-3 text-center"
+				style="background-color: #483D8B">
+				<font size="18" th:text="${titulo}"></font>
+			</div>
 			<div class="card-body">
 
 				<!--  <table th:if="${not #lists.isEmpty(clasificacion.listaMOFs)}" class="table">-->
@@ -21,26 +23,30 @@
 							<th>Nombre de Usuario</th>
 							<th>Correo electr&oacute;nico</th>
 							<th>Cambiar Permiso</th>
-							<th>Deshabilitar</th>
+							<th>Inhabilitar</th>
 							<th>Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="usuario: ${role}">
-							<td><a class="btn btn-primary btn-xs"><img
-									th:src="@{/images/ver.png}" width="35" height="25"></a></td>
+							<td><a class="btn btn-xs" style="background-color: #483D8B">
+							<img th:src="@{/images/ver.png}" width="35" height="25"></a></td>
 							<td
 								th:text="${usuario.users.nombre} + ' ' + ${usuario.users.apellidoPaterno} + ' ' + ${usuario.users.apellidoMaterno}"></td>
 							<td th:text="${usuario.users.email}"></td>
-							<td><a class="btn btn-primary btn-xs"
+							<td><a class="btn btn-xs" style="background-color: #483D8B"
 								sec:authorize="hasRole('ROLE_ADMIN')"
 								th:href="@{/PersonalAutorizado/formUsuario/} + ${usuario.users.id}"><img
 									th:src="@{/images/editar.png}" width="35" height="25"></a></td>
-							<td></td>
+							<td><a class="btn btn-xs" style="background-color: #ffff00"
+								sec:authorize="hasRole('ROLE_ADMIN')"
+								th:href="@{/PersonalAutorizado/inhabilitarUsuario/} + ${usuario.users.id}"
+								onclick="return confirm('&iquest;Est&aacute; seguro de inhabilitar este usuario?');">
+								<img th:src="@{/images/inhabilitar.png}" width="35" height="25"></a></td>
 							<td><a class="btn btn-danger btn-xs"
 								sec:authorize="hasRole('ROLE_ADMIN')"
 								th:href="@{/PersonalAutorizado/eliminarUsuario/} + ${usuario.users.id}"
-								onclick="return confirm('Estás seguro que quieres eliminar?');">
+								onclick="return confirm('&iquest;Est&aacute; seguro de eliminar este usuario?');">
 									<img th:src="@{/images/eliminarU.png}" width="35" height="25">
 							</a></td>
 						</tr>

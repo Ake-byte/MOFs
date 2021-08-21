@@ -9,8 +9,9 @@
 		<header th:replace="buscador :: header"></header>
 	</div>
 	<div class="container">
-		<div class="card bg-light">
-			<div class="card-header" th:text="${titulo}"></div>
+		<div class="card bg-light border-warning mb-3">
+			<div class="card-header text-white bg-warning mb-3 text-center"
+				th:text="${titulo}"></div>
 			<div class="card-body">
 				<div class="container py-4">
 					<nav class="navbar navbar-light bg-light">
@@ -22,9 +23,16 @@
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>id</th>
-								<th>Usuario</th>
-								<th>&Uacute;ltima modificaci&oacute;n</th>
+								<th>Ver Expediente</th>
+								<th style="width: 20%">Autor</th>
+								<th colspan="2"class="text-center">&Uacute;ltima modificaci&oacute;n
+									<table>
+										<tr>
+											<th style="width: 10%">Usuario</th>
+											<th style="width: 10%">Fecha</th>
+										</tr>
+									</table>
+								</th>
 								<th>Solicitar Permiso para Editar</th>
 								<th>Eliminar</th>
 							</tr>
@@ -35,7 +43,12 @@
 									th:href="@{/verSecciones/} + ${expedientes.id}"
 									th:text="${expedientes.id}"></a></td>
 								<td th:text="${expedientes.nombreUsuario}"></td>
-								<td></td>
+								
+										<td th:text="${expedientes.nombreUsuario}"></td>
+										<td th:text="${expedientes.fecha}"></td>
+								
+								
+
 								<td><a class="btn btn-primary btn-xs"
 									th:href="@{/solicitarPermiso/} + ${expedientes.id}"
 									th:text="'Solicitar Permiso'"></a></td>

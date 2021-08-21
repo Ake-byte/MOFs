@@ -43,6 +43,10 @@ public class LoginSuccesHandler extends SimpleUrlAuthenticationSuccessHandler {
 				break;
 			}
 		}
+		
+		if(usuario.getEnabled().equals(false)) {
+			usuarioInhabilitado();
+		}
 
 		flashMap.put("success", "Bienvenido " + usuario.getNombre() + " " 
 												+ usuario.getApellidoPaterno() + " "
@@ -51,6 +55,10 @@ public class LoginSuccesHandler extends SimpleUrlAuthenticationSuccessHandler {
 		flashMapManager.saveOutputFlashMap(flashMap, request, response);
 
 		super.onAuthenticationSuccess(request, response, authentication);
+	}
+	
+	public String usuarioInhabilitado() {
+		return "login";
 	}
 
 }

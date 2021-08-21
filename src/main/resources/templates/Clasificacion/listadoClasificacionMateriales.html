@@ -9,25 +9,28 @@
 		<header th:replace="buscador :: header"></header>
 	</div>
 	<div class="container">
-		<div class="card bg-light">
-			<div class="card-header" th:text="${titulo}"></div>
+		<div class="card bg-light mb-3" style="border-color:#20B2AA">
+			<div class="card-header text-white mb-3 text-center" style="background-color:#20B2AA">
+				<font size="18" th:text="${titulo}"></font>
+			</div>
 			<div class="card-body">
 				<div class="container py-4">
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>id</th>
-								<th>Nombre</th>
-								<th>Descripci&oacute;n</th>
+								<th>Ver Clasificaci&oacute;n</th>
+								<th>Nombre de la clasificaci&oacute;n</th>
+								<th>Descripci&oacute;n de la lasificaci&oacute;n</th>
 								<th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
 								<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="clasificaciones: ${clasificacion}">
-								<td><a class="btn btn-primary btn-xs"
-									th:href="@{/Clasificacion/verClasificacion/} + ${clasificaciones.id}"
-									th:text="${clasificaciones.id}"></a></td>
+								<td><a class="btn btn-xs" style="background-color:#20B2AA"
+									th:href="@{/Clasificacion/verClasificacion/} + ${clasificaciones.id}">
+										<img th:src="@{/images/ver.png}" width="35" height="25">
+								</a></td>
 								<td th:text="${clasificaciones.nombreClasificacion}"></td>
 								<td th:text="${clasificaciones.descripcionClasificacion}"></td>
 								<td><a class="btn btn-primary btn-xs"

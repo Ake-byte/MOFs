@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -31,6 +30,9 @@ public class Role implements Serializable{
 
     @Column(name = "authority")
     private String authority;
+    
+    @Column(name = "authority_name")
+    private String authorityName;
     
     //FK - Role Usuario
     //@ManyToOne(fetch = FetchType.LAZY)
@@ -80,7 +82,14 @@ public class Role implements Serializable{
 		this.investigadores = investigadores;
 	}
 
-	
+	public String getAuthorityName() {
+		return authorityName;
+	}
+
+	public void setAuthorityName(String authorityName) {
+		this.authorityName = authorityName;
+	}
+
 	
 	
 

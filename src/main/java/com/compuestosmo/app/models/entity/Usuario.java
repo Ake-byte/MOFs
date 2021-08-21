@@ -47,13 +47,16 @@ public class Usuario implements Serializable{
     //private List<Role> roles;
 	private Role roles;
 	
-	@Column(name = "nombre_role")
-	private String nombreRole;
+	//@Column(name = "nombre_role")
+	//private String nombreRole;
 	
 	//PERMISOS A EXPEDIENTES QUE TIENE EL USUARIO
 	@OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private List<PermisosExpediente> permisosExpediente;
+	
+	@Column(name = "reset_password_token")
+    private String resetPasswordToken;
 	
 	public Usuario() {
 		//roles = new ArrayList<Role>();
@@ -116,25 +119,6 @@ public class Usuario implements Serializable{
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
 	}
-/*
-	public List<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-
-	public void addRoles(Role role) {
-		roles.add(role);
-	}
-*/
-	
-	
-	public String getNombreRole() {
-		return nombreRole;
-	}
-
 
 	public Role getRoles() {
 		return roles;
@@ -143,11 +127,6 @@ public class Usuario implements Serializable{
 
 	public void setRoles(Role roles) {
 		this.roles = roles;
-	}
-
-
-	public void setNombreRole(String nombreRole) {
-		this.nombreRole = nombreRole;
 	}
 		
 
@@ -163,6 +142,28 @@ public class Usuario implements Serializable{
 	public void addPermisoExpediente(PermisosExpediente permisoExpediente) {
 		permisosExpediente.add(permisoExpediente);
 	}
+
+	
+	public String getResetPasswordToken() {
+		return resetPasswordToken;
+	}
+
+
+	public void setResetPasswordToken(String resetPasswordToken) {
+		this.resetPasswordToken = resetPasswordToken;
+	}
+
+
+	
+	/*public String getNombreRole() {
+		return nombreRole;
+	}
+
+
+	public void setNombreRole(String nombreRole) {
+		this.nombreRole = nombreRole;
+	}
+*/
 
 
 	private static final long serialVersionUID = 1L;

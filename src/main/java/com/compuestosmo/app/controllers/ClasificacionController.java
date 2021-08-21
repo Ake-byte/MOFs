@@ -5,6 +5,9 @@ import java.util.Map;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,12 +17,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
 import com.compuestosmo.app.models.dao.IClasificacionMOFDAO;
 import com.compuestosmo.app.models.entity.ClasificacionMOF;
 import com.compuestosmo.app.models.entity.MOF;
 import com.compuestosmo.app.models.service.IClasificacionMOFService;
+import com.compuestosmo.app.models.service.IMOFService;
+import com.compuestosmo.app.models.util.PageRender;
 
 @Controller
 @RequestMapping("/Clasificacion")
@@ -31,6 +37,9 @@ public class ClasificacionController {
 	@Autowired
 	private IClasificacionMOFService clasificacionMOFService;
 	
+	@Autowired
+	private IMOFService mofService;
+	
 	@RequestMapping(value="listadoClasificacionMateriales", method=RequestMethod.GET)
 	public String listar(Model model) {
 		model.addAttribute("titulo", "Clasificación de Materiales");
@@ -39,15 +48,21 @@ public class ClasificacionController {
 	}
 	
 	@GetMapping(value="/verClasificacion/{id}")
-	public String verClasificacion(@PathVariable(value="id") Long id, Map<String, Object> model) {
+	public String verClasificacion(@RequestParam(name = "page", defaultValue = "0") int page,
+			@PathVariable(value="id") Long id, Map<String, Object> model) {
 		ClasificacionMOF clasificacion = clasificacionMOFService.findOne(id);
 		
 		if(clasificacion == null) {
 			return "redirect:/Clasificacion/listadoClasificacionMateriales";
 		}
 		
-		model.put("clasificacion", clasificacion);
+		Pageable pageRequest = PageRequest.of(page, 10);
+		Page<MOF> mof = mofService.findMOFsByClasificacionId(clasificacion.getId(), pageRequest);
+		PageRender<MOF> pageRender = new PageRender<>("/Clasificacion/verClasificacion/" + id, mof);
+		
+		model.put("mof", mof);
 		model.put("titulo", "Clasificación MOF: " + clasificacion.getNombreClasificacion());
+		model.put("page", pageRender);
 		
 		return "Clasificacion/verClasificacion";
 	}

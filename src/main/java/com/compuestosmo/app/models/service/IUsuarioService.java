@@ -18,6 +18,8 @@ public interface IUsuarioService {
 	public Usuario findOne(Long id);
 	
 	public Usuario findByEmail(String email);
+	
+	public Usuario findByResetPasswordToken(String token);
 
 	public void delete(Long id);
 	

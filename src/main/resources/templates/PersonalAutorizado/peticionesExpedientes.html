@@ -9,14 +9,17 @@
 		<header th:replace="buscador :: header"></header>
 	</div>
 	<div class="container">
-		<div class="card bg-light">
-			<div class="card-header" th:text="${titulo}"></div>
+		<div class="card bg-light mb-3" style="border-color: #00CED1">
+			<div class="card-header text-white mb-3 text-center"
+				style="background-color:#00CED1">
+				<font size="18" th:text="${titulo}"></font>
+			</div>
 			<div class="card-body">
 				<div class="container py-4">
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>id</th>
+								<th>Ver Usuario</th>
 								<th>Nombre de Usuario</th>
 								<th>Expediente Solicitado</th>
 								<th>Compuesto Asociado</th>
@@ -25,14 +28,14 @@
 						</thead>
 						<tbody>
 							<tr th:each="peticion: ${peticion}">
-								<td><a class="btn btn-primary btn-xs"
-									th:text="${peticion.id}"></a></td>
+								<td><a class="btn btn-xs" style="background-color: #00CED1">
+									<img th:src="@{/images/ver.png}" width="35" height="25"></a></td>
 								<td th:text="${peticion.users.nombre} + ' ' + ${peticion.users.apellidoPaterno} + ' ' + ${peticion.users.apellidoMaterno}"></td>
 								<td th:text="${peticion.expedientes.nombreUsuario}"></td>
 								<td th:text="${peticion.expedientes.mof.nombreCompuesto}"></td>
-								<td><a class="btn btn-primary btn-xs"
-									th:href="@{/PersonalAutorizado/autorizarPermiso/} + ${peticion.id}"
-									th:text="'Autorizar'"></a></td>
+								<td><a class="btn btn-xs" style="background-color: #00CED1"
+									th:href="@{/PersonalAutorizado/autorizarPermiso/} + ${peticion.id}">
+									<img th:src="@{/images/autorizar.png}" width="35" height="25"></a></td>
 							</tr>
 						</tbody>
 					</table>

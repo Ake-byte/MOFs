@@ -56,10 +56,10 @@
 							</label>
 							<div class="col-sm-6">
 								<select id="rol" name="rol"
-									th:field="*{nombreRole}">
-									<option th:each="roles : ${permisos}"
-										th:value="${roles}"
-										th:utext="${roles}" />
+									th:field="*{roles.authorityName}">
+									<option th:each="permisos : ${permisos}"
+										th:value="${permisos}"
+										th:utext="${permisos}" />
 								</select>
 							</div>
 						</div>

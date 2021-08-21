@@ -28,6 +28,7 @@ import com.compuestosmo.app.models.entity.ExpedienteMOF;
 import com.compuestosmo.app.models.entity.MOF;
 import com.compuestosmo.app.models.entity.PermisosExpediente;
 import com.compuestosmo.app.models.entity.PruebasMOF;
+import com.compuestosmo.app.models.entity.Role;
 import com.compuestosmo.app.models.entity.SeccionesExpediente;
 import com.compuestosmo.app.models.entity.Usuario;
 import com.compuestosmo.app.models.service.IExpedienteMOFService;
@@ -141,8 +142,6 @@ public class ExpedienteController {
 		
 		ExpedienteMOF expedienteMOF = new ExpedienteMOF();
 		expedienteMOF.setMof(mof);
-		
-		PermisosExpediente pe = new PermisosExpediente();
 
 		String nombreUsuario = usuario.getNombre() + " " + usuario.getApellidoPaterno() + " "
 				+ usuario.getApellidoMaterno();
@@ -184,18 +183,19 @@ public class ExpedienteController {
 			return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
 		} else {
 			for (int i = 0; i < expedientesUsuario.size(); i++) {
-				if (expedientesUsuario.get(i).getExpedientes().equals(expedienteMOF) && expedientesUsuario.get(i).getPermiso().equals(true)) {
+				if (expedientesUsuario.get(i).getExpedientes().equals(expedienteMOF)) {
+					if(expedientesUsuario.get(i).getPermiso().equals(true)) {
+						se.setExpedientes(expedienteMOF);
+						
+						model.put("seccionE", se);
+						model.put("titulo", "Formulario Sección");
 
-					se.setExpedientes(expedienteMOF);
-
-					model.put("seccionE", se);
-					model.put("titulo", "Formulario Sección");
-
-				} else {
-					flash.addFlashAttribute("error", "No tienes permisos para modificar este expediente.");
-					return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
-				}
-
+					}
+					else {
+						flash.addFlashAttribute("error", "No tienes permisos para modificar este expediente.");
+						return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
+					}
+				} 
 			}
 		}
 
@@ -221,7 +221,7 @@ public class ExpedienteController {
 	}
 
 	@PostMapping(value = "formSeccion")
-	public String guardar(@Valid SeccionesExpediente seccionE, BindingResult result, Model model,
+	public String guardarSeccion(@Valid SeccionesExpediente seccionE, BindingResult result, Model model,
 			RedirectAttributes flash, SessionStatus status) {
 		//
 
@@ -275,9 +275,23 @@ public class ExpedienteController {
 		permisoExpediente.setExpedientes(expedientemof);
 		permisoExpediente.setPermiso(true);
 		
+		permisosE.saveUsuario(usuario);
 		permisosE.save(permisoExpediente);
 		permisosE.saveExpediente(expedientemof);
-		permisosE.saveUsuario(usuario);
+		
+		
+		//Se realiza lo anterior para todo el usuario con permiso 'Personal Autorizado'
+		List<Role> personalAutorizado = usuarioService.findByRolUsuario("ROLE_ADMIN");
+		for(int i = 0; i < personalAutorizado.size(); i++) {
+			PermisosExpediente permisoExpedientePA = new PermisosExpediente();
+			permisoExpedientePA.setUsers(personalAutorizado.get(i).getUsers());
+			permisoExpedientePA.setExpedientes(expedientemof);
+			permisoExpedientePA.setPermiso(true);
+			
+			permisosE.saveUsuario(personalAutorizado.get(i).getUsers());
+			permisosE.save(permisoExpedientePA);
+			permisosE.saveExpediente(expedientemof);
+		}
 		
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);

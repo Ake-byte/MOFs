@@ -6,11 +6,11 @@ insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enable
 insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enabled) values('Dr. Edilso Francisco', 'Reguera', 'Ruíz',	'edilso.reguera@gmail.com', '$2a$10$ikZAVJKUx5tyspO0hxAxZu99X2J1L/yPcEAu.jAkLSIpx5m4tJu2C', TRUE);
 insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enabled) values('Dr. Carlos Israel', 'Aguirre', 'Vélez',	'c.aguirre.velez@gmail.com', '$2a$10$xaaruwV8x92ds7aPZ93fou9EipWxEBVwloSRK7HwvXlEeCDkpYwt6', TRUE);
 
-INSERT INTO roles (user_id, authority) VALUES(1, 'ROLE_ADMIN');
-INSERT INTO roles (user_id, authority) VALUES(2, 'ROLE_ADMIN');
-INSERT INTO roles (user_id, authority) VALUES(3, 'ROLE_ADMIN');
-INSERT INTO roles (user_id, authority) VALUES(4, 'ROLE_ADMIN');
-INSERT INTO roles (user_id, authority) VALUES(5, 'ROLE_ADMIN');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(1, 'ROLE_ADMIN', 'Personal Autorizado');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(2, 'ROLE_ADMIN', 'Personal Autorizado');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(3, 'ROLE_ADMIN', 'Personal Autorizado');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(4, 'ROLE_ADMIN', 'Personal Autorizado');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(5, 'ROLE_ADMIN', 'Personal Autorizado');
 
 --DIRECTOR DE TESIS
 
@@ -22,13 +22,13 @@ insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enable
 insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enabled) values('Dra. Marlene', 'González', 'Montiel',	'maglerne@gmail.com', '$2a$10$JySokYqxxZ7XAymaYSgI/ej4W7NMEn0x.eMdODVrgQ0DafFHN1UNO',TRUE);
 insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enabled) values('Dr. Jesús', 'Vega', 'Moreno',	'jwega01@gmail.com', '$2a$10$ew.jUGEt/W42D2nFBwSF..PaBkYOkUGWuGamGX6QUjBHGbxqfFiTm',TRUE);
 
-INSERT INTO roles (user_id, authority) VALUES(6, 'ROLE_USER3');
-INSERT INTO roles (user_id, authority) VALUES(7, 'ROLE_USER3');
-INSERT INTO roles (user_id, authority) VALUES(8, 'ROLE_USER3');
-INSERT INTO roles (user_id, authority) VALUES(9, 'ROLE_USER3');
-INSERT INTO roles (user_id, authority) VALUES(10, 'ROLE_USER3');
-INSERT INTO roles (user_id, authority) VALUES(11, 'ROLE_USER3');
-INSERT INTO roles (user_id, authority) VALUES(12, 'ROLE_USER3');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(6, 'ROLE_USER3', 'Director de Tesis');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(7, 'ROLE_USER3', 'Director de Tesis');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(8, 'ROLE_USER3', 'Director de Tesis');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(9, 'ROLE_USER3', 'Director de Tesis');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(10, 'ROLE_USER3', 'Director de Tesis');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(11, 'ROLE_USER3', 'Director de Tesis');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(12, 'ROLE_USER3', 'Director de Tesis');
 
 --ALUMNOS
 
@@ -62,35 +62,35 @@ insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enable
 insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enabled) values('Juvencio','Vázquez','Samperio','juvencio_ipn@hotmail.com','$2a$10$LU1mTnaiMNINwZ4zDyvhYeQljVTFFLW5bsRBCR6u9b7TPrAEtclIO',TRUE);
 insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enabled) values('Alan','Franco','Ake','al.fr.ake@gmail.com','$2a$10$bGLQnSbjwAW1uV1whnRZbeoejiFRUIBB0zZN.bo/X6DyqEzXGnyQi',TRUE);
 
-INSERT INTO roles (user_id, authority) VALUES(13, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(14, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(15, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(16, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(17, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(18, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(19, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(20, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(21, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(22, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(23, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(24, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(25, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(26, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(27, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(28, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(29, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(30, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(31, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(32, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(33, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(34, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(35, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(36, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(37, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(38, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(39, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(40, 'ROLE_USER2');
-INSERT INTO roles (user_id, authority) VALUES(41, 'ROLE_USER2');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(13, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(14, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(15, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(16, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(17, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(18, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(19, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(20, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(21, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(22, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(23, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(24, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(25, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(26, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(27, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(28, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(29, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(30, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(31, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(32, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(33, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(34, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(35, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(36, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(37, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(38, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(39, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(40, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(41, 'ROLE_USER2', 'Investigador');
 
 INSERT INTO investigadores (role_id) VALUES(13);
 INSERT INTO investigadores (role_id) VALUES(14);
@@ -131,6 +131,24 @@ INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto A', 1);
 INSERT INTO mof (nombre_compuesto, formula, aplicaciones, metodo_sintesis, articulo, titulo_tesis, url_tesis, fecha, id_clasificacion) VALUES('Compuesto B', 'CB', 'Las aplicaciones son...', 'Los metodos de sintesis son', 'Articulo asass', 'Tesis A', 'url', NOW(), 2);
 INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto C', 1);
 INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto D', 1);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto E', 1);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto F', 1);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto G', 1);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto H', 1);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto I', 1);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto J', 1);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto K', 1);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto L', 1);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto M', 1);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto N', 1);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto O', 1);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto P', 1);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto Q', 1);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto C', 1);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto R', 1);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto S', 1);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto T', 1);
+
 
 INSERT INTO expedientes (fecha, mof_id, nombre_usuario) VALUES(NOW(), 2, 'Dr. Carlos Israel Aguirre Vélez');
 INSERT INTO permisos (permiso, expediente_id, user_id) VALUES(true, 1, 5);

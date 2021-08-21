@@ -9,51 +9,67 @@
 		<header th:replace="buscador :: header"></header>
 	</div>
 	<div class="container">
-		<div class="card bg-light">
-			<div class="card-header" th:text="${titulo}"></div>
+		<div class="card bg-light mb-3" style="border-color: #483D8B">
+			<div class="card-header text-white mb-3 text-center"
+				style="background-color: #483D8B">
+				<font size="18" th:text="${titulo}"></font>
+			</div>
 			<div class="card-body">
 				<div class="container py-4">
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th></th>
+								<th>Ver usuarios</th>
 								<th>Tipo de Usuario</th>
-								<th>Descripci&oacute;n Rol</th>
+								<th>Descripci&oacute;n del permiso que tiene cada usuario</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr>
-								<td><a class="btn btn-primary btn-xs"
-									th:href="@{/PersonalAutorizado/verUsuariosRegistrados}"
-									th:text="Ver"></a></td>
+								<td><a class="btn btn-xs" style="background-color: #483D8B"
+									th:href="@{/PersonalAutorizado/verUsuariosRegistrados}"> <img
+										th:src="@{/images/ver.png}" width="35" height="25">
+								</a></td>
 								<td>Usuario Registrado</td>
 								<td>Usuarios que necesitan ser validados en el sistema.
 									Estos usuarios no pueden realizar ninguna funci&oacute;n en el
 									sistema. Personal autorizado debe de asignarles un permiso</td>
 							</tr>
 							<tr>
-								<td><a class="btn btn-primary btn-xs"
-									th:href="@{/PersonalAutorizado/verInvestigadores}"
-									th:text="Ver"></a></td>
+								<td><a class="btn btn-xs" style="background-color: #483D8B"
+									th:href="@{/PersonalAutorizado/verInvestigadores}"> <img
+										th:src="@{/images/ver.png}" width="35" height="25">
+								</a></td>
 								<td>Investigador</td>
 								<td>Usuarios con este permiso pueden crear expedientes de
 									los compuestos</td>
 							</tr>
 							<tr>
-								<td><a class="btn btn-primary btn-xs"
-									th:href="@{/PersonalAutorizado/verDirectoresTesis}"
-									th:text="Ver"></a></td>
+								<td><a class="btn btn-xs" style="background-color: #483D8B"
+									th:href="@{/PersonalAutorizado/verDirectoresTesis}"> <img
+										th:src="@{/images/ver.png}" width="35" height="25">
+								</a></td>
 								<td>Director de Tesis</td>
 								<td>Usuarios que son directores de tesis de los
 									investigadores</td>
 							</tr>
 							<tr>
-								<td><a class="btn btn-primary btn-xs"
-									th:href="@{/PersonalAutorizado/verPersonalAutorizado}"
-									th:text="Ver"></a></td>
+								<td><a class="btn btn-xs" style="background-color: #483D8B"
+									th:href="@{/PersonalAutorizado/verPersonalAutorizado}"> <img
+										th:src="@{/images/ver.png}" width="35" height="25">
+								</a></td>
 								<td>Personal Autorizado</td>
 								<td>Usuario que puede asignar permisos a los usuarios y
 									modificar expedientes de los compuestos</td>
+							</tr>
+							<tr>
+								<td><a class="btn btn-xs" style="background-color: #483D8B"
+									th:href="@{/PersonalAutorizado/verUsuariosInhabilitados}">
+										<img th:src="@{/images/ver.png}" width="35" height="25">
+								</a></td>
+								<td>Usuarios Inhabilitados</td>
+								<td>Usuarios que concluyeron sus estudios en el centro y ya
+									no pueden ingresar al sistema</td>
 							</tr>
 						</tbody>
 					</table>

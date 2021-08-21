@@ -25,12 +25,10 @@ import com.compuestosmo.app.models.entity.Investigador;
 import com.compuestosmo.app.models.entity.PermisosExpediente;
 import com.compuestosmo.app.models.entity.Role;
 import com.compuestosmo.app.models.entity.Usuario;
-import com.compuestosmo.app.models.service.IExpedienteMOFService;
 import com.compuestosmo.app.models.service.IInvestigadoresService;
 import com.compuestosmo.app.models.service.IPermisosExpedientesService;
 import com.compuestosmo.app.models.service.IRoleService;
 import com.compuestosmo.app.models.service.IUsuarioService;
-import com.compuestosmo.app.models.service.UsuarioService;
 import com.compuestosmo.app.models.util.MailSenderService;
 import com.compuestosmo.app.models.util.PageRender;
 
@@ -40,9 +38,6 @@ public class AdminController {
 
 	@Autowired
 	private IUsuarioService usuarioService;
-
-	@Autowired
-	private IExpedienteMOFService expedienteService;
 
 	@Autowired
 	private IRoleService roleService;
@@ -123,6 +118,18 @@ public class AdminController {
 		return "PersonalAutorizado/verRol";
 	}
 
+	@RequestMapping(value = "/verUsuariosInhabilitados", method = RequestMethod.GET)
+	public String verUsuariosInhabilitados(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
+		Pageable pageRequest = PageRequest.of(page, 10);
+		Page<Role> usuarios = usuarioService.findUsuarioByRole("ROLE_USER4", pageRequest);
+		PageRender<Role> pageRender = new PageRender<Role>("/PersonalAutorizado/verUsuariosInhabilitados", usuarios);
+
+		model.addAttribute("titulo", "Usuarios Inhabilitados");
+		model.addAttribute("role", usuarios);
+		model.addAttribute("page", pageRender);
+		return "PersonalAutorizado/verRol";
+	}
+
 	@RequestMapping(value = "/formUsuario/{id}")
 	public String editar(@PathVariable(value = "id") Long id, Map<String, Object> model) {
 		Usuario usuario = null;
@@ -139,6 +146,7 @@ public class AdminController {
 		permisosUsuario.add("Investigador");
 		permisosUsuario.add("Director de Tesis");
 		permisosUsuario.add("Personal Autorizado");
+		permisosUsuario.add("Usuario Inhabilitado");
 
 		model.put("permisos", permisosUsuario);
 		model.put("titulo", "Editar Rol de Usuario");
@@ -156,9 +164,7 @@ public class AdminController {
 			return "formUsuario";
 		}
 
-		// List <Role> roles = usuario.getRoles();
 		Role roles = usuario.getRoles();
-		// Role newRole = roles.get(0);
 
 		List<Role> role = roleService.findAll();
 		Long idRoleUsuario;
@@ -171,17 +177,15 @@ public class AdminController {
 			}
 		}
 
-		switch (usuario.getNombreRole()) {
+		switch (usuario.getRoles().getAuthorityName()) {
 
 		case "Usuario Registrado":
-			// newRole.setAuthority("ROLE_USER1");
-			// roles.set(0, newRole);
+			roles.setAuthorityName("Usuario Registrado");
 			roles.setAuthority("ROLE_USER1");
 			break;
 
 		case "Investigador":
-			// newRole.setAuthority("ROLE_USER2");
-			// roles.set(0, newRole);
+			roles.setAuthorityName("Investigador");
 			roles.setAuthority("ROLE_USER2");
 			List<Investigador> investigadores = investigadorS.findall();
 			Investigador investigador = new Investigador();
@@ -189,8 +193,6 @@ public class AdminController {
 			if (roleUsuario != null) {
 				investigadorS.save(investigador);
 				investigadorS.saveUsuarioRole(roleUsuario);
-				// newRole.setInvestigador(investigador);
-				// roles.setInvestigador(investigador);
 				investigadores.add(investigador);
 
 			} else {
@@ -200,15 +202,19 @@ public class AdminController {
 			break;
 
 		case "Director de Tesis":
-			// newRole.setAuthority("ROLE_USER3");
-			// roles.set(0, newRole);
+			roles.setAuthorityName("Director de Tesis");
 			roles.setAuthority("ROLE_USER3");
 			break;
 
 		case "Personal Autorizado":
-			// newRole.setAuthority("ROLE_ADMIN");
-			// roles.set(0, newRole);
+			roles.setAuthorityName("Personal Autorizado");
 			roles.setAuthority("ROLE_ADMIN");
+			break;
+
+		case "Usuario Inhabilitado":
+			roles.setAuthorityName("Usuario Inhabilitado");
+			roles.setAuthority("ROLE_USER4");
+			usuario.setEnabled(false);
 			break;
 
 		default:
@@ -216,7 +222,7 @@ public class AdminController {
 		}
 
 		mailService.sendEmail(usuario.getEmail(), "Cambios de permisos en el sistema BD-LNCAE",
-				"Tu permiso actual es: " + usuario.getNombreRole(), usuario);
+				"Tu permiso actual es: " + usuario.getRoles().getAuthorityName(), usuario);
 		usuarioService.save(usuario);
 		status.setComplete();
 
@@ -233,18 +239,36 @@ public class AdminController {
 		return "redirect:/PersonalAutorizado/listarRoles";
 	}
 
+	@RequestMapping(value = "/inhabilitarUsuario/{id}")
+	public String inhabilitarUsuario(@PathVariable(value = "id") Long id) {
+
+		if (id > 0) {
+			Usuario usuario = usuarioService.findOne(id);
+			if (usuario != null) {
+				Role permisoUsuario = usuario.getRoles();
+				permisoUsuario.setAuthority("ROLE_USER4");
+				permisoUsuario.setAuthorityName("Usuario Inhabilitado");
+				usuario.setEnabled(false);
+			}
+			usuarioService.save(usuario);
+		}
+		
+		return "redirect:/PersonalAutorizado/listarRoles";
+	}
+
 	@RequestMapping(value = "/autorizarPermiso/{id_permiso}")
 	public String autorizarExpediente(@PathVariable(value = "id_permiso") Long idPermiso) throws Exception {
 
 		PermisosExpediente permisoSolicitado = permisoS.findOne(idPermiso);
-		
+
 		ExpedienteMOF expedientemof = permisoSolicitado.getExpedientes();
 		Usuario usuario = permisoSolicitado.getUsers();
-		
+
 		// Asignar Expediente al usuario que lo solicitó
 		permisoSolicitado.setPermiso(true);
+		permisosE.saveUsuario(usuario);
+
 		usuarioService.save(usuario);
-		
 
 		mailService.sendEmail(usuario.getEmail(), "SOLICITUD PARA EDITAR EXPEDIENTE",
 				"Se ha aprobado tu solicitud para editar el expediente de " + expedientemof.getNombreUsuario()

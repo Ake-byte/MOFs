@@ -80,9 +80,17 @@ public class UsuarioService implements IUsuarioService {
 	}
 
 	@Override
+	@Transactional(readOnly=true)
 	public Page<Role> findUsuarioByRole(String authority, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return roledao.findUsuarioByRole(authority, pageable);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public Usuario findByResetPasswordToken(String token) {
+		// TODO Auto-generated method stub
+		return usuariodao.findByResetPasswordToken(token);
 	}
 
 }

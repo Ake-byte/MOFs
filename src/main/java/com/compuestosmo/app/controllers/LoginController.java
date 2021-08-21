@@ -1,7 +1,6 @@
 package com.compuestosmo.app.controllers;
 
 import java.security.Principal;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -26,6 +25,7 @@ import com.compuestosmo.app.models.service.IRoleService;
 import com.compuestosmo.app.models.service.IUsuarioService;
 import com.compuestosmo.app.models.util.MailSenderService;
 
+
 @Controller
 public class LoginController {
 
@@ -34,13 +34,12 @@ public class LoginController {
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
-	
+
 	@Autowired
 	private IUsuarioService usuarioService;
-	
+
 	@Autowired(required = true)
-    private MailSenderService mailService;
+	private MailSenderService mailService;
 
 	@GetMapping("/login")
 	public String login(@RequestParam(value = "error", required = false) String error,
@@ -53,11 +52,13 @@ public class LoginController {
 		}
 
 		if (error != null) {
-			model.addAttribute("error", "Error al iniciar sesión. El nombre de usuario o contraseña es incorrecto.");
+			model.addAttribute("error", "Error al iniciar sesión. El correo o la contraseña son incorrectos.");
+			//return "redirect:/login";
 		}
 
 		if (logout != null) {
 			model.addAttribute("succes", "Has cerrado sesión con éxito");
+			// return "redirect:login";
 		}
 
 		return "login";
@@ -66,24 +67,25 @@ public class LoginController {
 	@GetMapping(value = "/register")
 	public String register(Map<String, Object> model) {
 		Usuario usuario = new Usuario();
-		
+
 		model.put("usuario", usuario);
 		model.put("titulo", "Registro de Usuario");
 		return "register";
 	}
 
 	@PostMapping(value = "/register")
-	public String guardar(@Valid Usuario usuario, RedirectAttributes flash, BindingResult result, Model model, SessionStatus status) throws Exception {
+	public String guardar(@Valid Usuario usuario, RedirectAttributes flash, BindingResult result, Model model,
+			SessionStatus status) throws Exception {
 
 		List<Usuario> usuarios = usuarioService.findall();
-		
-		for(int i = 0; i < usuarios.size(); i++) {
-			if(usuarios.get(i).getEmail().equals(usuario.getEmail())) {
+
+		for (int i = 0; i < usuarios.size(); i++) {
+			if (usuarios.get(i).getEmail().equals(usuario.getEmail())) {
 				flash.addFlashAttribute("error", "Ya existe un usuario con esa dirección de correo electrónico.");
 				return "redirect:/register";
 			}
 		}
-		
+
 		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Registro de Usuario");
 			return "register";
@@ -93,23 +95,22 @@ public class LoginController {
 
 		role.setAuthority("ROLE_USER1");
 		role.setUsers(usuario);
-
-
+		role.setAuthorityName("Usuario Registrado");
+		
 		usuario.setRoles(role);
+		//usuario.setNombreRole("Usuario Registrado");
 		usuario.setEnabled(true);
 
 		String password = usuario.getPassword();
 
 		String bcryptPassword = passwordEncoder.encode(password);
-		
+
 		usuario.setPassword(bcryptPassword);
 
-		
-		
 		roleService.saveUsuario(usuario);
 		roleService.save(role);
-		mailService.sendEmail(usuario.getEmail(), "Bienvenido al sistema BD-LNCAE", "Tu permiso actual es: Usuario Registrado", usuario);
-		
+		mailService.sendEmail(usuario.getEmail(), "Bienvenido al sistema BD-LNCAE",
+				"Tu permiso actual es: Usuario Registrado", usuario);
 
 		status.setComplete();
 
@@ -121,4 +122,6 @@ public class LoginController {
 
 		return "index";
 	}
+
+
 }

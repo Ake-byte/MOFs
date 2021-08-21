@@ -7,10 +7,10 @@
 		<header th:replace="buscador :: header"></header>
 	</div>
 	<div class="container">
-		<div class="card bg-light">
-			<div class="card-header" th:text="${titulo}"></div>
+		<div class="card bg-light border-primary mb-3">
+			<div class="card-header text-white bg-primary mb-3 text-center"  th:text="${titulo}"></div>
 			<div th:if="${#lists.isEmpty(mof.expedientesMOF)}"
-				class="alert alert-info my-4"
+				class="alert alert-info my-4 text-center"
 				th:text="'No hay expedientes del compuesto ' + ${mof.nombreCompuesto}">
 			</div>
 			<div class="card-body" th:each="mof: ${mof}">
@@ -36,7 +36,7 @@
 									de Difracci&oacute;n</a></li>
 							<li class="nav-item"
 								>
-								<a class="nav-link" th:href="@{/listarExpedientes/} + ${mof.id}"> Ver Expedientes</a>
+								<a class="nav-link text-dark bg-warning" th:href="@{/listarExpedientes/} + ${mof.id}"> Ver Expedientes</a>
 						</ul>
 						<div class="card-body">
 							<div class="tab-content" id="myTabContent">

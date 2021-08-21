@@ -4,23 +4,25 @@
 <head th:fragment="head">
 <meta charset="UTF-8" />
 <title th:text="${titulo}"></title>
-<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
 <link th:href="@{/css/jquery-ui.min.css}" rel="stylesheet" />
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" />
+
 
 
 </head>
 <body>
 	<header th:fragment="header">
+
 		<nav class="navbar navbar-expand-lg navbar-light bg-light">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="#">BD - LNCAE</a>
-				<button class="navbar-toggler collapsed" type="button"
+				<button class="navbar-toggler" type="button"
 					data-bs-toggle="collapse" data-bs-target="#navbarNav"
 					aria-controls="navbarNav" aria-expanded="false"
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
 				</button>
-				<div class="navbar-collapse collapse" id="navbarNav">
+				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav mr-auto">
 						<li class="nav-item"><a class="nav-link active"
 							aria-current="page" th:href="@{/index}">Inicio</a></li>
@@ -35,6 +37,8 @@
 							class="nav-link"
 							th:href="@{/PersonalAutorizado/peticionesExpedientes}">Expedientes
 						</a></li>
+						<li class="nav-item"><a class="nav-link"
+							th:href="@{/Usuario/perfil}">Perfil </a></li>
 					</ul>
 					<div sec:authorize="!isAuthenticated()">
 						<a class="btn btn-outline-primary" th:href="@{/login}">
@@ -81,16 +85,12 @@
 	<footer th:fragment="footer" class="container">
 		<p>Base de datos de compuestos metal-órganicos</p>
 		<hr />
-		<p sec:authorize="isAuthenticated()">
-			Usuario: <span sec:authentication="name"></span> | Roles: <span
-				sec:authentication="principal.authorities"></span>
-		</p>
 
 		<script th:src="@{/js/jquery-3.3.1.min.js}"></script>
 		<script th:src="@{/js/popper.min.js}"></script>
 		<script th:src="@{/js/bootstrap.min.js}"></script>
 		<script th:src="@{/js/jquery-ui.min.js}"></script>
-		
+
 	</footer>
 	<!--<script th:replace="js/autocompletado :: javascript"></script>-->
 </body>

@@ -9,8 +9,10 @@
 		<header th:replace="buscador :: header"></header>
 	</div>
 	<div class="container">
-		<div class="card bg-light">
-			<div class="card-header" th:text="${titulo}"></div>
+		<div class="card bg-light mb-3" style="border-color:#4169E1">
+			<div class="card-header text-white mb-3 text-center" style="background-color:#4169E1">
+				<font size="18" th:text="${titulo}"></font>
+			</div>
 			<div class="card-body">
 				<div class="container py-2">
 					<nav class="navbar navbar-light bg-light">
@@ -23,7 +25,7 @@
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>id</th>
+								<th>Ver Material</th>
 								<th>Nombre</th>
 								<th>Clasificaci&oacute;n</th>
 								<th>Directores</th>
@@ -34,14 +36,15 @@
 						</thead>
 						<tbody>
 							<tr th:each="mof: ${materiales}">
-								<td><a class="btn btn-primary btn-xs"
+								<td><a class="btn btn-xs" style="background-color:#4169E1"
 									th:href="@{/CompuestoMOF/fichaMaterial/} + ${mof.id}"
-									th:text="${mof.id}"></a></td>
+									>
+									<img th:src="@{/images/ver.png}" width="35" height="25"></a></td>
 								<td th:text="${mof.nombreCompuesto}"></td>
 								<td th:text="${mof.clasificacionmof.nombreClasificacion}"></td>
 								<td></td>
 								<td></td>
-								<td><a class="btn btn-primary btn-xs"
+								<td><a class="btn text-white btn-xs" style="background-color:#4169E1" 
 									th:href="@{/CompuestoMOF/formMaterial/} + ${mof.id}"
 									th:text="'Editar'"></a></td>
 								<td><a class="btn btn-danger btn-xs"

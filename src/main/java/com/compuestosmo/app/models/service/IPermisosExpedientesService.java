@@ -2,8 +2,6 @@ package com.compuestosmo.app.models.service;
 
 import java.util.List;
 
-import org.springframework.data.jpa.repository.Query;
-
 import com.compuestosmo.app.models.entity.ExpedienteMOF;
 import com.compuestosmo.app.models.entity.PermisosExpediente;
 import com.compuestosmo.app.models.entity.Usuario;

@@ -50,4 +50,10 @@ public class InvestigadoresService implements IInvestigadoresService {
 		investigadoresDAO.deleteById(id);
 	}
 
+	@Override
+	public Investigador findByRoleID(Long id) {
+		return investigadoresDAO.findByRoleID(id);
+	}
+
+
 }

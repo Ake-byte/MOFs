@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container" style="width: 48rem;">
+		<div class="card bg-light">
+			<div class="card-header" th:text="${titulo}"></div>
+			<div class="card-body">
+				<div class="container py-4">
+
+
+
+					<form th:action="@{/Usuario/editarDatosSistema}" th:object="${investigador}"
+						method="post">
+						<!-- 
+						<p th:text="'Datos de Sistema de: ' + ${usuario.nombre} + ' '+ ${usuario.apellidoPaterno} + ' '+ ${usuario.apellidoMaterno}"></p>
+						 -->
+						<br>
+						<p>Directores de Tesis</p>
+						<div class="form-group row">
+							<label for="nombre" class="col-sm-2 col-form-label"></label> <br>
+							<div class="col-sm-10">
+								<table>
+									<thead>
+										<tr>
+											<td>Director de Tesis 1</td>
+											<tr>
+											<td><div class="col-sm-6">
+													<select id="director1" name="director1"
+														th:field="*{director1}">
+														<option th:each="director : ${director1}"
+															th:value="${director.nombre}"
+															th:utext="${director.nombre}" />
+													</select>
+												</div></td>
+										</tr>
+										<tr>
+											<td>Director de Tesis 2</td>
+											<tr>
+											<td><div class="col-sm-6">
+													<select id="director1" name="director1"
+														th:field="*{director2}">
+														<option th:each="director : ${director1}"
+															th:value="${director.nombre}"
+															th:utext="${director.nombre}" />
+													</select>
+												</div></td>
+										</tr>
+									</thead>
+								</table>
+							</div>
+						</div>
+						<br>
+						<div class="form-group row">
+							<label class="col-sm-2 col-form-label">Permisos en el
+								Sistema</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control"
+									th:errorclass="'form-control alert-danger'"
+									th:field="*{roles.authorityName}" readonly />
+							</div>
+						</div>
+						<br>
+						<div class="form-group row">
+							<div class="col-sm-6">
+								<input type="submit" value="Guardar" class="btn-primary" />
+							</div>
+						</div>
+						<input type="hidden" th:field="*{id}" />  
+						<input type="hidden" th:field="*{roles}" /> 
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

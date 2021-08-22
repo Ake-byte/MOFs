@@ -15,6 +15,8 @@ public interface IInvestigadoresService {
 	public void saveUsuarioRole(Role role);
 
 	public Investigador findOne(Long id);
+	
+	public Investigador findByRoleID(Long id);
 
 	public void delete(Long id);
 }

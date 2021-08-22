@@ -41,14 +41,10 @@ public class Usuario implements Serializable{
 	
 	private Boolean enabled;
 	
-	//@OneToMany(cascade = CascadeType.ALL)
 	@OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     //private List<Role> roles;
 	private Role roles;
-	
-	//@Column(name = "nombre_role")
-	//private String nombreRole;
 	
 	//PERMISOS A EXPEDIENTES QUE TIENE EL USUARIO
 	@OneToMany(cascade = CascadeType.ALL)
@@ -152,18 +148,6 @@ public class Usuario implements Serializable{
 	public void setResetPasswordToken(String resetPasswordToken) {
 		this.resetPasswordToken = resetPasswordToken;
 	}
-
-
-	
-	/*public String getNombreRole() {
-		return nombreRole;
-	}
-
-
-	public void setNombreRole(String nombreRole) {
-		this.nombreRole = nombreRole;
-	}
-*/
 
 
 	private static final long serialVersionUID = 1L;

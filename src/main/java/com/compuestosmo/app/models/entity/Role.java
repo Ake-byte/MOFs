@@ -34,20 +34,19 @@ public class Role implements Serializable{
     @Column(name = "authority_name")
     private String authorityName;
     
-    //FK - Role Usuario
-    //@ManyToOne(fetch = FetchType.LAZY)
     @OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
     private Usuario users;
     
     @OneToMany(mappedBy = "roles", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-   // @JoinColumn(name = "investigador_id")
-    
-    //private Investigador investigador;
     private List<Investigador> investigadores;
+    
+    @OneToMany(mappedBy = "roles", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Directores> directores;
     
     public Role() {
     	investigadores = new ArrayList<Investigador>();
+    	directores = new ArrayList<Directores>();
     }
     
 	public Long getId() {
@@ -81,6 +80,14 @@ public class Role implements Serializable{
 	public void setInvestigadores(List<Investigador> investigadores) {
 		this.investigadores = investigadores;
 	}
+	
+	public List<Directores> getDirectores() {
+		return directores;
+	}
+
+	public void setDirectores(List<Directores> directores) {
+		this.directores = directores;
+	}
 
 	public String getAuthorityName() {
 		return authorityName;
@@ -89,8 +96,5 @@ public class Role implements Serializable{
 	public void setAuthorityName(String authorityName) {
 		this.authorityName = authorityName;
 	}
-
-	
-	
 
 }

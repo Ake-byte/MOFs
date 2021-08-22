@@ -65,7 +65,7 @@ public class MaterialController {
 	@RequestMapping(value="formMaterial")
 	public String crearFicha(Map<String, Object> model) {
 		MOF mof = new MOF();
-		//List<ClasificacionMOF> clasificacion =  clasificacionService.findall();
+		
 		Iterable<ClasificacionMOF> clasificacion = clasificaciondao.findAll();
 		((Model) model).addAttribute("clasificacion", clasificacion);
 		
@@ -97,9 +97,6 @@ public class MaterialController {
 	
 	@PostMapping(value="/formMaterial")
 	public String guardar(@Valid MOF mof, BindingResult result, Model model,SessionStatus status) {
-		
-		Iterable<ClasificacionMOF> clasificacion = clasificaciondao.findAll();
-		((Model) model).addAttribute("clasificacion", clasificacion);
 		
 		if(result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario MOF");

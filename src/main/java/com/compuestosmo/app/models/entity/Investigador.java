@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -31,8 +30,6 @@ public class Investigador implements Serializable{
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "role_id")
     private Role roles;
-	
-	
 
 	public Long getId() {
 		return id;
@@ -69,16 +66,6 @@ public class Investigador implements Serializable{
 	}
 
 
-	
-
-
-
-
-
-
-
-
-
 	public Role getRoles() {
 		return roles;
 	}
@@ -88,17 +75,6 @@ public class Investigador implements Serializable{
 	public void setRoles(Role roles) {
 		this.roles = roles;
 	}
-
-
-
-
-
-
-
-
-
-
-
 
 	private static final long serialVersionUID = 1L;
 }

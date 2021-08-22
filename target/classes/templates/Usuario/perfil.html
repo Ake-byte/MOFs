@@ -15,10 +15,13 @@
 							<li class="nav-item"><a class="nav-link active"
 								id="info-tab" data-toggle="tab" href="#info" role="tab"
 								aria-controls="home" aria-selected="true">Datos Personales</a></li>
-							<li class="nav-item">
-								<a class="nav-link" > Ver Expedientes</a>
-							<li class="nav-item">
-								<a class="nav-link" > Ver solicitudes a Expedientes</a>
+							<li class="nav-item"><a class="nav-link"
+							id="datosSistema-tab" data-toggle="tab" href="#datosSistema"
+								role="tab" aria-controls="datosSistema" aria-selected="false">Datos en el Sistema</a></li>
+							<li class="nav-item"><a class="nav-link"> Ver
+									Expedientes</a></li>
+							<li class="nav-item"><a class="nav-link"> Ver
+									solicitudes a Expedientes</a></li>
 						</ul>
 						<div class="card-body">
 							<div class="tab-content" id="myTabContent">
@@ -27,20 +30,44 @@
 									<div class="card">
 										<ul class="list-group list-group-flush">
 											<li class="list-group-item"
-												th:text="'Nombre: ' + ${usuario.nombre} + ' '+ ${usuario.apellidoPaterno} + ' ' + ${usuario.apellidoMaterno}">
+												th:text="'Nombre: '+ ${usuario.nombre}"><br></li>	
 											<li class="list-group-item"
-												th:text="'Correo: '+ ${usuario.email}"></li>
+												th:text="'Apellido Paterno: '+ ${usuario.apellidoPaterno}"><br></li>
 											<li class="list-group-item"
-												th:text="'Permisos en el sistema: ' + ${usuario.roles.authorityName}"></li>
+												th:text="'Apellido Materno: '+ ${usuario.apellidoMaterno}"><br></li>	
+											<li class="list-group-item"
+												th:text="'Correo: '+ ${usuario.email}"><br></li>	
 										</ul>
 									</div>
 									<div>
-									<p>
-										<a class="btn btn-primary btn-xs"
-										th:href="@{/Usuario/editarDatos/} + ${usuario.id}">Editar datos</a>
-									</p>
+										<p>
+											<a class="btn btn-primary btn-xs"
+												th:href="@{/Usuario/editarDatos/} + ${usuario.id}">Editar
+												datos</a>
+										</p>
 									</div>
 
+								</div>
+								<div class="tab-pane fade" id="datosSistema" role="tabpanel"
+									aria-labelledby="datosSistema">
+									<div class="card">
+										<ul class="list-group list-group-flush">
+											<li class="list-group-item"
+												th:text="'Permisos en el sistema: ' + ${investigador.roles.authorityName}"><br></li>
+											<li class="list-group-item"
+												th:text="'Director 1: ' + ${investigador.director1}"><br></li>
+											<li class="list-group-item"
+												th:text="'Director 2: ' + ${investigador.director2}"><br></li>	
+										</ul>
+									</div>
+									<div>
+										<p>
+											<a class="btn btn-primary btn-xs"
+												th:href="@{/Usuario/editarDatosSistema/} + ${investigador.id}">Editar
+												datos</a>
+										</p>
+									</div>
+									
 								</div>
 							</div>
 						</div>

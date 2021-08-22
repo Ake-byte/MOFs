@@ -1,6 +1,5 @@
 package com.compuestosmo.app;
 
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -8,10 +7,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.compuestosmo.app.auth.handler.LoginSuccesHandler;
 import com.compuestosmo.app.models.service.JpaUserDetailsService;
@@ -23,8 +19,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private LoginSuccesHandler successHandler;
 	
-	@Autowired
-	private DataSource dataSource;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -74,26 +68,6 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		
 		builder.userDetailsService(userDetailsService)
 		.passwordEncoder(passwordEncoder);
-		//.usersByUsernameQuery("select email, pwd, enabled from users where email=?")
-		//.authoritiesByUsernameQuery("select u.email, a.authority from authorities a inner join users u on (a.user_id=u.users_id) where u.email=?");
-		/*
-	
-		//Crear Usuarios en memoria
-		
-		//-----------------admin
-		//Administrador: tiene permiso a todas las funciones del sistema
-		
-		//-----------------user2
-		//Investigador2: tiene permiso a todas las funciones referentes a los MOFs
-		
-		//-----------------user1
-		//Investigador1: no tiene permiso a nada, sin embargo, está registrado en el sistema
-		
-		builder.inMemoryAuthentication()
-		.withUser(users.username("admin").password("12345").roles("ADMIN", "USER2"))
-		.withUser(users.username("user2").password("12345").roles("USER2"))
-		.withUser(users.username("user1").password("12345").roles("USER1"));
-	*/
 	}
 
 }

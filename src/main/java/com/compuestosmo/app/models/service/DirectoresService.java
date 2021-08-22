@@ -5,10 +5,12 @@ import java.util.List;
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.compuestosmo.app.models.dao.IDirectoresDAO;
 import com.compuestosmo.app.models.entity.Directores;
 
+@Service
 public class DirectoresService implements IDirectoresService {
 
 	@Autowired

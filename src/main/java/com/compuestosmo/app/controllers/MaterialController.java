@@ -3,19 +3,25 @@ package com.compuestosmo.app.controllers;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.compuestosmo.app.models.dao.IClasificacionMOFDAO;
 import com.compuestosmo.app.models.dao.IMOFDAO;
@@ -40,11 +46,13 @@ public class MaterialController {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
-	
+
 	@RequestMapping(value="listarMateriales", method=RequestMethod.GET)
 	public String listar(Model model) {
 		model.addAttribute("titulo", "Listado de Materiales");
 		model.addAttribute("materiales", mofdao.findAll());
+		model.addAttribute("mof", new MOF());
+		
 		return "CompuestoMOF/listarMateriales";
 	}
 	
@@ -119,8 +127,26 @@ public class MaterialController {
 		return "redirect:/CompuestoMOF/listarMateriales";
 	}
 	
-	@GetMapping(value = "/buscar-investigador/{term}", produces = { "application/json" })
-	public @ResponseBody List<Usuario> cargarUsuarios(@PathVariable String term) {
-		return usuarioService.findByNombreU(term);
+	@GetMapping("/buscar")
+	public String buscarMOF(HttpServletRequest request, HttpServletResponse response,
+			@ModelAttribute("term") String term, @ModelAttribute("mof") MOF mof,
+			Model model, RedirectAttributes flash) {
+		
+		if(term != null) {
+			List<MOF> mofs = mofService.findByTerm(term);
+			
+			if(mofs.isEmpty()) {
+				flash.addFlashAttribute("error", "No se encontraron elementos que coincidieran con: '"+ term + "'.");
+				return "redirect:/CompuestoMOF/listarMateriales";
+			}
+			
+			model.addAttribute("titulo", "Búsqueda: " + term);
+			model.addAttribute("materiales", mofs);
+			
+			return "CompuestoMOF/ResultadosBusquedaMOF";
+		}
+		
+		return "CompuestoMOF/listarMateriales";
+		
 	}
 }

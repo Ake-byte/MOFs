@@ -27,6 +27,7 @@ public class RoleService implements IRoleService{
 	private IInvestigadoresDAO investigadorDAO;
 	
 	@Override
+	@Transactional(readOnly=true)
 	public List<Role> findAll() {
 		
 		return (List<Role>) roleDAO.findAll();

@@ -19,6 +19,7 @@ public class PruebasMOFService implements IPruebasMOFService {
 	private IPruebasMOFDAO pruebasMOFDAO;
 	
 	@Override
+	@Transactional(readOnly=true)
 	public List<PruebasMOF> findall() {
 		return (List<PruebasMOF>) pruebasMOFDAO.findAll();
 	}

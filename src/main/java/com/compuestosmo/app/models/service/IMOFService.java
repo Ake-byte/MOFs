@@ -20,4 +20,6 @@ public interface IMOFService {
 	public void delete(Long id);
 	
 	public Page<MOF> findMOFsByClasificacionId(Long id, Pageable pageable);
+	
+	public List<MOF> findByTerm(String term);
 }

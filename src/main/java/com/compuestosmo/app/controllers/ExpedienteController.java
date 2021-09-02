@@ -123,15 +123,7 @@ public class ExpedienteController {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-		List<Usuario> usuarios = usuarioService.findall();
-		Usuario usuario = null;
-
-		for (int i = 0; i < usuarios.size(); i++) {
-			if (usuarios.get(i).getEmail().equals(auth.getName())) {
-				usuario = usuarios.get(i);
-				break;
-			}
-		}
+		Usuario usuario = usuarioService.findByEmail(auth.getName());
 
 		MOF mof = mofService.findOne(mofId);
 		if (mof == null) {
@@ -165,15 +157,7 @@ public class ExpedienteController {
 		}
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-		List<Usuario> usuarios = usuarioService.findall();
-		Usuario usuario = null;
-
-		for (int i = 0; i < usuarios.size(); i++) {
-			if (usuarios.get(i).getEmail().equals(auth.getName())) {
-				usuario = usuarios.get(i);
-				break;
-			}
-		}
+		Usuario usuario = usuarioService.findByEmail(auth.getName());
 
 		List<PermisosExpediente> expedientesUsuario = usuario.getPermisosExpediente();
 
@@ -222,8 +206,11 @@ public class ExpedienteController {
 
 	@PostMapping(value = "formSeccion")
 	public String guardarSeccion(@Valid SeccionesExpediente seccionE, BindingResult result, Model model,
-			RedirectAttributes flash, SessionStatus status) {
-		//
+			RedirectAttributes flash, SessionStatus status, Authentication authentication, HttpServletRequest request) {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		
+		Usuario usuario = usuarioService.findByEmail(auth.getName());
 
 		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario de una nueva Sección");
@@ -237,6 +224,9 @@ public class ExpedienteController {
 		Long idExpediente = seccionE.getExpedientes().getId();
 		ExpedienteMOF expedientemof = expedienteService.findOne(idExpediente);
 
+		expedientemof.setNombreUltimoUsuario(usuario.getNombre() + ' ' + usuario.getApellidoPaterno() + ' ' + usuario.getApellidoMaterno());
+		expedienteService.save(expedientemof);
+		
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
 		return "redirect:/verSecciones/" + expedientemof.getId();
@@ -258,15 +248,9 @@ public class ExpedienteController {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-		List<Usuario> usuarios = usuarioService.findall();
-		Usuario usuario = null;
+		
+		Usuario usuario = usuarioService.findByEmail(auth.getName());
 
-		for (int i = 0; i < usuarios.size(); i++) {
-			if (usuarios.get(i).getEmail().equals(auth.getName())) {
-				usuario = usuarios.get(i);
-				break;
-			}
-		}
 		
 		//Se agrega a la tabla de expedientes que se le pueden asignar a los usuarios
 		//Funciona de la misma manera que con los roles de usuario
@@ -292,6 +276,9 @@ public class ExpedienteController {
 			permisosE.save(permisoExpedientePA);
 			permisosE.saveExpediente(expedientemof);
 		}
+		
+		expedientemof.setNombreUltimoUsuario(usuario.getNombre() + ' ' + usuario.getApellidoPaterno() + ' ' + usuario.getApellidoMaterno());
+		expedienteService.save(expedientemof);
 		
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
@@ -319,15 +306,7 @@ public class ExpedienteController {
 		if (idExpediente != null) {
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-			List<Usuario> usuarios = usuarioService.findall();
-			Usuario usuario = null;
-
-			for (int i = 0; i < usuarios.size(); i++) {
-				if (usuarios.get(i).getEmail().equals(auth.getName())) {
-					usuario = usuarios.get(i);
-					break;
-				}
-			}
+			Usuario usuario = usuarioService.findByEmail(auth.getName());
 			
 			List<PermisosExpediente> permisosDelUsuario = usuario.getPermisosExpediente();
 			if(permisosDelUsuario.isEmpty()) {

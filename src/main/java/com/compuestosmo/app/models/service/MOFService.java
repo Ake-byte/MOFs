@@ -27,7 +27,7 @@ public class MOFService implements IMOFService{
 	public List<MOF> findAll() {
 		return (List<MOF>) mofdao.findAll();
 	}
-
+	
 	@Override
 	@Transactional
 	public void save(MOF mof) {
@@ -60,6 +60,14 @@ public class MOFService implements IMOFService{
 	public Page<MOF> findMOFsByClasificacionId(Long id, Pageable pageable) {
 		// TODO Auto-generated method stub
 		return mofdao.findMOFsByClasificacionId(id, pageable);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<MOF> findByTerm(String term) {
+		
+			return mofdao.search(term);
+
 	}
 
 

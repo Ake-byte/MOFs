@@ -38,9 +38,6 @@ public class ForgotPasswordController {
 	
 	@GetMapping(value = "/newPassword")
 	public String newPassword(Map<String, Object> model) {
-		// Usuario usuario = new Usuario();
-
-		// model.put("usuario", usuario);
 		model.put("titulo", "Recuperar Acceso");
 		return "newPassword";
 	}

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head"></head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
@@ -15,12 +16,16 @@
 							<li class="nav-item"><a class="nav-link active"
 								id="info-tab" data-toggle="tab" href="#info" role="tab"
 								aria-controls="home" aria-selected="true">Datos Personales</a></li>
-							<li class="nav-item"><a class="nav-link"
-							id="datosSistema-tab" data-toggle="tab" href="#datosSistema"
-								role="tab" aria-controls="datosSistema" aria-selected="false">Datos en el Sistema</a></li>
-							<li class="nav-item"><a class="nav-link"> Ver
+							<li class="nav-item"><a
+								sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER2')" class="nav-link"
+								id="datosSistema-tab" data-toggle="tab" href="#datosSistema"
+								role="tab" aria-controls="datosSistema" aria-selected="false">Datos
+									en el Sistema</a></li>
+							<li class="nav-item"><a 
+							sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER2')" class="nav-link"> Ver
 									Expedientes</a></li>
-							<li class="nav-item"><a class="nav-link"> Ver
+							<li class="nav-item"><a 
+							sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER2')" class="nav-link"> Ver
 									solicitudes a Expedientes</a></li>
 						</ul>
 						<div class="card-body">
@@ -30,13 +35,13 @@
 									<div class="card">
 										<ul class="list-group list-group-flush">
 											<li class="list-group-item"
-												th:text="'Nombre: '+ ${usuario.nombre}"><br></li>	
+												th:text="'Nombre: '+ ${usuario.nombre}"><br></li>
 											<li class="list-group-item"
 												th:text="'Apellido Paterno: '+ ${usuario.apellidoPaterno}"><br></li>
 											<li class="list-group-item"
-												th:text="'Apellido Materno: '+ ${usuario.apellidoMaterno}"><br></li>	
+												th:text="'Apellido Materno: '+ ${usuario.apellidoMaterno}"><br></li>
 											<li class="list-group-item"
-												th:text="'Correo: '+ ${usuario.email}"><br></li>	
+												th:text="'Correo: '+ ${usuario.email}"><br></li>
 										</ul>
 									</div>
 									<div>
@@ -48,7 +53,7 @@
 									</div>
 
 								</div>
-								<div class="tab-pane fade" id="datosSistema" role="tabpanel"
+								<div class="tab-pane fade" id="datosSistema" role="tabpanel" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER2')"
 									aria-labelledby="datosSistema">
 									<div class="card">
 										<ul class="list-group list-group-flush">
@@ -57,7 +62,7 @@
 											<li class="list-group-item"
 												th:text="'Director 1: ' + ${investigador.director1}"><br></li>
 											<li class="list-group-item"
-												th:text="'Director 2: ' + ${investigador.director2}"><br></li>	
+												th:text="'Director 2: ' + ${investigador.director2}"><br></li>
 										</ul>
 									</div>
 									<div>
@@ -67,7 +72,7 @@
 												datos</a>
 										</p>
 									</div>
-									
+
 								</div>
 							</div>
 						</div>

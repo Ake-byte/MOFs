@@ -23,8 +23,6 @@ public interface IUsuarioService {
 
 	public void delete(Long id);
 	
-	public List<MOF> findByNombre(String term);
-	
 	public List<Usuario> findByNombreU(String term);
 	
 	public List<Role> findByRolUsuario(String authority);

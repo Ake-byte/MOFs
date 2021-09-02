@@ -98,7 +98,6 @@ public class LoginController {
 		role.setAuthorityName("Usuario Registrado");
 		
 		usuario.setRoles(role);
-		//usuario.setNombreRole("Usuario Registrado");
 		usuario.setEnabled(true);
 
 		String password = usuario.getPassword();

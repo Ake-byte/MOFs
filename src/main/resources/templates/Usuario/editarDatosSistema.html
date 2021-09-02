@@ -29,6 +29,7 @@
 											<td><div class="col-sm-6">
 													<select id="director1" name="director1"
 														th:field="*{director1}">
+														<option th:if= "${director1 != ''}" th:value> -- Seleccione una opci&oacute;n -- </option>
 														<option th:each="director : ${director1}"
 															th:value="${director.nombre}"
 															th:utext="${director.nombre}" />
@@ -39,9 +40,10 @@
 											<td>Director de Tesis 2</td>
 											<tr>
 											<td><div class="col-sm-6">
-													<select id="director1" name="director1"
+													<select id="director2" name="director2"
 														th:field="*{director2}">
-														<option th:each="director : ${director1}"
+														<option th:if= "${director2 != ''}" th:value> -- Seleccione una opci&oacute;n -- </option>
+														<option th:each="director : ${director2}"
 															th:value="${director.nombre}"
 															th:utext="${director.nombre}" />
 													</select>

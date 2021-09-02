@@ -7,7 +7,7 @@
 			$("#buscar_investigador").autocomplete({
 				source : function(request, response) {
 					$.ajax({
-						url : "/CompuestoMOF/buscar-investigador/" + request.term,
+						url : "/PersonalAutorizado/cargar-investigador/" + request.term,
 						dataType : "json",
 						data : {
 							term : request.term

@@ -191,6 +191,8 @@ public class AdminController {
 			Investigador investigador = new Investigador();
 
 			if (roleUsuario != null) {
+				investigador.setDirector1("");
+				investigador.setDirector2("");
 				investigadorS.save(investigador);
 				investigadorS.saveUsuarioRole(roleUsuario);
 				investigadores.add(investigador);

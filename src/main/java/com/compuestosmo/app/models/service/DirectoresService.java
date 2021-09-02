@@ -17,6 +17,7 @@ public class DirectoresService implements IDirectoresService {
 	private IDirectoresDAO directoresdao;
 	
 	@Override
+	@Transactional(readOnly=true)
 	public List<Directores> findall() {
 		return (List<Directores>) directoresdao.findAll();
 	}

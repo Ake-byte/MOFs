@@ -28,6 +28,7 @@ public class UsuarioService implements IUsuarioService {
 	private IRoleDAO roledao;
 	
 	@Override
+	@Transactional(readOnly=true)
 	public List<Usuario> findall() {
 		return (List<Usuario>) usuariodao.findAll();
 	}
@@ -56,13 +57,6 @@ public class UsuarioService implements IUsuarioService {
 	public Usuario findByEmail(String email) {
 		
 		return usuariodao.findByEmail(email);
-	}
-
-	@Override
-	@Transactional(readOnly=true)
-	public List<MOF> findByNombre(String term) {
-		// TODO Auto-generated method stub
-		return mofdao.findByNombre(term);
 	}
 
 	@Override

@@ -64,15 +64,7 @@ public class PruebaController {
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-		List<Usuario> usuarios = usuarioService.findall();
-		Usuario usuario = null;
-
-		for (int i = 0; i < usuarios.size(); i++) {
-			if (usuarios.get(i).getEmail().equals(auth.getName())) {
-				usuario = usuarios.get(i);
-				break;
-			}
-		}
+		Usuario usuario = usuarioService.findByEmail(auth.getName());
 
 		List<PermisosExpediente> expedientesUsuario = usuario.getPermisosExpediente();
 
@@ -163,7 +155,6 @@ public class PruebaController {
 
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
-		// return "redirect:/fichaMaterial/" + pruebamof.getExpedientes().getId();
 		return "redirect:/expedienteMaterial/" + seccionesE.getId();
 	}
 
@@ -196,8 +187,6 @@ public class PruebaController {
 		}
 
 		SeccionesExpediente seccionesE = prueba.getSecciones_expedientes();
-		// MOF mof = expedientemof.getMof();
-		// ExpedienteMOF expedientemof = expedienteService.findOne();
 		return "redirect:/expedienteMaterial/" + seccionesE.getId();
 	}
 }

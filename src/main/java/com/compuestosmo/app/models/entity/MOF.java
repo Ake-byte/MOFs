@@ -35,8 +35,16 @@ public class MOF implements Serializable {
 	private String nombreCompuesto;
 
 	// Directores
-
+	@Column(name = "director1")
+	private String director1;
+	
+	@Column(name = "director2")
+	private String director2;
+	
 	// Investigador Responsable
+	@Column(name = "investigador")
+	private String investigador;
+	
 	//@NotEmpty
 	private String formula;
 
@@ -161,9 +169,31 @@ public class MOF implements Serializable {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
+	
+	public String getDirector1() {
+		return director1;
+	}
 
-	
-	
+	public void setDirector1(String director1) {
+		this.director1 = director1;
+	}
+
+	public String getDirector2() {
+		return director2;
+	}
+
+	public void setDirector2(String director2) {
+		this.director2 = director2;
+	}
+
+	public String getInvestigador() {
+		return investigador;
+	}
+
+	public void setInvestigador(String investigador) {
+		this.investigador = investigador;
+	}
+
 	public List<ExpedienteMOF> getExpedientesMOF() {
 		return expedientesMOF;
 	}

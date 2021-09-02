@@ -43,7 +43,7 @@
 								<td th:text="${mof.nombreCompuesto}"></td>
 								<td th:text="${mof.clasificacionmof.nombreClasificacion}"></td>
 								<td></td>
-								<td></td>
+								<td th:text="${mof.investigador}"></td>
 								<td><a class="btn text-white btn-xs" style="background-color:#4169E1" 
 									th:href="@{/CompuestoMOF/formMaterial/} + ${mof.id}"
 									th:text="'Editar'"></a></td>

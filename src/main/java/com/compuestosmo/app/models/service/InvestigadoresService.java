@@ -3,6 +3,8 @@ package com.compuestosmo.app.models.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,6 +55,12 @@ public class InvestigadoresService implements IInvestigadoresService {
 	@Override
 	public Investigador findByRoleID(Long id) {
 		return investigadoresDAO.findByRoleID(id);
+	}
+
+	@Override
+	public Page<Investigador> findInvestigador(Pageable pageable) {
+		// TODO Auto-generated method stub
+		return investigadoresDAO.findInvestigador(pageable);
 	}
 
 

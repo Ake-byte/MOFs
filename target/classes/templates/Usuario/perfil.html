@@ -5,7 +5,7 @@
 <body>
 	<header th:replace="layout/layout :: header"></header>
 
-	<div class="container">
+	<div class="container  py-4" style="width: 54rem;">
 		<div class="card bg-light">
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body" th:each="usuario: ${usuario}">
@@ -17,15 +17,15 @@
 								id="info-tab" data-toggle="tab" href="#info" role="tab"
 								aria-controls="home" aria-selected="true">Datos Personales</a></li>
 							<li class="nav-item"><a
-								sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER2')" class="nav-link"
+								sec:authorize="hasRole('ROLE_USER2')" class="nav-link"
 								id="datosSistema-tab" data-toggle="tab" href="#datosSistema"
 								role="tab" aria-controls="datosSistema" aria-selected="false">Datos
 									en el Sistema</a></li>
-							<li class="nav-item"><a 
-							sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER2')" class="nav-link"> Ver
+							<li class="nav-item"><a
+								sec:authorize="hasRole('ROLE_USER2')" class="nav-link"> Ver
 									Expedientes</a></li>
-							<li class="nav-item"><a 
-							sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER2')" class="nav-link"> Ver
+							<li class="nav-item"><a
+								sec:authorize="hasRole('ROLE_USER2')" class="nav-link"> Ver
 									solicitudes a Expedientes</a></li>
 						</ul>
 						<div class="card-body">
@@ -33,46 +33,80 @@
 								<div class="tab-pane fade show active" id="info" role="tabpanel"
 									aria-labelledby="info-tab">
 									<div class="card">
-										<ul class="list-group list-group-flush">
-											<li class="list-group-item"
-												th:text="'Nombre: '+ ${usuario.nombre}"><br></li>
-											<li class="list-group-item"
-												th:text="'Apellido Paterno: '+ ${usuario.apellidoPaterno}"><br></li>
-											<li class="list-group-item"
-												th:text="'Apellido Materno: '+ ${usuario.apellidoMaterno}"><br></li>
-											<li class="list-group-item"
-												th:text="'Correo: '+ ${usuario.email}"><br></li>
-										</ul>
+										<div class="card-body">
+											<div class="form-group row">
+												<label for="nombre" class="col-sm-4 col-form-label">Nombre(s):</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control"
+														th:field="${usuario.nombre}" readonly />
+												</div>
+											</div>
+											<br>
+											<div class="form-group row">
+												<label for="nombre" class="col-sm-4 col-form-label">Apellido
+													Paterno:</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control"
+														th:field="${usuario.apellidoPaterno}" readonly />
+												</div>
+											</div>
+											<br>
+											<div class="form-group row">
+												<label for="nombre" class="col-sm-4 col-form-label">Apellido
+													Materno</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control"
+														th:field="${usuario.apellidoMaterno}" readonly />
+												</div>
+											</div>
+											<br>
+											<div>
+												<a class="btn btn-primary btn-xs"
+													th:href="@{/Usuario/editarDatos/} + ${usuario.id}">Editar
+													datos</a>
+											</div>
+										</div>
 									</div>
-									<div>
-										<p>
-											<a class="btn btn-primary btn-xs"
-												th:href="@{/Usuario/editarDatos/} + ${usuario.id}">Editar
-												datos</a>
-										</p>
-									</div>
-
 								</div>
-								<div class="tab-pane fade" id="datosSistema" role="tabpanel" sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER2')"
+								<div class="tab-pane fade" id="datosSistema" role="tabpanel"
+									sec:authorize="hasRole('ROLE_USER2')"
 									aria-labelledby="datosSistema">
 									<div class="card">
-										<ul class="list-group list-group-flush">
-											<li class="list-group-item"
-												th:text="'Permisos en el sistema: ' + ${investigador.roles.authorityName}"><br></li>
-											<li class="list-group-item"
-												th:text="'Director 1: ' + ${investigador.director1}"><br></li>
-											<li class="list-group-item"
-												th:text="'Director 2: ' + ${investigador.director2}"><br></li>
-										</ul>
+										<div class="card-body">
+											<div class="form-group row">
+												<label for="nombre" class="col-sm-4 col-form-label">Permisos
+													en el Sistema</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control"
+														th:field="${investigador.roles.authorityName}" readonly />
+												</div>
+											</div>
+											<br>
+											<div class="form-group row">
+												<label for="nombre" class="col-sm-4 col-form-label">Director
+													de Tesis 1:</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control"
+														th:field="${investigador.director1}" readonly />
+												</div>
+											</div>
+											<br>
+											<div class="form-group row">
+												<label for="nombre" class="col-sm-4 col-form-label">Director
+													de Tesis 2:</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control"
+														th:field="${investigador.director2}" readonly />
+												</div>
+											</div>
+											<br>
+											<div>
+												<a class="btn btn-primary btn-xs"
+													th:href="@{/Usuario/editarDatosSistema/} + ${investigador.id}">Editar
+													datos</a>
+											</div>
+										</div>
 									</div>
-									<div>
-										<p>
-											<a class="btn btn-primary btn-xs"
-												th:href="@{/Usuario/editarDatosSistema/} + ${investigador.id}">Editar
-												datos</a>
-										</p>
-									</div>
-
 								</div>
 							</div>
 						</div>

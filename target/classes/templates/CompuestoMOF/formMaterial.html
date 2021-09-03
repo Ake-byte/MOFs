@@ -3,14 +3,12 @@
 <head th:replace="layout/layout :: head"></head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
-	<div class="container">
+	<div class="container py-4" style="width: 78rem;">
 		<div class="card bg-light border-primary mb-3">
-			<div class="card-header text-white bg-primary mb-3"  th:text="${titulo}"></div>
+			<div class="card-header text-white bg-primary mb-3"
+				th:text="${titulo}"></div>
 			<div class="card-body">
-				<div class="container py-4">
-
-
-
+				<div class="container">
 					<form th:action="@{/CompuestoMOF/formMaterial}" th:object="${mof}"
 						method="post" enctype="multipart/form-data">
 						<div class="form-group row">
@@ -24,7 +22,7 @@
 									th:errors="*{nombreCompuesto}"></small>
 							</div>
 						</div>
-
+						<br>
 						<div class="form-group row">
 							<label for="descripcion" class="col-sm-2 col-form-label">F&oacute;rmula</label>
 							<div class="col-sm-6">
@@ -34,7 +32,7 @@
 									th:if="${#fields.hasErrors('formula')}" th:errors="*{formula}"></small>
 							</div>
 						</div>
-
+						<br>
 
 						<div class="form-group row">
 							<label class="col-sm-2 col-form-label">Clasificaci&oacute;n
@@ -48,17 +46,40 @@
 								</select>
 							</div>
 						</div>
-
+						<br>
+						<p>Directores de Tesis</p>
+						<br>
 						<div class="form-group row">
-							<label for="descripcion" class="col-sm-2 col-form-label">Directores</label>
-							<div class="col-sm-6"></div>
+							<label class="col-sm-4 col-form-label">Director de Tesis
+								1</label>
+							<div class="col-sm-6">
+								<select id="director1" name="director1" th:field="*{director1}">
+									<option th:if="${director1 != ''}" th:value>--
+										Seleccione una opci&oacute;n --</option>
+									<option th:each="director : ${director1}"
+										th:value="${director.nombre}" th:utext="${director.nombre}" />
+								</select>
+							</div>
 						</div>
-
+						<br>
+						<div class="form-group row">
+							<label class="col-sm-4 col-form-label">Director de Tesis
+								2</label>
+							<div class="col-sm-6">
+								<select id="director2" name="director2" th:field="*{director2}">
+									<option th:if="${director2 != ''}" th:value>--
+										Seleccione una opci&oacute;n --</option>
+									<option th:each="director : ${director2}"
+										th:value="${director.nombre}" th:utext="${director.nombre}" />
+								</select>
+							</div>
+						</div>
+						<br>
 						<div class="form-group row">
 							<label for="descripcion" class="col-sm-2 col-form-label">CIF</label>
 							<div class="col-sm-6"></div>
 						</div>
-
+						<br>
 						<div class="form-group row">
 							<label for="descripcion" class="col-sm-2 col-form-label">Aplicaciones</label>
 							<div class="col-sm-6">
@@ -66,7 +87,7 @@
 									th:field="*{aplicaciones}" />
 							</div>
 						</div>
-
+						<br>
 						<div class="form-group row">
 							<label for="descripcion" class="col-sm-2 col-form-label">M&eacute;todo
 								de S&iacute;ntesis</label>
@@ -75,14 +96,14 @@
 									th:field="*{metodoSintesis}" />
 							</div>
 						</div>
-
+						<br>
 						<div class="form-group row">
 							<label for="descripcion" class="col-sm-2 col-form-label">Art&iacute;culo</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control" th:field="*{articulo}" />
 							</div>
 						</div>
-
+						<br>
 						<div class="form-group row">
 							<label for="descripcion" class="col-sm-2 col-form-label">T&iacute;tulo
 								Tesis</label>
@@ -91,7 +112,7 @@
 									th:field="*{tituloTesis}" />
 							</div>
 						</div>
-
+						<br>
 						<div class="form-group row">
 							<label for="descripcion" class="col-sm-2 col-form-label">URL
 								Tesis</label>
@@ -99,26 +120,26 @@
 								<input type="text" class="form-control" th:field="*{url}" />
 							</div>
 						</div>
-
+						<br>
 						<div class="form-group row">
 							<label for="buscar_producto" class="col-sm-2 col-form-label"
 								th:text="'Investigador Responsable'"></label>
 							<div class="col-sm-6">
-								<input type="text" name="buscar_investigador" id="buscar_investigador"
-									class="form-control" />
+								<input type="text" class="form-control" th:field="*{investigador}" />
 							</div>
 						</div>
-
-
+						<br>
 						<div class="form-group row">
-							<div class="col-sm-6">
-								<input type="submit" value="Guardar" class="btn-primary" />
+							<div class="col-sm-1">
+								<input type="submit" value="Guardar" class="btn btn-primary" />
+							</div>
+							<div class="col-sm-1">
+								<a class="btn btn-danger"
+									th:href="@{/CompuestoMOF/listarMateriales}"
+									th:text="'Cancelar'"> </a>
 							</div>
 						</div>
-
 						<input type="hidden" th:field="*{id}" />
-
-
 					</form>
 				</div>
 			</div>
@@ -126,6 +147,5 @@
 	</div>
 
 	<footer th:replace="layout/layout :: footer"></footer>
-	<script th:replace="CompuestoMOF/js/autocompletado :: javascript"></script>
 </body>
 </html>

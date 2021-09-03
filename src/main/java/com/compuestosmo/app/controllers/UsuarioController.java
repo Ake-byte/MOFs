@@ -73,15 +73,11 @@ public class UsuarioController {
 	@GetMapping(value = "/editarDatosSistema/{id}")
 	public String editarDatosSistema(@PathVariable(value = "id") Long idUsuario, Map<String, Object> model) {
 
-		// Usuario usuario = usuarioService.findOne(idUsuario);
-		// Role role = roleService.findOne(usuario.getRoles().getId());
-		// Investigador investigador = investigadorService.findByRoleID(role.getId());
 		Investigador investigador = investigadorService.findOne(idUsuario);
 
 		List<Directores> director1 = directorService.findall();
 		List<Directores> director2 = directorService.findall();
 
-		// ((Model) model).addAttribute("usuario", usuario);
 		((Model) model).addAttribute("investigador", investigador);
 		((Model) model).addAttribute("director1", director1);
 		((Model) model).addAttribute("director2", director2);

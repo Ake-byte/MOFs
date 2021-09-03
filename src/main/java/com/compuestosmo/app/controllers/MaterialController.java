@@ -26,8 +26,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.compuestosmo.app.models.dao.IClasificacionMOFDAO;
 import com.compuestosmo.app.models.dao.IMOFDAO;
 import com.compuestosmo.app.models.entity.ClasificacionMOF;
+import com.compuestosmo.app.models.entity.Directores;
 import com.compuestosmo.app.models.entity.MOF;
 import com.compuestosmo.app.models.entity.Usuario;
+import com.compuestosmo.app.models.service.IDirectoresService;
 import com.compuestosmo.app.models.service.IMOFService;
 import com.compuestosmo.app.models.service.IUsuarioService;
 
@@ -46,6 +48,9 @@ public class MaterialController {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private IDirectoresService directorService;
 
 	@RequestMapping(value="listarMateriales", method=RequestMethod.GET)
 	public String listar(Model model) {
@@ -95,6 +100,12 @@ public class MaterialController {
 		}else {
 			return "redirect:/listarMateriales";
 		}
+		
+		List<Directores> director1 = directorService.findall();
+		List<Directores> director2 = directorService.findall();
+
+		((Model) model).addAttribute("director1", director1);
+		((Model) model).addAttribute("director2", director2);
 		
 		model.put("mof", mof);
 		model.put("titulo", "Editar MOF");

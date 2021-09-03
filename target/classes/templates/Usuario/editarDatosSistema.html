@@ -3,59 +3,45 @@
 <head th:replace="layout/layout :: head"></head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
-	<div class="container" style="width: 48rem;">
+	<div class="container py-4" style="width: 48rem;">
 		<div class="card bg-light">
 			<div class="card-header" th:text="${titulo}"></div>
 			<div class="card-body">
-				<div class="container py-4">
+				<div class="container">
 
-
-
-					<form th:action="@{/Usuario/editarDatosSistema}" th:object="${investigador}"
-						method="post">
-						<!-- 
-						<p th:text="'Datos de Sistema de: ' + ${usuario.nombre} + ' '+ ${usuario.apellidoPaterno} + ' '+ ${usuario.apellidoMaterno}"></p>
-						 -->
+					<form th:action="@{/Usuario/editarDatosSistema}"
+						th:object="${investigador}" method="post">
 						<br>
 						<p>Directores de Tesis</p>
+						<br>
 						<div class="form-group row">
-							<label for="nombre" class="col-sm-2 col-form-label"></label> <br>
-							<div class="col-sm-10">
-								<table>
-									<thead>
-										<tr>
-											<td>Director de Tesis 1</td>
-											<tr>
-											<td><div class="col-sm-6">
-													<select id="director1" name="director1"
-														th:field="*{director1}">
-														<option th:if= "${director1 != ''}" th:value> -- Seleccione una opci&oacute;n -- </option>
-														<option th:each="director : ${director1}"
-															th:value="${director.nombre}"
-															th:utext="${director.nombre}" />
-													</select>
-												</div></td>
-										</tr>
-										<tr>
-											<td>Director de Tesis 2</td>
-											<tr>
-											<td><div class="col-sm-6">
-													<select id="director2" name="director2"
-														th:field="*{director2}">
-														<option th:if= "${director2 != ''}" th:value> -- Seleccione una opci&oacute;n -- </option>
-														<option th:each="director : ${director2}"
-															th:value="${director.nombre}"
-															th:utext="${director.nombre}" />
-													</select>
-												</div></td>
-										</tr>
-									</thead>
-								</table>
+							<label class="col-sm-4 col-form-label">Director de Tesis
+								1</label>
+							<div class="col-sm-6">
+								<select id="director1" name="director1" th:field="*{director1}">
+									<option th:if="${director1 != ''}" th:value>--
+										Seleccione una opci&oacute;n --</option>
+									<option th:each="director : ${director1}"
+										th:value="${director.nombre}" th:utext="${director.nombre}" />
+								</select>
 							</div>
 						</div>
 						<br>
 						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">Permisos en el
+							<label class="col-sm-4 col-form-label">Director de Tesis
+								2</label>
+							<div class="col-sm-6">
+								<select id="director2" name="director2" th:field="*{director2}">
+									<option th:if="${director2 != ''}" th:value>--
+										Seleccione una opci&oacute;n --</option>
+									<option th:each="director : ${director2}"
+										th:value="${director.nombre}" th:utext="${director.nombre}" />
+								</select>
+							</div>
+						</div>
+						<br>
+						<div class="form-group row">
+							<label class="col-sm-4 col-form-label">Permisos en el
 								Sistema</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control"
@@ -69,8 +55,8 @@
 								<input type="submit" value="Guardar" class="btn-primary" />
 							</div>
 						</div>
-						<input type="hidden" th:field="*{id}" />  
-						<input type="hidden" th:field="*{roles}" /> 
+						<input type="hidden" th:field="*{id}" /> <input type="hidden"
+							th:field="*{roles}" />
 
 					</form>
 				</div>

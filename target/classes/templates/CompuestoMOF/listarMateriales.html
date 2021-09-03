@@ -36,10 +36,10 @@
 						</thead>
 						<tbody>
 							<tr th:each="mof: ${materiales}">
-								<td><a class="btn btn-xs" style="background-color:#4169E1"
-									th:href="@{/CompuestoMOF/fichaMaterial/} + ${mof.id}"
-									>
-									<img th:src="@{/images/ver.png}" width="35" height="25"></a></td>
+								<td><a class="btn btn-xs" style="background-color: #4169E1"
+									th:href="@{/CompuestoMOF/fichaMaterial/} + ${mof.id}">
+										<img th:src="@{/images/ver.png}" width="35" height="25">
+								</a></td>
 								<td th:text="${mof.nombreCompuesto}"></td>
 								<td th:text="${mof.clasificacionmof.nombreClasificacion}"></td>
 								<td></td>

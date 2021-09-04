@@ -5,7 +5,10 @@
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container">
 		<div class="card bg-light border-warning mb-3">
-			<div class="card-header text-white bg-warning mb-3 text-center"  th:text="${titulo}"></div>
+			<div class="card-header mb-3 text-center">
+				<header th:replace="layout/navs :: header"></header>
+				<font size="18" th:text="${titulo}"></font>
+			</div>
 			<div class="card-body">
 				<div class="container py-4">
 					<form th:action="@{/formExpediente}" th:object="${expedientemof}" method="post">

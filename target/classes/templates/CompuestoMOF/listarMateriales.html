@@ -5,14 +5,14 @@
 
 <body>
 	<header th:replace="layout/layout :: header"></header>
-	<div class="container py-4">
-		<header th:replace="buscador :: header"></header>
-	</div>
+
 	<div class="container">
-		<div class="card bg-light mb-3" style="border-color:#4169E1">
-			<div class="card-header text-white mb-3 text-center" style="background-color:#4169E1">
+		<div class="card bg-light mb-3" style="border-color: #4169E1">
+			<div class="card-header mb-3 text-center">
+				<header th:replace="layout/navs :: header"></header>
 				<font size="18" th:text="${titulo}"></font>
 			</div>
+
 			<div class="card-body">
 				<div class="container py-2">
 					<nav class="navbar navbar-light bg-light">
@@ -37,19 +37,21 @@
 						<tbody>
 							<tr th:each="mof: ${materiales}">
 								<td><a class="btn btn-xs" style="background-color: #4169E1"
-									th:href="@{/CompuestoMOF/fichaMaterial/} + ${mof.id}">
-										<img th:src="@{/images/ver.png}" width="35" height="25">
+									th:href="@{/CompuestoMOF/fichaMaterial/} + ${mof.id}"> <img
+										th:src="@{/images/ver.png}" width="35" height="25">
 								</a></td>
 								<td th:text="${mof.nombreCompuesto}"></td>
 								<td th:text="${mof.clasificacionmof.nombreClasificacion}"></td>
 								<td></td>
 								<td th:text="${mof.investigador}"></td>
-								<td><a class="btn text-white btn-xs" style="background-color:#4169E1" 
+								<td><a class="btn text-white btn-xs"
+									style="background-color: #4169E1"
 									th:href="@{/CompuestoMOF/formMaterial/} + ${mof.id}"
 									th:text="'Editar'"></a></td>
 								<td><a class="btn btn-danger btn-xs"
 									sec:authorize="hasRole('ROLE_ADMIN')"
-									th:href="@{/CompuestoMOF/eliminar/} + ${mof.id}" th:text="'Eliminar'"
+									th:href="@{/CompuestoMOF/eliminar/} + ${mof.id}"
+									th:text="'Eliminar'"
 									onclick="return confirm('Estás seguro que quieres eliminar?');">
 								</a></td>
 							</tr>

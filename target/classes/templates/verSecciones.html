@@ -5,9 +5,10 @@
 
 <body>
 	<header th:replace="layout/layout :: header"></header>
-	<div class="container py-4">
-		<header th:replace="buscador :: header"></header>
-	</div>
+	<div class="card-header mb-3 text-center">
+				<header th:replace="layout/navs :: header"></header>
+				<font size="18" th:text="${titulo}"></font>
+			</div>
 	<div class="container">
 		<div class="card bg-light">
 			<div class="card-header">

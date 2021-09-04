@@ -8,8 +8,10 @@
 	</div>
 	<div class="container" style="width: 98rem;">
 		<div class="card bg-light border-primary mb-3">
-			<div class="card-header text-white bg-primary mb-3 text-center"
-				th:text="${titulo}"></div>
+			<div class="card-header mb-3 text-center">
+				<header th:replace="layout/navs :: header"></header>
+				<font size="18" th:text="${titulo}"></font>
+			</div>
 			<div th:if="${#lists.isEmpty(mof.expedientesMOF)}"
 				class="alert alert-info my-4 text-center"
 				th:text="'No hay expedientes del compuesto ' + ${mof.nombreCompuesto}">

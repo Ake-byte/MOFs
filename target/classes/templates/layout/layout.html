@@ -21,23 +21,6 @@
 					<span class="navbar-toggler-icon"></span>
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
-					<ul class="navbar-nav mr-auto">
-						<li class="nav-item"><a class="nav-link active"
-							aria-current="page" th:href="@{/index}">Inicio</a></li>
-						<li class="nav-item"><a class="nav-link"
-							th:href="@{/Clasificacion/listadoClasificacionMateriales}">Clasificaciones</a>
-						</li>
-						<li class="nav-item"><a class="nav-link"
-							th:href="@{/CompuestoMOF/listarMateriales}">Materiales</a></li>
-						<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a
-							class="nav-link" th:href="@{/PersonalAutorizado/listarRoles}">Usuarios</a></li>
-						<li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a
-							class="nav-link"
-							th:href="@{/PersonalAutorizado/peticionesExpedientes}">Expedientes
-						</a></li>
-						<li class="nav-item"><a class="nav-link"
-							th:href="@{/Usuario/perfil}">Perfil </a></li>
-					</ul>
 					<div sec:authorize="!isAuthenticated()">
 						<a class="btn btn-outline-primary" th:href="@{/login}">
 							Ingresar</a>
@@ -66,6 +49,7 @@
 							</form>
 						</div>
 					</div>
+					<div th:replace="buscador :: header"></div>
 				</div>
 			</div>
 		</nav>

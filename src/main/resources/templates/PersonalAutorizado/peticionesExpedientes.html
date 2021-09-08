@@ -6,10 +6,10 @@
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container">
-		<div class="card bg-light mb-3" style="border-color: #00CED1">
-			<div class="card-header mb-3 text-center">
-				<header th:replace="layout/navs :: header"></header>
-				<font size="18" th:text="${titulo}"></font>
+		<div class="card bg-light mb-3" style="border-color: #4169E1">
+			<div class="card-header mb-3 text-white text-center"
+				style="background: #4169E1">
+				<h3 th:text="${titulo}"></h3>
 			</div>
 			<div class="card-body">
 				<div class="container py-4">
@@ -26,13 +26,16 @@
 						<tbody>
 							<tr th:each="peticion: ${peticion}">
 								<td><a class="btn btn-xs" style="background-color: #00CED1">
-									<img th:src="@{/images/ver.png}" width="35" height="25"></a></td>
-								<td th:text="${peticion.users.nombre} + ' ' + ${peticion.users.apellidoPaterno} + ' ' + ${peticion.users.apellidoMaterno}"></td>
+										<img th:src="@{/images/ver.png}" width="35" height="25">
+								</a></td>
+								<td
+									th:text="${peticion.users.nombre} + ' ' + ${peticion.users.apellidoPaterno} + ' ' + ${peticion.users.apellidoMaterno}"></td>
 								<td th:text="${peticion.expedientes.nombreUsuario}"></td>
 								<td th:text="${peticion.expedientes.mof.nombreCompuesto}"></td>
 								<td><a class="btn btn-xs" style="background-color: #00CED1"
 									th:href="@{/PersonalAutorizado/autorizarPermiso/} + ${peticion.id}">
-									<img th:src="@{/images/autorizar.png}" width="35" height="25"></a></td>
+										<img th:src="@{/images/autorizar.png}" width="35" height="25">
+								</a></td>
 							</tr>
 						</tbody>
 					</table>

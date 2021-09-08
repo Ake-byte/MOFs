@@ -3,14 +3,11 @@
 <head th:replace="layout/layout :: head"></head>
 <body>
 	<header th:replace="layout/layout :: header"></header>
-	<div class="container py-4">
-		<header th:replace="buscador :: header"></header>
-	</div>
-	<div class="container" style="width: 98rem;">
-		<div class="card bg-light border-primary mb-3">
-			<div class="card-header mb-3 text-center">
-				<header th:replace="layout/navs :: header"></header>
-				<font size="18" th:text="${titulo}"></font>
+	<div class="container" style="width: 86rem;">
+		<div class="card bg-light mb-3" style="border-color: #4169E1">
+			<div class="card-header mb-3 text-white text-center"
+				style="background: #4169E1">
+				<h3 th:text="${titulo}"></h3>
 			</div>
 			<div th:if="${#lists.isEmpty(mof.expedientesMOF)}"
 				class="alert alert-info my-4 text-center"
@@ -31,26 +28,25 @@
 									de s&iacute;ntesis</a></li>
 							<li class="nav-item"><a class="nav-link" id="cif-tab"
 								data-toggle="tab" href="#fig3d" role="tab" aria-controls="fig3d"
-								aria-selected="false">Figura 3D
-								</a></li>
+								aria-selected="false">Figura 3D </a></li>
 							<!-- https://blokhin.github.io/cif-js-engines/ -->
 							<li class="nav-item"><a class="nav-link" id="patrondif-tab"
 								data-toggle="tab" href="#patrondif" role="tab"
 								aria-controls="patrondif" aria-selected="false">Patr&oacute;n
 									de Difracci&oacute;n</a></li>
-							<li class="nav-item"><a
-								class="nav-link text-dark bg-warning"
+							<li class="nav-item"><a class="nav-link"
 								th:href="@{/CompuestoMOF/formMaterial/} + ${mof.id}"><img
 									th:src="@{/images/editar.png}" width="35" height="25">Editar
-									Informaci&oacute;n del Compuesto</a>
-							<li class="nav-item"><a
-								class="nav-link text-dark bg-warning"
+									Compuesto</a>
+							<li class="nav-item"><a class="nav-link"
 								th:href="@{/listarExpedientes/} + ${mof.id}"><img
 									th:src="@{/images/ver.png}" width="35" height="25"> Ver
 									Expedientes</a>
-							<li class="nav-item"><a
-								class="nav-link text-dark bg-warning"
-								th:href="@{/formExpediente/} + ${mof.id}"> Crear Expediente</a>
+							<li class="nav-item"><a class="nav-link"
+								th:href="@{/formExpediente/} + ${mof.id}"> <img
+									th:src="@{/images/crearExpediente.png}" width="35" height="25"> Crear
+									Expediente
+							</a>
 						</ul>
 						<div class="card-body">
 							<div class="tab-content" id="myTabContent">
@@ -81,7 +77,10 @@
 								<div class="tab-pane fade" id="fig3d" role="tabpanel"
 									aria-labelledby="fig3d-tab">
 									<p>Acceder al sitio:</p>
-									<p><a href="https://blokhin.github.io/cif-js-engines/" class="card-link">Ver CIF</a></p>
+									<p>
+										<a href="https://blokhin.github.io/cif-js-engines/"
+											class="card-link">Ver CIF</a>
+									</p>
 								</div>
 								<div class="tab-pane fade" id="patrondif" role="tabpanel"
 									aria-labelledby="patrondif-tab">

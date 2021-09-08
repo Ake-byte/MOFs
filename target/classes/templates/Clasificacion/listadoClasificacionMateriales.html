@@ -6,13 +6,12 @@
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container">
-		<div class="card bg-light mb-3" style="border-color:#20B2AA">
-			<div class="card-header mb-3 text-center">
-				<header th:replace="layout/navs :: header"></header>
-				<font size="18" th:text="${titulo}"></font>
+		<div class="card bg-light mb-3" >
+			<div class="card-header mb-3 text-white text-center">
+				<h3 th:text="${titulo}"></h3>
 			</div>
 			<div class="card-body">
-				<div class="container py-4">
+				<div class="container">
 					<table class="table table-striped">
 						<thead>
 							<tr>
@@ -25,21 +24,22 @@
 						</thead>
 						<tbody>
 							<tr th:each="clasificaciones: ${clasificacion}">
-								<td><a class="btn btn-xs" style="background-color:#20B2AA"
+								<td><a id="ver" class="btn btn-xs"
 									th:href="@{/Clasificacion/verClasificacion/} + ${clasificaciones.id}">
 										<img th:src="@{/images/ver.png}" width="35" height="25">
 								</a></td>
 								<td th:text="${clasificaciones.nombreClasificacion}"></td>
 								<td th:text="${clasificaciones.descripcionClasificacion}"></td>
-								<td><a class="btn btn-primary btn-xs"
+								<td><a id="editar" class="btn btn-primary btn-xs"
 									sec:authorize="hasRole('ROLE_ADMIN')"
 									th:href="@{/Clasificacion/formClasificacion/} + ${clasificaciones.id}"
-									th:text="'Editar'"></a></td>
-								<td><a class="btn btn-danger btn-xs"
+									><img
+										th:src="@{/images/editarCompuesto.png}" width="35" height="25"></a></td>
+								<td><a id="eliminar" class="btn btn-danger btn-xs"
 									sec:authorize="hasRole('ROLE_ADMIN')"
 									th:href="@{/Clasificacion/eliminarClasificacion/} + ${clasificaciones.id}"
-									th:text="'Eliminar'"
 									onclick="return confirm('Estás seguro que quieres eliminar?');">
+								<img th:src="@{/images/eliminar.png}" width="35" height="25">
 								</a></td>
 							</tr>
 						</tbody>

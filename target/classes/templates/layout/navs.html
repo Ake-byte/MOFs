@@ -11,30 +11,32 @@
 <body>
 	<header th:fragment="header">
 
-		<div>
-			<ul class="nav nav-pills justify-content-center">
-				<li><a class="nav-link"
-					th:classappend="${#httpServletRequest.getRequestURI() == '/index' ? 'active':''}"
-					aria-current="page" th:href="@{/index}">Inicio</a></li>
-				<li><a class="nav-link"
-					th:classappend="${#httpServletRequest.getRequestURI() == '/Clasificacion/listadoClasificacionMateriales' ? 'active':''}"
-					th:href="@{/Clasificacion/listadoClasificacionMateriales}">Clasificaciones</a>
-				</li>
-				<li><a class="nav-link"
-					th:classappend="${#httpServletRequest.getRequestURI() == '/CompuestoMOF/listarMateriales' ? 'active':''}"
-					th:href="@{/CompuestoMOF/listarMateriales}">Materiales</a></li>
-				<li sec:authorize="hasRole('ROLE_ADMIN')"><a
-					th:classappend="${#httpServletRequest.getRequestURI() == '/PersonalAutorizado/listarRoles' ? 'active':''}"
-					th:href="@{/PersonalAutorizado/listarRoles}">Usuarios</a></li>
-				<li sec:authorize="hasRole('ROLE_ADMIN')"><a
-					th:classappend="${#httpServletRequest.getRequestURI() == '/PersonalAutorizado/peticionesExpedientes' ? 'active':''}"
-					th:href="@{/PersonalAutorizado/peticionesExpedientes}">Expedientes
-				</a></li>
-				<li><a class="nav-link"
-					th:classappend="${#httpServletRequest.getRequestURI() == '/Usuario/perfil' ? 'active':''}"
-					th:href="@{/Usuario/perfil}">Perfil </a></li>
+		<div class="container py-4">
+			<div id="navs" class="card-header mb-3 text-center">
+				<ul class="nav nav-pills justify-content-center">
+					<li><a class="nav-link"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/index' ? 'active':''}"
+						aria-current="page" th:href="@{/index}">Inicio</a></li>
+					<li><a class="nav-link"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/Clasificacion/listadoClasificacionMateriales' ? 'active':''}"
+						th:href="@{/Clasificacion/listadoClasificacionMateriales}">Clasificaciones</a>
+					</li>
+					<li><a class="nav-link"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/CompuestoMOF/listarMateriales' ? 'active':''}"
+						th:href="@{/CompuestoMOF/listarMateriales}">Materiales</a></li>
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a class="nav-link"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/PersonalAutorizado/listarRoles' ? 'active':''}"
+						th:href="@{/PersonalAutorizado/listarRoles}">Usuarios</a></li>
+					<li sec:authorize="hasRole('ROLE_ADMIN')"><a class="nav-link"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/PersonalAutorizado/peticionesExpedientes' ? 'active':''}"
+						th:href="@{/PersonalAutorizado/peticionesExpedientes}">Expedientes
+					</a></li>
+					<li><a class="nav-link"
+						th:classappend="${#httpServletRequest.getRequestURI() == '/Usuario/perfil' ? 'active':''}"
+						th:href="@{/Usuario/perfil}">Perfil </a></li>
 
-			</ul>
+				</ul>
+			</div>
 		</div>
 
 	</header>

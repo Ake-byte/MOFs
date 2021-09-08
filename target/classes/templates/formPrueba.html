@@ -4,26 +4,24 @@
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container">
-		<div class="card bg-light border-warning mb-3">
-			<div class="card-header mb-3 text-center">
-				<header th:replace="layout/navs :: header"></header>
-				<font size="18" th:text="${titulo}"></font>
+		<div class="card bg-light mb-3" style="border-color: #4169E1">
+			<div class="card-header mb-3 text-white text-center"
+				style="background: #4169E1">
+				<h3 th:text="${titulo}"></h3>
 			</div>
 			<div class="card-body">
-				<div class="container py-4">
-
-
-
-					<form th:action="@{/formPrueba}" th:object="${pruebamof}" method="post"
-						enctype="multipart/form-data">
+				<div class="container">
+					<form th:action="@{/formPrueba}" th:object="${pruebamof}"
+						method="post" enctype="multipart/form-data">
 						<div class="form-group row">
-							<label for="nombre" class="col-sm-2 col-form-label">Nombre de la Figura/Gr&aacute;fica</label>
+							<label for="nombre" class="col-sm-2 col-form-label">Nombre
+								de la Figura/Gr&aacute;fica</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control"
 									th:field="*{nombrePrueba}" />
 							</div>
 						</div>
-						
+						<br>
 						<div class="form-group row">
 							<label for="nombre" class="col-sm-2 col-form-label">Descripci&oacute;n</label>
 							<div class="col-sm-6">
@@ -31,23 +29,24 @@
 									th:field="*{descripcionPrueba}" />
 							</div>
 						</div>
-						
+						<br>
 						<div class="form-group row">
 							<label for="file" class="col-sm-2 col-form-label">Imagen</label>
 							<div class="col-sm-6">
 								<input type="file" name="file" class="form-control" />
 							</div>
 						</div>
-						
-						
+						<br>
+
 						<div class="form-group row">
 							<div class="col-sm-6">
 								<input type="submit" value="Guardar" class="btn-primary" />
 							</div>
 						</div>
 						<!--  <input type="hidden" th:value="${mof.id}" th:field="*{mof}" />-->
-						<input type="hidden" th:field="*{id}" />
-						<input type="hidden" th:value="${pruebamof.secciones_expedientes}" th:field="*{secciones_expedientes}" />						
+						<input type="hidden" th:field="*{id}" /> <input type="hidden"
+							th:value="${pruebamof.secciones_expedientes}"
+							th:field="*{secciones_expedientes}" />
 
 					</form>
 				</div>

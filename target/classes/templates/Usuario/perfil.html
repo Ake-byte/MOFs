@@ -5,9 +5,12 @@
 <body>
 	<header th:replace="layout/layout :: header"></header>
 
-	<div class="container  py-4" style="width: 54rem;">
-		<div class="card bg-light">
-			<div class="card-header" th:text="${titulo}"></div>
+	<div class="container" style="width: 54rem;">
+		<div class="card bg-light mb-3" style="border-color: #4169E1">
+			<div class="card-header mb-3 text-white text-center"
+				style="background: #4169E1">
+				<h3 th:text="${titulo}"></h3>
+			</div>
 			<div class="card-body" th:each="usuario: ${usuario}">
 
 				<div class="container">
@@ -24,9 +27,6 @@
 							<li class="nav-item"><a
 								sec:authorize="hasRole('ROLE_USER2')" class="nav-link"> Ver
 									Expedientes</a></li>
-							<li class="nav-item"><a
-								sec:authorize="hasRole('ROLE_USER2')" class="nav-link"> Ver
-									solicitudes a Expedientes</a></li>
 						</ul>
 						<div class="card-body">
 							<div class="tab-content" id="myTabContent">
@@ -57,6 +57,14 @@
 												<div class="col-sm-6">
 													<input type="text" class="form-control"
 														th:field="${usuario.apellidoMaterno}" readonly />
+												</div>
+											</div>
+											<br>
+											<div class="form-group row">
+												<label for="nombre" class="col-sm-4 col-form-label">Correo Electr&oacute;nico:</label>
+												<div class="col-sm-6">
+													<input type="text" class="form-control"
+														th:field="${usuario.email}" readonly />
 												</div>
 											</div>
 											<br>

@@ -4,16 +4,13 @@
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container">
-		<div class="card bg-light border-warning mb-3">
-			<div class="card-header mb-3 text-center">
-				<header th:replace="layout/navs :: header"></header>
-				<font size="18" th:text="${titulo}"></font>
+		<div class="card bg-light mb-3" style="border-color: #4169E1">
+			<div class="card-header mb-3 text-white text-center"
+				style="background: #4169E1">
+				<h3 th:text="${titulo}"></h3>
 			</div>
 			<div class="card-body">
-				<div class="container py-4">
-
-
-
+				<div class="container">
 					<form th:action="@{/formSeccion}" th:object="${seccionE}" method="post">
 						<div class="form-group row">
 							<label for="nombre" class="col-sm-2 col-form-label">Nombre de la Secci&oacute;n</label>
@@ -22,6 +19,7 @@
 									th:field="*{nombreSeccion}" />
 							</div>
 						</div>
+						<br>
 						<div class="form-group row">
 							<label for="nombre" class="col-sm-2 col-form-label">Descripci&oacute;n de la Secci&oacute;n</label>
 							<div class="col-sm-6">

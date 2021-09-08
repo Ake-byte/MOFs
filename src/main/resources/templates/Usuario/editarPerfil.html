@@ -4,10 +4,13 @@
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container" style="width: 48rem;">
-		<div class="card bg-light">
-			<div class="card-header" th:text="${titulo}"></div>
+		<div class="card bg-light mb-3" style="border-color: #4169E1">
+			<div class="card-header mb-3 text-white text-center"
+				style="background: #4169E1">
+				<h3 th:text="${titulo}"></h3>
+			</div>
 			<div class="card-body">
-				<div class="container py-4">
+				<div class="container">
 
 
 
@@ -44,18 +47,18 @@
 						</div>
 						<br>
 						<div class="form-group row">
-							<label for="nombre" class="col-sm-2 col-form-label">Email</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control"
-									th:errorclass="'form-control alert-danger'" th:field="*{email}" />
+							<label for="nombre" class="col-sm-2 col-form-label">Correo Electr&oacute;nico</label>
+							<div class="col-sm-6">
+								<a th:href="@{/Usuario/changeEmail/} + ${usuario.id}"
+									class="btn btn-primary btn-xs">Cambiar Correo Electr&oacute;nico</a>
 							</div>
 						</div>
 						<br>
 						<div class="form-group row">
 							<label for="nombre" class="col-sm-2 col-form-label">Contrase&ntilde;a</label>
 							<div class="col-sm-6">
-								<a th:href="@{/Usuario/changePassword}"
-									class="btn btn-primary btn-xs">Cambiar contrase&ntilde;a</a>
+								<a th:href="@{/Usuario/changePassword/} + ${usuario.id}"
+									class="btn btn-primary btn-xs">Cambiar Contrase&ntilde;a</a>
 							</div>
 						</div>
 						<br>

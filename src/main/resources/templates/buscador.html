@@ -12,24 +12,17 @@
 	<header th:fragment="header">
 
 		<div sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER2')"
-			class="container py-6" style="width: 38rem;">
+			class="container" style="width: 38rem;">
 			<nav class="navbar navbar-light bg-light">
 				<div class="container-fluid">
 					<form th:action="@{/CompuestoMOF/buscar}" th:object="${mof}"
 						method="GET">
-						<div class="form-inline mx-sm-10 ">
-
-							
-								<input type="text" name="term" id="term" size="70"
-									th:value="${term}" placeholder="Buscar" class="form-control" />
-
-							
-							
-								<input type="submit" value="Buscar" /> &nbsp;
-							
-								<input type="button" value="Borrar" id="btnClear"
-									onclick="clearSearch()" />
-							
+						<div class="input-group mb-3">
+							<input type="text" name="term" id="term" size="70"
+								th:value="${term}" placeholder="Buscar" class="form-control" />
+							<div class="input-group-append">
+								<button class="btn btn-outline-secondary" type="submit">Buscar</button>
+							</div>
 						</div>
 					</form>
 				</div>
@@ -38,11 +31,5 @@
 		</div>
 
 	</header>
-	<script type="text/javascript" th:fragment="javascript">
-		function clearSearch() {
-			window.location = "[[@{/CompuestoMOF/listarMateriales}]]";
-		}
-	</script>
-
 </body>
 </html>

@@ -61,35 +61,34 @@ public class PruebaController {
 		}
 
 		ExpedienteMOF expedienteMOF = seccionesE.getExpedientes();
-		
+
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
 		Usuario usuario = usuarioService.findByEmail(auth.getName());
 
-		List<PermisosExpediente> expedientesUsuario = usuario.getPermisosExpediente();
+		List<PermisosExpediente> permisosDelUsuario = usuario.getPermisosExpediente();
 
-		if (expedientesUsuario.isEmpty()) {
+		if (permisosDelUsuario.isEmpty()) {
 			flash.addFlashAttribute("error",
 					"No tienes permisos para modificar este expediente. Solicita permiso para editar.");
 			return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
 		} else {
-			for (int i = 0; i < expedientesUsuario.size(); i++) {
-				if (expedientesUsuario.get(i).getExpedientes().equals(expedienteMOF) && expedientesUsuario.get(i).getPermiso().equals(true)) {
-					PruebasMOF pruebaMOF = new PruebasMOF();
-					pruebaMOF.setSecciones_expedientes(seccionesE);
+			for (int i = 0; i < permisosDelUsuario.size(); i++) {
+				if (permisosDelUsuario.get(i).getExpedientes().equals(expedienteMOF)) {
+					if (permisosDelUsuario.get(i).getPermiso().equals(true)) {
+						PruebasMOF pruebaMOF = new PruebasMOF();
+						pruebaMOF.setSecciones_expedientes(seccionesE);
 
-					model.put("pruebamof", pruebaMOF);
-					model.put("titulo", "Formulario Prueba");
-
-				} else {
-					flash.addFlashAttribute("error",
-							"No tienes permisos para modificar este expediente. Se ha notificado a personal autorizado que deseas acceder a este recurso.");
-					return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
+						model.put("pruebamof", pruebaMOF);
+						model.put("titulo", "Formulario Prueba");
+					} else {
+						flash.addFlashAttribute("error",
+								"No tienes permisos para modificar este expediente. Se ha notificado a personal autorizado que deseas acceder a este recurso.");
+						return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
+					}
 				}
-
 			}
 		}
-		
 
 		return "formPrueba";
 	}

@@ -39,8 +39,13 @@
 						<br>
 
 						<div class="form-group row">
-							<div class="col-sm-6">
-								<input type="submit" value="Guardar" class="btn-primary" />
+							<div class="col-sm-1">
+								<input type="submit" value="Guardar" class="btn btn-primary" />
+							</div>
+							<div class="col-sm-1">
+								<a class="btn btn-danger"
+									th:href="@{/verSecciones/} + ${pruebamof.secciones_expedientes.id}"
+									th:text="'Cancelar'"> </a>
 							</div>
 						</div>
 						<!--  <input type="hidden" th:value="${mof.id}" th:field="*{mof}" />-->

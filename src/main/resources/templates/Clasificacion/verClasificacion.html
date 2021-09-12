@@ -11,24 +11,46 @@
 			</div>
 			<div class="card-body">
 
-
+				<nav th:replace="paginator :: paginator"></nav>
 				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th>id</th>
-							<th>Nombre</th>
-							<th>Clasificaci&oacute;n</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="mof: ${mof}">
-							<td><a class="btn btn-primary btn-xs"
-								th:href="@{/CompuestoMOF/fichaMaterial/} + ${mof.id}" th:text="${mof.id}"></a></td>
-							<td th:text="${mof.nombreCompuesto}"></td>
-							<td th:text="${mof.clasificacionmof.nombreClasificacion}"></td>
-						</tr>
-					</tbody>
-				</table>
+						<thead>
+							<tr>
+								<th>Ver Material</th>
+								<th>Nombre</th>
+								<th>Clasificaci&oacute;n</th>
+								<th>Directores</th>
+								<th>Investigador Responsable</th>
+								<th>Editar</th>
+								<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="mof: ${mof}">
+								<td><a id="ver" class="btn btn-xs"
+									th:href="@{/CompuestoMOF/fichaMaterial/} + ${mof.id}"> <img
+										th:src="@{/images/ver.png}" width="35" height="25">
+								</a></td>
+								<td th:text="${mof.nombreCompuesto}"></td>
+								<td th:text="${mof.clasificacionmof.nombreClasificacion}"></td>
+								<td>
+									<ul>
+										<li th:text="${mof.director1}"></li>
+										<li th:text="${mof.director2}"></li>
+									</ul>
+								</td>
+								<td th:text="${mof.investigador}"></td>
+								<td><a id="editar" class="btn btn-xs"
+									th:href="@{/CompuestoMOF/formMaterial/} + ${mof.id}"><img
+										th:src="@{/images/editarCompuesto.png}" width="35" height="25"></a></td>
+								<td><a id="eliminar" class="btn btn-xs"
+									sec:authorize="hasRole('ROLE_ADMIN')"
+									th:href="@{/CompuestoMOF/eliminar/} + ${mof.id}"
+									onclick="return confirm('Estás seguro que quieres eliminar?');">
+										<img th:src="@{/images/eliminar.png}" width="35" height="25">
+								</a></td>
+							</tr>
+						</tbody>
+					</table>
 
 				<nav th:replace="paginator :: paginator"></nav>
 

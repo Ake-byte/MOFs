@@ -16,5 +16,8 @@ public interface IRoleDAO extends CrudRepository<Role, Long>{
 	
 	@Query("select r from Role r where r.authority like ?1%")
 	public Page<Role> findUsuarioByRole(String authority, Pageable pageable);
+	
+	@Query("select r from Role r where r.users.id = ?1")
+	public Role findRoleByUserId(Long id);
 
 }

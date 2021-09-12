@@ -4,9 +4,8 @@
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container" style="width: 86rem;">
-		<div class="card bg-light mb-3" style="border-color: #4169E1">
-			<div class="card-header mb-3 text-white text-center"
-				style="background: #4169E1">
+		<div class="card bg-light mb-3">
+			<div class="card-header mb-3 text-white text-center">
 				<h3 th:text="${titulo}"></h3>
 			</div>
 			<div th:if="${#lists.isEmpty(mof.expedientesMOF)}"
@@ -36,7 +35,7 @@
 									de Difracci&oacute;n</a></li>
 							<li class="nav-item"><a class="nav-link"
 								th:href="@{/CompuestoMOF/formMaterial/} + ${mof.id}"><img
-									th:src="@{/images/editar.png}" width="35" height="25">Editar
+									th:src="@{/images/editarCompuesto.png}" width="35" height="25">Editar
 									Compuesto</a>
 							<li class="nav-item"><a class="nav-link"
 								th:href="@{/listarExpedientes/} + ${mof.id}"><img

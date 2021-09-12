@@ -19,4 +19,6 @@ public void saveInvestigador(Investigador investigador);
 public Role findOne(Long id);
 
 public void delete(Long id);
+
+public Role findRoleByUserId(Long id);
 }

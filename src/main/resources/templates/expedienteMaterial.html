@@ -41,9 +41,10 @@
 						</thead>
 						<tbody>
 							<tr th:each="pruebas: ${prueba}">
-								<td><a class="btn btn-primary btn-xs"
+								<td><a id="ver" class="btn btn-primary btn-xs"
 									th:href="@{/fichaMaterial/} + ${pruebas.id}"
-									th:text="${pruebas.id}"></a></td>
+									><img
+										th:src="@{/images/ver.png}" width="35" height="25"></a></td>
 								<td><img th:if="${#strings.length(pruebas.imagen)>0}"
 									th:src="@{'/uploads/' + ${pruebas.imagen}}"
 									th:alt="${pruebas.imagen}" /></td>

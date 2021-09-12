@@ -13,10 +13,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
@@ -54,20 +54,20 @@ public class AdminController {
 	@Autowired
 	private IPermisosExpedientesService permisoS;
 
-	@RequestMapping(value = "peticionesExpedientes", method = RequestMethod.GET)
+	@GetMapping(value = "peticionesExpedientes")
 	public String verExpedientesUsuarios(Model model) {
 		model.addAttribute("titulo", "Solicitudes de usuarios para modificar expedientes.");
 		model.addAttribute("peticion", permisoS.findAllEnabled());
 		return "PersonalAutorizado/peticionesExpedientes";
 	}
 
-	@RequestMapping(value = "listarRoles", method = RequestMethod.GET)
+	@GetMapping(value = "listarRoles")
 	public String listar(Model model) {
 		model.addAttribute("titulo", "Permisos de Usuario");
 		return "PersonalAutorizado/listarRoles";
 	}
 
-	@RequestMapping(value = "/verPersonalAutorizado", method = RequestMethod.GET)
+	@GetMapping(value = "/verPersonalAutorizado")
 	public String verPersonalAutorizado(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 		Pageable pageRequest = PageRequest.of(page, 10);
 		Page<Role> usuarios = usuarioService.findUsuarioByRole("ROLE_ADMIN", pageRequest);
@@ -79,7 +79,7 @@ public class AdminController {
 		return "PersonalAutorizado/verRol";
 	}
 
-	@RequestMapping(value = "/verUsuariosRegistrados", method = RequestMethod.GET)
+	@GetMapping(value = "/verUsuariosRegistrados")
 	public String verUsuariosRegistrados(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 		Pageable pageRequest = PageRequest.of(page, 10);
 		Page<Role> usuarios = usuarioService.findUsuarioByRole("ROLE_USER1", pageRequest);
@@ -92,7 +92,7 @@ public class AdminController {
 		return "PersonalAutorizado/verRol";
 	}
 
-	@RequestMapping(value = "/verInvestigadores", method = RequestMethod.GET)
+	@GetMapping(value = "/verInvestigadores")
 	public String verInvestigadores(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 
 		Pageable pageRequest = PageRequest.of(page, 10);
@@ -106,7 +106,7 @@ public class AdminController {
 		return "PersonalAutorizado/verRol";
 	}
 
-	@RequestMapping(value = "/verDirectoresTesis", method = RequestMethod.GET)
+	@GetMapping(value = "/verDirectoresTesis")
 	public String verDirectoresTesis(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 		Pageable pageRequest = PageRequest.of(page, 10);
 		Page<Role> usuarios = usuarioService.findUsuarioByRole("ROLE_USER3", pageRequest);
@@ -118,7 +118,7 @@ public class AdminController {
 		return "PersonalAutorizado/verRol";
 	}
 
-	@RequestMapping(value = "/verUsuariosInhabilitados", method = RequestMethod.GET)
+	@GetMapping(value = "/verUsuariosInhabilitados")
 	public String verUsuariosInhabilitados(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
 		Pageable pageRequest = PageRequest.of(page, 10);
 		Page<Role> usuarios = usuarioService.findUsuarioByRole("ROLE_USER4", pageRequest);
@@ -166,17 +166,8 @@ public class AdminController {
 
 		Role roles = usuario.getRoles();
 
-		List<Role> role = roleService.findAll();
-		Long idRoleUsuario;
-		Role roleUsuario = null;
-		for (int i = 0; i < role.size(); i++) {
-			if (role.get(i).getUsers().getId().equals(usuario.getId())) {
-				idRoleUsuario = usuario.getId();
-				roleUsuario = roleService.findOne(idRoleUsuario);
-				break;
-			}
-		}
-
+		Role roleUsuario = roleService.findRoleByUserId(usuario.getId());
+		
 		switch (usuario.getRoles().getAuthorityName()) {
 
 		case "Usuario Registrado":

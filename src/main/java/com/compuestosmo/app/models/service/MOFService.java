@@ -58,7 +58,6 @@ public class MOFService implements IMOFService{
 	@Override
 	@Transactional(readOnly=true)
 	public Page<MOF> findMOFsByClasificacionId(Long id, Pageable pageable) {
-		// TODO Auto-generated method stub
 		return mofdao.findMOFsByClasificacionId(id, pageable);
 	}
 
@@ -68,6 +67,11 @@ public class MOFService implements IMOFService{
 		
 			return mofdao.search(term);
 
+	}
+
+	@Override
+	public Page<MOF> findAll(Pageable pageable) {
+		return mofdao.findAll(pageable);
 	}
 
 

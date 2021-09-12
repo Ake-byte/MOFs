@@ -225,6 +225,7 @@ public class ExpedienteController {
 		ExpedienteMOF expedientemof = expedienteService.findOne(idExpediente);
 
 		expedientemof.setNombreUltimoUsuario(usuario.getNombre() + ' ' + usuario.getApellidoPaterno() + ' ' + usuario.getApellidoMaterno());
+		//expedientemof.setFecha(null);
 		expedienteService.save(expedientemof);
 		
 		status.setComplete();

@@ -21,5 +21,7 @@ public interface IMOFService {
 	
 	public Page<MOF> findMOFsByClasificacionId(Long id, Pageable pageable);
 	
+	public Page<MOF> findAll(Pageable pageable);
+	
 	public List<MOF> findByTerm(String term);
 }

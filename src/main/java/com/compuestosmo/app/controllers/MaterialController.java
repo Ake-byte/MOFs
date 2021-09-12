@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -28,10 +29,10 @@ import com.compuestosmo.app.models.dao.IMOFDAO;
 import com.compuestosmo.app.models.entity.ClasificacionMOF;
 import com.compuestosmo.app.models.entity.Directores;
 import com.compuestosmo.app.models.entity.MOF;
-import com.compuestosmo.app.models.entity.Usuario;
 import com.compuestosmo.app.models.service.IDirectoresService;
 import com.compuestosmo.app.models.service.IMOFService;
 import com.compuestosmo.app.models.service.IUsuarioService;
+import com.compuestosmo.app.models.util.PageRender;
 
 @Controller
 @RequestMapping("/CompuestoMOF")
@@ -47,16 +48,21 @@ public class MaterialController {
 	private IClasificacionMOFDAO clasificaciondao;
 	
 	@Autowired
-	private IUsuarioService usuarioService;
-	
-	@Autowired
 	private IDirectoresService directorService;
 
-	@RequestMapping(value="listarMateriales", method=RequestMethod.GET)
-	public String listar(Model model) {
+	@GetMapping(value="/listarMateriales")
+	public String listar(@RequestParam(name="page",defaultValue="0") int page, Model model) {
+		
+		Pageable pageRequest = PageRequest.of(page,10);
+		
+		Page<MOF> materiales = mofService.findAll(pageRequest);
+		
+		PageRender<MOF> pageRender = new PageRender<MOF>("/CompuestoMOF/listarMateriales", materiales);
+		
 		model.addAttribute("titulo", "Listado de Materiales");
-		model.addAttribute("materiales", mofdao.findAll());
+		model.addAttribute("materiales", materiales);
 		model.addAttribute("mof", new MOF());
+		model.addAttribute("page", pageRender);
 		
 		return "CompuestoMOF/listarMateriales";
 	}

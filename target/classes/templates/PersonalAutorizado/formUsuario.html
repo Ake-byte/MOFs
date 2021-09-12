@@ -10,9 +10,6 @@
 				<h3 th:text="${titulo}"></h3>
 			</div>
 				<div class="container">
-
-
-
 					<form th:action="@{/PersonalAutorizado/formUsuario}" th:object="${usuario}" method="post">
 						<div class="form-group row">
 							<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
@@ -67,8 +64,13 @@
 						</div>
 						<br>
 						<div class="form-group row">
-							<div class="col-sm-6">
-								<input type="submit" value="Guardar" class="btn-primary" />
+							<div class="col-sm-1">
+								<input type="submit" value="Guardar" class="btn btn-primary" />
+							</div>
+							<div class="col-sm-1">
+								<a class="btn btn-danger"
+									th:href="@{/PersonalAutorizado/listarRoles}"
+									th:text="'Cancelar'"> </a>
 							</div>
 						</div>
 						

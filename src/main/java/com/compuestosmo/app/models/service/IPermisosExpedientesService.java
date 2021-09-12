@@ -21,4 +21,5 @@ public interface IPermisosExpedientesService {
 	public void delete(Long id);
 	
 	public List<PermisosExpediente> findAllEnabled();
+	
 }

@@ -43,9 +43,11 @@
 						</thead>
 						<tbody>
 							<tr th:each="expedientes: ${mof.expedientesMOF}">
-								<td><a class="btn btn-primary btn-xs"
+								<td><a id="ver" class="btn btn-primary btn-xs"
 									th:href="@{/verSecciones/} + ${expedientes.id}"
-									th:text="${expedientes.id}"></a></td>
+									>
+									<img
+										th:src="@{/images/ver.png}" width="35" height="25"></a></td>
 								<td th:text="${expedientes.nombreUsuario}"></td>
 
 								<td th:text="${expedientes.nombreUltimoUsuario}"></td>
@@ -53,7 +55,7 @@
 
 
 
-								<td><a class="btn btn-primary btn-xs"
+								<td><a  class="btn btn-primary btn-xs"
 									th:href="@{/solicitarPermiso/} + ${expedientes.id}"
 									th:text="'Solicitar Permiso'"></a></td>
 								<td><a class="btn btn-danger btn-xs"

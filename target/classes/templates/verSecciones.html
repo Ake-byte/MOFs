@@ -24,7 +24,7 @@
 					<table class="table table-striped">
 						<thead>
 							<tr>
-								<th>id</th>
+								<th>Ver Secci&oacute;n</th>
 								<th>Nombre Secci&oacute;n</th>
 								<th>Descripci&oacute;n de la Secci&oacute;n</th>
 								<th>Modificar</th>
@@ -33,9 +33,10 @@
 						</thead>
 						<tbody>
 							<tr th:each="secciones: ${expedientemof.seccionesExpediente}">
-								<td><a class="btn btn-primary btn-xs"
+								<td><a id="ver" class="btn btn-primary btn-xs"
 									th:href="@{/expedienteMaterial/} + ${secciones.id}"
-									th:text="${secciones.id}"></a></td>
+									><img
+										th:src="@{/images/ver.png}" width="35" height="25"></a></td>
 								<td th:text="${secciones.nombreSeccion}"></td>
 								<td th:text="${secciones.descripcionSeccion}"></td>
 								<!--  <td><a class="btn btn-primary btn-xs"

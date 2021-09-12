@@ -69,8 +69,6 @@ public class PermisosExpedientesService implements IPermisosExpedientesService {
 
 	@Override
 	public List<PermisosExpediente> findAllEnabled() {
-		// TODO Auto-generated method stub
 		return permisoDAO.findAllEnabled();
 	}
-
 }

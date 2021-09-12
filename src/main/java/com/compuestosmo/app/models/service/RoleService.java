@@ -36,35 +36,35 @@ public class RoleService implements IRoleService{
 	@Override
 	@Transactional
 	public void save(Role role) {
-		// TODO Auto-generated method stub
 		roleDAO.save(role);
 	}
 
 	@Override
 	@Transactional
 	public void saveUsuario(Usuario usuario) {
-		// TODO Auto-generated method stub
 		usuarioDAO.save(usuario);
 	}
 
 	@Override
 	@Transactional(readOnly=true)
 	public Role findOne(Long id) {
-		// TODO Auto-generated method stub
 		return roleDAO.findById(id).orElse(null);
 	}
 
 	@Override
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
 		roleDAO.deleteById(id);
 	}
 
 	@Override
 	@Transactional
 	public void saveInvestigador(Investigador investigador) {
-		// TODO Auto-generated method stub
 		investigadorDAO.save(investigador);
+	}
+
+	@Override
+	public Role findRoleByUserId(Long id) {
+		return roleDAO.findRoleByUserId(id);
 	}
 
 }

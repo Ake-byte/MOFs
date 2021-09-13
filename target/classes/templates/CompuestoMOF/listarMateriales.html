@@ -51,7 +51,7 @@
 								<td><a id="editar" class="btn btn-xs"
 									th:href="@{/CompuestoMOF/formMaterial/} + ${mof.id}"><img
 										th:src="@{/images/editarCompuesto.png}" width="35" height="25"></a></td>
-								<td><a id="eliminar" class="btn btn-xs"
+								<td><a class="btn btn-danger btn-xs"
 									sec:authorize="hasRole('ROLE_ADMIN')"
 									th:href="@{/CompuestoMOF/eliminar/} + ${mof.id}"
 									onclick="return confirm('Estás seguro que quieres eliminar?');">

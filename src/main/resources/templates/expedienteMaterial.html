@@ -36,14 +36,14 @@
 								<th>Nombre</th>
 								<th>Descripci&oacute;n</th>
 								<th>Modificar</th>
+								<th>PDF</th>
 								<th>Eliminar</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="pruebas: ${prueba}">
-								<td><a id="ver" class="btn btn-primary btn-xs"
-									th:href="@{/fichaMaterial/} + ${pruebas.id}"
-									><img
+								<td><a id="ver" class="btn btn-xs"
+									th:href="@{/fichaMaterial/} + ${pruebas.id}"><img
 										th:src="@{/images/ver.png}" width="35" height="25"></a></td>
 								<td><img th:if="${#strings.length(pruebas.imagen)>0}"
 									th:src="@{'/uploads/' + ${pruebas.imagen}}"
@@ -53,6 +53,12 @@
 								<td><a class="btn btn-primary btn-xs"
 									th:href="@{/formPrueba/} + ${expedientemof.id} + '/' + ${pruebas.id}"
 									th:text="'Modificar'"></a></td>
+								<!-- <td><a id="pdf" class="btn btn-xs"
+									th:href="@{'/pdf/'} + ${pruebas.id} + '/' + ${pruebas.imagen}"> <img
+										th:src="@{/images/pdf.png}" width="35" height="25"></a></td>-->
+								<td><a id="pdf" class="btn btn-xs"
+									th:href="@{'/verPrueba/' + ${pruebas.id}(format=pdf)}"> <img
+										th:src="@{/images/pdf.png}" width="35" height="25"></a></td> 
 								<td><a class="btn btn-danger btn-xs"
 									th:href="@{/eliminarPrueba/} + ${expedientemof.id} + '/' + ${pruebas.id}"
 									th:text="'Eliminar'"> </a></td>

@@ -15,10 +15,10 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 @Service
-public class UploadService implements IUploadFileService{
+public class UploadService implements IUploadFileService {
 
-	private final static String UPLOADS_FOLDER = "uploads";
-	
+	private static final String UPLOADS_FOLDER = "uploads";
+
 	@Override
 	public Resource load(String filename) throws MalformedURLException {
 		Path pathFoto = getPath(filename);
@@ -46,10 +46,10 @@ public class UploadService implements IUploadFileService{
 	public boolean delete(String filename) {
 		Path rootPath = getPath(filename);
 		File archivo = rootPath.toFile();
-		
-		if(archivo.exists() && archivo.canRead()) {
-			//archivo.delete();
-			if(archivo.delete()) {
+
+		if (archivo.exists() && archivo.canRead()) {
+			// archivo.delete();
+			if (archivo.delete()) {
 				return true;
 			}
 		}
@@ -64,11 +64,31 @@ public class UploadService implements IUploadFileService{
 	@Override
 	public void init() throws IOException {
 		Files.createDirectory(Paths.get(UPLOADS_FOLDER));
-		
+
 	}
-	
+
 	public Path getPath(String filename) {
 		return Paths.get(UPLOADS_FOLDER).resolve(filename).toAbsolutePath();
+	}
+	
+	public byte[] mostrar(String filename) {
+		byte[] b = null;
+
+		Path pathFoto = getPath(filename);
+
+		// log.info("IMAGEN A MOSTRAR =>" + pathFoto);
+
+		try {
+
+			b = Files.readAllBytes(pathFoto);
+
+		} catch (IOException e) {
+
+			e.printStackTrace();
+
+		}
+
+		return b;
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.document.AbstractPdfView;
 
 import com.compuestosmo.app.models.entity.ExpedienteMOF;
 import com.compuestosmo.app.models.entity.PermisosExpediente;
@@ -35,10 +37,15 @@ import com.compuestosmo.app.models.service.IPruebasMOFService;
 import com.compuestosmo.app.models.service.ISeccionesExpedienteService;
 import com.compuestosmo.app.models.service.IUploadFileService;
 import com.compuestosmo.app.models.service.IUsuarioService;
+import com.compuestosmo.app.models.service.PruebasMOFService;
+import com.lowagie.text.Document;
+import com.lowagie.text.Image;
+import com.lowagie.text.pdf.PdfPTable;
+import com.lowagie.text.pdf.PdfWriter;
 
 @Controller("/pruebasmof")
 public class PruebaController {
-
+// extends AbstractPdfView
 	@Autowired
 	private IPruebasMOFService pruebaService;
 
@@ -135,7 +142,6 @@ public class PruebaController {
 			try {
 				uniqueFilename = uploadFileService.copy(foto);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			pruebamof.setImagen(uniqueFilename);
@@ -188,4 +194,14 @@ public class PruebaController {
 		SeccionesExpediente seccionesE = prueba.getSecciones_expedientes();
 		return "redirect:/expedienteMaterial/" + seccionesE.getId();
 	}
+
+	@GetMapping(value = "/verPrueba/{id}")
+	public String verPDF(@PathVariable Long id, Model model, HttpServletRequest request, HttpServletResponse response) {
+		PruebasMOF prueba = pruebaService.findOne(id);
+		
+		model.addAttribute("prueba", prueba);
+		
+		return "verPrueba";
+	}
+
 }

@@ -16,4 +16,6 @@ public interface IUploadFileService {
 	public void deleteAll();
 	
 	public void init() throws IOException;
+	
+	public byte[] mostrar(String filename);
 }

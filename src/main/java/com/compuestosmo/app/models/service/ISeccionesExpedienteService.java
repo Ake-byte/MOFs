@@ -16,4 +16,6 @@ public interface ISeccionesExpedienteService {
 	public SeccionesExpediente findOne(Long id);
 
 	public void delete(Long id);
+	
+	public List<SeccionesExpediente> findSeccionesByExpedienteId(Long id);
 }

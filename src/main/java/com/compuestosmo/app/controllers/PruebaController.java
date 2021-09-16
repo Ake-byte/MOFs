@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.document.AbstractPdfView;
 
 import com.compuestosmo.app.models.entity.ExpedienteMOF;
 import com.compuestosmo.app.models.entity.PermisosExpediente;
@@ -37,15 +36,10 @@ import com.compuestosmo.app.models.service.IPruebasMOFService;
 import com.compuestosmo.app.models.service.ISeccionesExpedienteService;
 import com.compuestosmo.app.models.service.IUploadFileService;
 import com.compuestosmo.app.models.service.IUsuarioService;
-import com.compuestosmo.app.models.service.PruebasMOFService;
-import com.lowagie.text.Document;
-import com.lowagie.text.Image;
-import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfWriter;
 
 @Controller("/pruebasmof")
 public class PruebaController {
-// extends AbstractPdfView
+	
 	@Autowired
 	private IPruebasMOFService pruebaService;
 

@@ -20,5 +20,5 @@ public interface IPruebasMOFService {
 
 	public void delete(Long id);
 	
-	
+	public List<PruebasMOF> findPruebasBySeccionId(Long id);
 }

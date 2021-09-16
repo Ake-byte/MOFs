@@ -28,6 +28,7 @@
 								<th>Nombre Secci&oacute;n</th>
 								<th>Descripci&oacute;n de la Secci&oacute;n</th>
 								<th>Modificar</th>
+								<th>Descargar Secci&oacute;n</th>
 								<th>Eliminar</th>
 							</tr>
 						</thead>
@@ -39,6 +40,9 @@
 										th:src="@{/images/ver.png}" width="35" height="25"></a></td>
 								<td th:text="${secciones.nombreSeccion}"></td>
 								<td th:text="${secciones.descripcionSeccion}"></td>
+								<td><a id="pdf" class="btn btn-xs"
+									th:href="@{'/expedienteMaterial/' + ${secciones.id}(format=pdf)}"> <img
+										th:src="@{/images/pdf.png}" width="35" height="25"></a></td>
 								<!--  <td><a class="btn btn-primary btn-xs"
 								th:href="@{/formSeccion/} + ${mof.id} + '/' + ${expedientes.id}"
 								th:text="'Modificar'"></a></td>

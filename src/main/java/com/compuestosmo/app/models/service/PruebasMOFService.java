@@ -46,8 +46,13 @@ public class PruebasMOFService implements IPruebasMOFService {
 	@Override
 	@Transactional(readOnly=true)
 	public Page<PruebasMOF> findPruebasById(Long id, Pageable pageable) {
-		// TODO Auto-generated method stub
 		return pruebasMOFDAO.findPruebasById(id, pageable);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<PruebasMOF> findPruebasBySeccionId(Long id) {
+		return pruebasMOFDAO.findPruebasBySeccionId(id);
 	}
 
 

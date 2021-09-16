@@ -43,7 +43,7 @@
 						<tbody>
 							<tr th:each="pruebas: ${prueba}">
 								<td><a id="ver" class="btn btn-xs"
-									th:href="@{/fichaMaterial/} + ${pruebas.id}"><img
+									th:href="@{/verPrueba/} + ${pruebas.id}"><img
 										th:src="@{/images/ver.png}" width="35" height="25"></a></td>
 								<td><img th:if="${#strings.length(pruebas.imagen)>0}"
 									th:src="@{'/uploads/' + ${pruebas.imagen}}"

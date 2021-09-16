@@ -48,7 +48,7 @@ public class UploadService implements IUploadFileService {
 		File archivo = rootPath.toFile();
 
 		if (archivo.exists() && archivo.canRead()) {
-			// archivo.delete();
+			archivo.delete();
 			if (archivo.delete()) {
 				return true;
 			}
@@ -72,20 +72,14 @@ public class UploadService implements IUploadFileService {
 	}
 	
 	public byte[] mostrar(String filename) {
+		
 		byte[] b = null;
-
 		Path pathFoto = getPath(filename);
 
-		// log.info("IMAGEN A MOSTRAR =>" + pathFoto);
-
 		try {
-
 			b = Files.readAllBytes(pathFoto);
-
 		} catch (IOException e) {
-
 			e.printStackTrace();
-
 		}
 
 		return b;

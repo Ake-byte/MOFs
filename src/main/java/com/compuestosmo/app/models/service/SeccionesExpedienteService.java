@@ -23,37 +23,38 @@ public class SeccionesExpedienteService implements ISeccionesExpedienteService {
 	@Override
 	@Transactional(readOnly=true)
 	public List<SeccionesExpediente> findall() {
-		// TODO Auto-generated method stub
 		return (List<SeccionesExpediente>) seccionesEDAO.findAll();
 	}
 
 	@Override
 	@Transactional
 	public void save(SeccionesExpediente seccionesExpediente) {
-		// TODO Auto-generated method stub
 		seccionesEDAO.save(seccionesExpediente);
 	}
 
 	@Override
 	@Transactional
 	public void savePrueba(PruebasMOF pruebamof) {
-		// TODO Auto-generated method stub
 		pruebasMOFDAO.save(pruebamof);
 	}
 
 	@Override
 	@Transactional(readOnly=true)
 	public SeccionesExpediente findOne(Long id) {
-		// TODO Auto-generated method stub
 		return seccionesEDAO.findById(id).orElse(null);
 	}
 
 	@Override
 	@Transactional
 	public void delete(Long id) {
-		// TODO Auto-generated method stub
 		seccionesEDAO.deleteById(id);
 
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<SeccionesExpediente> findSeccionesByExpedienteId(Long id) {
+		return seccionesEDAO.findSeccionesByExpedienteId(id);
 	}
 
 }

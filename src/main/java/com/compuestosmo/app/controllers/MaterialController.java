@@ -88,6 +88,12 @@ public class MaterialController {
 		Iterable<ClasificacionMOF> clasificacion = clasificaciondao.findAll();
 		((Model) model).addAttribute("clasificacion", clasificacion);
 		
+		List<Directores> director1 = directorService.findall();
+		List<Directores> director2 = directorService.findall();
+
+		((Model) model).addAttribute("director1", director1);
+		((Model) model).addAttribute("director2", director2);
+		
 		model.put("mof", mof);
 		model.put("titulo", "Formulario MOF");
 		return "CompuestoMOF/formMaterial";

@@ -15,9 +15,9 @@
 				<div class="container">
 					<nav class="navbar navbar-light bg-light">
 						<div class="container-fluid">
-							<a sec:authorize="hasRole('ROLE_ADMIN')"
+							<a sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER2')"
 								th:href="@{/CompuestoMOF/formMaterial}"
-								class="btn btn-primary btn-xs">Crear Registro</a>
+								class="btn btn-primary btn-xs">Agregar Compuesto</a>
 						</div>
 					</nav>
 					<nav th:replace="paginator :: paginator"></nav>
@@ -43,11 +43,14 @@
 								<td th:text="${mof.clasificacionmof.nombreClasificacion}"></td>
 								<td>
 									<ul>
-										<li th:text="${mof.director1}"></li>
-										<li th:text="${mof.director2}"></li>
+										<li th:if="${mof.director1 == null or mof.director2 == null}" >No tiene directores de tesis</li>
+										<li th:unless="${mof.director1 == null}" th:text="${mof.director1}"></li>
+										<li th:unless="${mof.director2 == null}" th:text="${mof.director2}"></li>
+										
 									</ul>
 								</td>
-								<td th:text="${mof.investigador}"></td>
+								<td th:if="${mof.investigador == null or mof.investigador ==''}">No hay Investigador asignado</td>
+								<td th:unless="${mof.investigador == null or mof.investigador ==''}" th:text="${mof.investigador}"></td>
 								<td><a id="editar" class="btn btn-xs"
 									th:href="@{/CompuestoMOF/formMaterial/} + ${mof.id}"><img
 										th:src="@{/images/editarCompuesto.png}" width="35" height="25"></a></td>

@@ -68,7 +68,7 @@ insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enable
 insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enabled) values('Paula Montserrat','Crespo','Barrera','moncbarrera@gmail.com','$2a$10$ULyEGz8WzjRQkHbF86uwaeAtSX/XMRchqIDRCyGKpCcdAsgUJLzwu',TRUE);
 insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enabled) values('Yosuan','Ávila','García','yosuan.ag87@gmail.com','$2a$10$p0CFB5troI2tRle2cIjGSeEUi1EjOd4cye7bDPDcSEiVasnd9NA72',TRUE);
 insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enabled) values('Juvencio','Vázquez','Samperio','juvencio_ipn@hotmail.com','$2a$10$LU1mTnaiMNINwZ4zDyvhYeQljVTFFLW5bsRBCR6u9b7TPrAEtclIO',TRUE);
-insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enabled) values('Alan','Franco','Ake','al.fr.ake@gmail.com','$2a$10$bGLQnSbjwAW1uV1whnRZbeoejiFRUIBB0zZN.bo/X6DyqEzXGnyQi',TRUE);
+--insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enabled) values('Alan','Franco','Ake','al.fr.ake@gmail.com','$2a$10$bGLQnSbjwAW1uV1whnRZbeoejiFRUIBB0zZN.bo/X6DyqEzXGnyQi',TRUE);
 
 INSERT INTO roles (user_id, authority, authority_name) VALUES(13, 'ROLE_USER2', 'Investigador');
 INSERT INTO roles (user_id, authority, authority_name) VALUES(14, 'ROLE_USER2', 'Investigador');
@@ -98,7 +98,7 @@ INSERT INTO roles (user_id, authority, authority_name) VALUES(37, 'ROLE_USER2', 
 INSERT INTO roles (user_id, authority, authority_name) VALUES(38, 'ROLE_USER2', 'Investigador');
 INSERT INTO roles (user_id, authority, authority_name) VALUES(39, 'ROLE_USER2', 'Investigador');
 INSERT INTO roles (user_id, authority, authority_name) VALUES(40, 'ROLE_USER2', 'Investigador');
-INSERT INTO roles (user_id, authority, authority_name) VALUES(41, 'ROLE_USER2', 'Investigador');
+--INSERT INTO roles (user_id, authority, authority_name) VALUES(41, 'ROLE_USER2', 'Investigador');
 
 INSERT INTO investigadores (role_id, director1, director2) VALUES(13, '', '');
 INSERT INTO investigadores (role_id, director1, director2) VALUES(14, '', '');
@@ -129,7 +129,6 @@ INSERT INTO investigadores (role_id, director1, director2) VALUES(38, '', '');
 INSERT INTO investigadores (role_id, director1, director2) VALUES(39, '', '');
 INSERT INTO investigadores (role_id, director1, director2) VALUES(40, '', '');
 --INSERT INTO investigadores (role_id, director1, director2) VALUES(41, 'Dr. José Antonio Irán Díaz Góngora', 'Dr. Oscar Fernando Odio Chacón');
-INSERT INTO investigadores (role_id, director1, director2) VALUES(41, '', '');
 
 --DATOS DE PRUEBA
 
@@ -137,9 +136,10 @@ INSERT INTO clasificacionmof (nombre_clasificacion, descripcion_clasificacion) V
 INSERT INTO clasificacionmof (nombre_clasificacion, descripcion_clasificacion) VALUES('Clasificacion B', 'Materiales dentro de la clasificacion B');
 
 INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto A', 1);
-INSERT INTO mof (nombre_compuesto, formula, aplicaciones, metodo_sintesis, articulo, titulo_tesis, url_tesis, fecha, id_clasificacion, investigador) VALUES('Compuesto B', 'CB', 'Las aplicaciones son...', 'Los metodos de sintesis son', 'Articulo asass', 'Tesis A', 'url', NOW(), 2, 'Alan Franco Ake');
-INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto C', 1);
-INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto D', 1);
+--INSERT INTO mof (nombre_compuesto, formula, aplicaciones, metodo_sintesis, articulo, titulo_tesis, url_tesis, fecha, id_clasificacion, investigador) VALUES('Compuesto B', 'CB', 'Las aplicaciones son...', 'Los metodos de sintesis son', 'Articulo asass', 'Tesis A', 'url', NOW(), 2, 'Alan Franco Ake');
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto B', 2);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto C', 2);
+INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto D', 2);
 INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto E', 1);
 INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto F', 1);
 INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto G', 1);
@@ -155,8 +155,8 @@ INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto P', 1);
 INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto Q', 1);
 INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto C', 1);
 INSERT INTO mof (nombre_compuesto, id_clasificacion) VALUES('Compuesto R', 1);
-INSERT INTO mof (nombre_compuesto, id_clasificacion, investigador) VALUES('Compuesto S', 1, 'Alan Franco Ake');
-INSERT INTO mof (nombre_compuesto, id_clasificacion, investigador) VALUES('Compuesto T', 1, 'Alan Franco Ake');
+--INSERT INTO mof (nombre_compuesto, id_clasificacion, investigador) VALUES('Compuesto S', 1, 'Alan Franco Ake');
+--INSERT INTO mof (nombre_compuesto, id_clasificacion, investigador) VALUES('Compuesto T', 1, 'Alan Franco Ake');
 
 
 INSERT INTO expedientes (fecha, mof_id, nombre_usuario, ultimo_usuario) VALUES(NOW(), 2, 'Dr. Carlos Israel Aguirre Vélez', 'Dr. Carlos Israel Aguirre Vélez');
@@ -165,9 +165,9 @@ INSERT INTO expedientes (fecha, mof_id, nombre_usuario, ultimo_usuario) VALUES(N
 INSERT INTO permisos (permiso, expediente_id, user_id) VALUES(true, 1, 5);
 INSERT INTO permisos (permiso, expediente_id, user_id) VALUES(true, 2, 13);
 INSERT INTO permisos (permiso, expediente_id, user_id) VALUES(true, 3, 38);
-INSERT INTO permisos (permiso, expediente_id, user_id) VALUES(false, 1, 41);
-INSERT INTO permisos (permiso, expediente_id, user_id) VALUES(false, 2, 41);
-INSERT INTO permisos (permiso, expediente_id, user_id) VALUES(false, 3, 41);
+--INSERT INTO permisos (permiso, expediente_id, user_id) VALUES(false, 1, 41);
+--INSERT INTO permisos (permiso, expediente_id, user_id) VALUES(false, 2, 41);
+--INSERT INTO permisos (permiso, expediente_id, user_id) VALUES(false, 3, 41);
 INSERT INTO secciones_expedientes (nombre_seccion, descripcion_seccion, expediente_id) VALUES('Pruebas Magnéticas', 'Se realizaron pruebas magnéticas al compuesto', 1);
 INSERT INTO secciones_expedientes (nombre_seccion, descripcion_seccion, expediente_id) VALUES('Pruebas Eléctricas', 'Se realizaron pruebas eléctricas al compuesto', 2);
 INSERT INTO secciones_expedientes (nombre_seccion, descripcion_seccion, expediente_id) VALUES('Pruebas Térmicas', 'Se realizaron pruebas térmicas al compuesto', 2);

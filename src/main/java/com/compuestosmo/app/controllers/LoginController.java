@@ -25,7 +25,6 @@ import com.compuestosmo.app.models.service.IRoleService;
 import com.compuestosmo.app.models.service.IUsuarioService;
 import com.compuestosmo.app.models.util.MailSenderService;
 
-
 @Controller
 public class LoginController {
 
@@ -53,7 +52,7 @@ public class LoginController {
 
 		if (error != null) {
 			model.addAttribute("error", "Error al iniciar sesión. El correo o la contraseña son incorrectos.");
-			//return "redirect:/login";
+			// return "redirect:/login";
 		}
 
 		if (logout != null) {
@@ -77,13 +76,11 @@ public class LoginController {
 	public String guardar(@Valid Usuario usuario, RedirectAttributes flash, BindingResult result, Model model,
 			SessionStatus status) throws Exception {
 
-		List<Usuario> usuarios = usuarioService.findall();
+		Usuario checarNuevoUsuario = usuarioService.findByEmail(usuario.getEmail());
 
-		for (int i = 0; i < usuarios.size(); i++) {
-			if (usuarios.get(i).getEmail().equals(usuario.getEmail())) {
-				flash.addFlashAttribute("error", "Ya existe un usuario con esa dirección de correo electrónico.");
-				return "redirect:/register";
-			}
+		if (checarNuevoUsuario != null) {
+			flash.addFlashAttribute("error", "Ya existe un usuario con esa dirección de correo electrónico.");
+			return "redirect:/register";
 		}
 
 		if (result.hasErrors()) {
@@ -96,7 +93,7 @@ public class LoginController {
 		role.setAuthority("ROLE_USER1");
 		role.setUsers(usuario);
 		role.setAuthorityName("Usuario Registrado");
-		
+
 		usuario.setRoles(role);
 		usuario.setEnabled(true);
 
@@ -121,6 +118,5 @@ public class LoginController {
 
 		return "index";
 	}
-
 
 }

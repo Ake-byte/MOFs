@@ -67,7 +67,7 @@ public class ClasificacionController {
 		return "Clasificacion/verClasificacion";
 	}
 	
-	@Secured("ROLE_ADMIN")
+	
 	@RequestMapping(value="formClasificacion")
 	public String crearClasificacion(Map<String, Object> model) {
 		ClasificacionMOF clasificacionmof = new ClasificacionMOF();

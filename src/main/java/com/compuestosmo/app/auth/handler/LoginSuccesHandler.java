@@ -34,29 +34,21 @@ public class LoginSuccesHandler extends SimpleUrlAuthenticationSuccessHandler {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
-		List<Usuario> usuarios = usuarioService.findall();
-		Usuario usuario = null;
+		Usuario usuario = usuarioService.findByEmail(auth.getName());
 
-		for (int i = 0; i < usuarios.size(); i++) {
-			if (usuarios.get(i).getEmail().equals(auth.getName())) {
-				usuario = usuarios.get(i);
-				break;
+		if (usuario.getEmail().equals(auth.getName())) {
+			if (usuario.getEnabled().equals(false)) {
+				usuarioInhabilitado();
 			}
+			flashMap.put("success", "Bienvenido " + usuario.getNombre() + " " + usuario.getApellidoPaterno() + " "
+					+ usuario.getApellidoMaterno() + ", has iniciado sesión con éxito.");
+
+			flashMapManager.saveOutputFlashMap(flashMap, request, response);
+
+			super.onAuthenticationSuccess(request, response, authentication);
 		}
-		
-		if(usuario.getEnabled().equals(false)) {
-			usuarioInhabilitado();
-		}
-
-		flashMap.put("success", "Bienvenido " + usuario.getNombre() + " " 
-												+ usuario.getApellidoPaterno() + " "
-													+ usuario.getApellidoMaterno() + ", has iniciado sesión con éxito.");
-
-		flashMapManager.saveOutputFlashMap(flashMap, request, response);
-
-		super.onAuthenticationSuccess(request, response, authentication);
 	}
-	
+
 	public String usuarioInhabilitado() {
 		return "login";
 	}

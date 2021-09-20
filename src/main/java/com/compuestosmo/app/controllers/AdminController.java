@@ -184,10 +184,13 @@ public class AdminController {
 			if (roleUsuario != null) {
 				investigador.setDirector1("");
 				investigador.setDirector2("");
+				investigador.setRoles(roleUsuario);
+				investigadores.add(investigador);
+				
 				investigadorS.save(investigador);
 				investigadorS.saveUsuarioRole(roleUsuario);
-				investigadores.add(investigador);
-
+				
+				
 			} else {
 				return "redirect:/PersonalAutorizado/listarRoles";
 			}

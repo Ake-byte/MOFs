@@ -11,24 +11,27 @@
 			</div>
 			<div class="card-body">
 				<div class="container">
-					<form th:action="@{/Clasificacion/formClasificacion}" th:object="${clasificacionmof}" method="post"
+					<form th:action="@{/Clasificacion/formClasificacion}"
+						th:object="${clasificacionmof}" method="post"
 						enctype="multipart/form-data">
 						<div class="form-group row">
 							<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" th:errorclass="'form-control alert-danger'"
+								<input type="text" class="form-control"
+									th:errorclass="'form-control alert-danger'"
 									th:field="*{nombreClasificacion}" />
-									
+
 							</div>
 						</div>
-
+						<br>
 						<div class="form-group row">
 							<label for="descripcion" class="col-sm-2 col-form-label">Descripci&oacute;n</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" th:field="*{descripcionClasificacion}" />
+								<input type="text" class="form-control"
+									th:field="*{descripcionClasificacion}" />
 							</div>
 						</div>
-
+						<br>
 						<div class="form-group row">
 							<div class="col-sm-1">
 								<input type="submit" value="Guardar" class="btn btn-primary" />
@@ -39,7 +42,7 @@
 									th:text="'Cancelar'"> </a>
 							</div>
 						</div>
-						
+
 						<input type="hidden" th:field="*{id}" />
 
 
@@ -48,7 +51,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>
 </html>

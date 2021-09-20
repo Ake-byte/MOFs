@@ -4,9 +4,8 @@
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container" style="width: 78rem;">
-		<div class="card bg-light mb-3" style="border-color: #4169E1">
-			<div class="card-header mb-3 text-white text-center"
-				style="background: #4169E1">
+		<div class="card bg-light mb-3">
+			<div class="card-header mb-3 text-white text-center">
 				<h3 th:text="${titulo}"></h3>
 			</div>
 			<div class="card-body">
@@ -14,7 +13,7 @@
 					<form th:action="@{/CompuestoMOF/formMaterial}" th:object="${mof}"
 						method="post" enctype="multipart/form-data">
 						<div class="form-group row">
-							<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+							<label for="nombre" class="col-sm-2 col-form-label">Nombre del Compuesto:</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control"
 									th:errorclass="'form-control alert-danger'"
@@ -26,7 +25,7 @@
 						</div>
 						<br>
 						<div class="form-group row">
-							<label for="descripcion" class="col-sm-2 col-form-label">F&oacute;rmula</label>
+							<label for="descripcion" class="col-sm-2 col-form-label">F&oacute;rmula del compuesto:</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control"
 									th:errorclass="'form-control alert-danger'"
@@ -37,11 +36,13 @@
 						<br>
 
 						<div class="form-group row">
-							<label class="col-sm-2 col-form-label">Clasificaci&oacute;n
+							<label class="col-sm-2 col-form-label">Clasificaci&oacute;n del compuesto:
 							</label>
 							<div class="col-sm-6">
 								<select id="clasificacion" name="clasificacion"
 									th:field="*{clasificacionmof}">
+									<option th:if="${clasificacionmof != ''}" th:value>--
+									Seleccione una clasificaci&oacute;n --</option>
 									<option th:each="clasificacionmof : ${clasificacion}"
 										th:value="${clasificacionmof.id}"
 										th:utext="${clasificacionmof.nombreClasificacion}" />
@@ -53,7 +54,7 @@
 						<br>
 						<div class="form-group row">
 							<label class="col-sm-4 col-form-label">Director de Tesis
-								1</label>
+								1:</label>
 							<div class="col-sm-6">
 								<select id="director1" name="director1" th:field="*{director1}">
 									<option th:if="${director1 != ''}" th:value>--
@@ -66,7 +67,7 @@
 						<br>
 						<div class="form-group row">
 							<label class="col-sm-4 col-form-label">Director de Tesis
-								2</label>
+								2:</label>
 							<div class="col-sm-6">
 								<select id="director2" name="director2" th:field="*{director2}">
 									<option th:if="${director2 != ''}" th:value>--
@@ -78,12 +79,12 @@
 						</div>
 						<br>
 						<div class="form-group row">
-							<label for="descripcion" class="col-sm-2 col-form-label">CIF</label>
+							<label for="descripcion" class="col-sm-2 col-form-label">Archivo CIF</label>
 							<div class="col-sm-6"></div>
 						</div>
 						<br>
 						<div class="form-group row">
-							<label for="descripcion" class="col-sm-2 col-form-label">Aplicaciones</label>
+							<label for="descripcion" class="col-sm-2 col-form-label">Aplicaciones:</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control"
 									th:field="*{aplicaciones}" />
@@ -92,7 +93,7 @@
 						<br>
 						<div class="form-group row">
 							<label for="descripcion" class="col-sm-2 col-form-label">M&eacute;todo
-								de S&iacute;ntesis</label>
+								de S&iacute;ntesis:</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control"
 									th:field="*{metodoSintesis}" />

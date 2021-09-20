@@ -12,6 +12,13 @@
 			</div>
 			<div class="card-body">
 				<div class="container">
+				<nav class="navbar navbar-light bg-light">
+						<div class="container-fluid">
+							<a sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER2')"
+								th:href="@{/Clasificacion/formClasificacion}"
+								class="btn btn-primary btn-xs">Agregar Clasificaci&oacute;n</a>
+						</div>
+					</nav>
 					<table class="table table-striped">
 						<thead>
 							<tr>

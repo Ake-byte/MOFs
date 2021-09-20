@@ -6,9 +6,8 @@
 <body>
 	<header th:replace="layout/layout :: header"></header>
 	<div class="container">
-		<div class="card bg-light mb-3" style="border-color: #4169E1">
-			<div class="card-header mb-3 text-white text-center"
-				style="background: #4169E1">
+		<div class="card bg-light mb-3">
+			<div class="card-header mb-3 text-white text-center">
 				<h3 th:text="${titulo}"></h3>
 			</div>
 			<div class="card-body">
@@ -27,18 +26,27 @@
 						</thead>
 						<tbody>
 							<tr th:each="mof: ${materiales}">
-								<td><a class="btn btn-xs" style="background-color: #4169E1"
-									th:href="@{/CompuestoMOF/fichaMaterial/} + ${mof.id}">
-										<img th:src="@{/images/ver.png}" width="35" height="25">
+								<td><a id="ver" class="btn btn-xs"
+									th:href="@{/CompuestoMOF/fichaMaterial/} + ${mof.id}"> <img
+										th:src="@{/images/ver.png}" width="35" height="25">
 								</a></td>
 								<td th:text="${mof.nombreCompuesto}"></td>
 								<td th:text="${mof.clasificacionmof.nombreClasificacion}"></td>
-								<td></td>
+								<td>
+									<ul>
+										<li th:if="${mof.director1 == null or mof.director2 == null}">No
+											tiene directores de tesis</li>
+										<li th:unless="${mof.director1 == null}"
+											th:text="${mof.director1}"></li>
+										<li th:unless="${mof.director2 == null}"
+											th:text="${mof.director2}"></li>
+
+									</ul>
+								</td>
 								<td th:text="${mof.investigador}"></td>
-								<td><a class="btn text-white btn-xs"
-									style="background-color: #4169E1"
-									th:href="@{/CompuestoMOF/formMaterial/} + ${mof.id}"
-									th:text="'Editar'"></a></td>
+								<td><a id="editar" class="btn text-white btn-xs"
+									th:href="@{/CompuestoMOF/formMaterial/} + ${mof.id}"><img
+										th:src="@{/images/editarCompuesto.png}" width="35" height="25"></a></td>
 								<td><a class="btn btn-danger btn-xs"
 									sec:authorize="hasRole('ROLE_ADMIN')"
 									th:href="@{/CompuestoMOF/eliminar/} + ${mof.id}"

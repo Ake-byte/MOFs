@@ -9,67 +9,65 @@
 				style="background: #4169E1">
 				<h3 th:text="${titulo}"></h3>
 			</div>
-				<div class="container">
+			<div class="container">
 
-					<form th:action="@{/Usuario/editarDatosSistema}"
-						th:object="${investigador}" method="post">
-						<br>
-						<p>Directores de Tesis</p>
-						<br>
-						<div class="form-group row">
-							<label class="col-sm-4 col-form-label">Director de Tesis
-								1</label>
-							<div class="col-sm-6">
-								<select id="director1" name="director1" th:field="*{director1}">
-									<option th:if="${director1 != ''}" th:value>--
-										Seleccione una opci&oacute;n --</option>
-									<option th:each="director : ${director1}"
-										th:value="${director.nombre}" th:utext="${director.nombre}" />
-								</select>
-							</div>
+				<form th:action="@{/Usuario/editarDatosSistema}"
+					th:object="${investigador}" method="post">
+					<br>
+					<div class="form-group row">
+						<label class="col-sm-4 col-form-label">Permisos en el
+							Sistema</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control"
+								th:errorclass="'form-control alert-danger'"
+								th:field="*{roles.authorityName}" readonly />
 						</div>
-						<br>
-						<div class="form-group row">
-							<label class="col-sm-4 col-form-label">Director de Tesis
-								2</label>
-							<div class="col-sm-6">
-								<select id="director2" name="director2" th:field="*{director2}">
-									<option th:if="${director2 != ''}" th:value>--
-										Seleccione una opci&oacute;n --</option>
-									<option th:each="director : ${director2}"
-										th:value="${director.nombre}" th:utext="${director.nombre}" />
-								</select>
-							</div>
+					</div>
+					<br>
+					<h3>Directores de Tesis</h3>
+					<br>
+					<p>Selecciona a tus directores de tesis.</p>
+					<div class="form-group row">
+						<label class="col-sm-4 col-form-label">Director de Tesis 1</label>
+						<div class="col-sm-6">
+							<select id="director1" name="director1" th:field="*{director1}">
+								<option th:if="${director1 != ''}" th:value>--
+									Seleccione una opci&oacute;n --</option>
+								<option th:each="director : ${director1}"
+									th:value="${director.nombre}" th:utext="${director.nombre}" />
+							</select>
 						</div>
-						<br>
-						<div class="form-group row">
-							<label class="col-sm-4 col-form-label">Permisos en el
-								Sistema</label>
-							<div class="col-sm-6">
-								<input type="text" class="form-control"
-									th:errorclass="'form-control alert-danger'"
-									th:field="*{roles.authorityName}" readonly />
-							</div>
+					</div>
+					<br>
+					<div class="form-group row">
+						<label class="col-sm-4 col-form-label">Director de Tesis 2</label>
+						<div class="col-sm-6">
+							<select id="director2" name="director2" th:field="*{director2}">
+								<option th:if="${director2 != ''}" th:value>--
+									Seleccione una opci&oacute;n --</option>
+								<option th:each="director : ${director2}"
+									th:value="${director.nombre}" th:utext="${director.nombre}" />
+							</select>
 						</div>
-						<br>
-						<div class="form-group row">
-							<div class="col-sm-1">
-								<input type="submit" value="Guardar" class="btn btn-primary" />
-							</div>
-							<div class="col-sm-1">
-								<a class="btn btn-danger"
-									th:href="@{/Usuario/perfil}"
-									th:text="'Cancelar'"> </a>
-							</div>
+					</div>
+					<br>
+					
+					<div class="form-group row">
+						<div class="col-sm-2">
+							<input type="submit" value="Guardar" class="btn btn-primary" />
 						</div>
-						<input type="hidden" th:field="*{id}" /> <input type="hidden"
-							th:field="*{roles}" />
-
-					</form>
-				</div>
+						<div class="col-sm-2">
+							<a class="btn btn-danger" th:href="@{/Usuario/perfil}"
+								th:text="'Cancelar'"> </a>
+						</div>
+					</div>
+					<input type="hidden" th:field="*{id}" /> <input type="hidden"
+						th:field="*{roles}" /> <br>
+				</form>
 			</div>
 		</div>
 	</div>
+	
 
 	<footer th:replace="layout/layout :: footer"></footer>
 </body>

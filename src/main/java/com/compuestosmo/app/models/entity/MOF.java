@@ -49,6 +49,7 @@ public class MOF implements Serializable {
 	private String formula;
 
 	// Archivo - CIF
+	private String cif;
 	
 	//@NotEmpty
 	private String aplicaciones; // Propósito/Aplicaciones del MOF
@@ -204,6 +205,14 @@ public class MOF implements Serializable {
 	
 	public void addExpedientes(ExpedienteMOF expedienteMOF) {
 		expedientesMOF.add(expedienteMOF);
+	}
+
+	public String getCif() {
+		return cif;
+	}
+
+	public void setCif(String cif) {
+		this.cif = cif;
 	}
 
 	private static final long serialVersionUID = 1L;

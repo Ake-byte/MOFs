@@ -40,7 +40,7 @@ public class ClasificacionController {
 	@Autowired
 	private IMOFService mofService;
 	
-	@RequestMapping(value="listadoClasificacionMateriales", method=RequestMethod.GET)
+	@GetMapping(value="listadoClasificacionMateriales")
 	public String listar(Model model) {
 		model.addAttribute("titulo", "Clasificación de Materiales");
 		model.addAttribute("clasificacion", clasificacionMOFdao.findAll());

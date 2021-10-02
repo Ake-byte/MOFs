@@ -173,7 +173,7 @@ INSERT INTO expedientes (fecha, mof_id, nombre_usuario, ultimo_usuario) VALUES(N
 INSERT INTO permisos (permiso, expediente_id, user_id) VALUES(true, 1, 5);
 INSERT INTO permisos (permiso, expediente_id, user_id) VALUES(true, 2, 13);
 INSERT INTO permisos (permiso, expediente_id, user_id) VALUES(true, 3, 38);
-INSERT INTO permisos (permiso, expediente_id, user_id) VALUES(false, 1, 41);
+INSERT INTO permisos (permiso, expediente_id, user_id) VALUES(true, 1, 41);
 INSERT INTO permisos (permiso, expediente_id, user_id) VALUES(false, 2, 41);
 INSERT INTO permisos (permiso, expediente_id, user_id) VALUES(false, 3, 41);
 INSERT INTO secciones_expedientes (nombre_seccion, descripcion_seccion, expediente_id) VALUES('Pruebas Magnéticas', 'Se realizaron pruebas magnéticas al compuesto', 1);

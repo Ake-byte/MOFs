@@ -14,17 +14,23 @@
 			</div>
 			<div class="card-body">
 				<div class="container">
-					<nav class="navbar navbar-light bg-light">
-						<div class="container-fluid">
-							<a th:href="@{/formPrueba/}+ ${expedientemof.id}"
-								class="btn btn-primary btn-xs">Crear Prueba</a>
-						</div>
-					</nav>
+					<ul class="nav nav-pills justify-content-center">
+						<li><div class="container-fluid">
+								<a th:href="@{/formPrueba/}+ ${expedientemof.id}"
+									class="btn btn-primary btn-xs">Crear Prueba</a>
+							</div></li>
+						<li><div class="container-fluid">
+								<a th:href="@{/listarExpedientes/} + ${expedientemof.expedientes.mof.id}"
+									class="btn btn-primary btn-xs">Regresar al Listado de
+									Expedientes</a>
+							</div></li>
+					</ul>
+					<br>
 					<div th:if="${#lists.isEmpty(expedientemof.pruebasMOF)}"
 						class="alert alert-info my-4"
 						th:text="'No hay registros en la secci&oacute;n: ' + ${expedientemof.nombreSeccion}">
 					</div>
-
+					<br>
 					<!--  <table  class="table">-->
 					<table th:if="${not #lists.isEmpty(expedientemof.pruebasMOF)}"
 						class="table">
@@ -58,7 +64,7 @@
 										th:src="@{/images/pdf.png}" width="35" height="25"></a></td>-->
 								<td><a id="pdf" class="btn btn-xs"
 									th:href="@{'/verPrueba/' + ${pruebas.id}(format=pdf)}"> <img
-										th:src="@{/images/pdf.png}" width="35" height="25"></a></td> 
+										th:src="@{/images/pdf.png}" width="35" height="25"></a></td>
 								<td><a class="btn btn-danger btn-xs"
 									th:href="@{/eliminarPrueba/} + ${expedientemof.id} + '/' + ${pruebas.id}"
 									th:text="'Eliminar'"> </a></td>

@@ -16,12 +16,18 @@
 					th:text="'No hay expedientes del compuesto ' + ${mof.nombreCompuesto}">
 				</div>
 				<div class="container">
-					<nav class="navbar navbar-light bg-light">
-						<div class="container-fluid">
-							<a th:href="@{/formExpediente/} + ${mof.id}"
-								class="btn btn-primary btn-xs">Crear Expediente</a>
-						</div>
-					</nav>
+					<ul class="nav nav-pills justify-content-center">
+						<li><div class="container-fluid">
+								<a th:href="@{/formExpediente/} + ${mof.id}"
+									class="btn btn-primary btn-xs">Crear Expediente</a>
+							</div></li>
+						<li><div class="container-fluid">
+								<a th:href="@{/CompuestoMOF/fichaMaterial/} + ${mof.id}"
+									class="btn btn-primary btn-xs">Regresar a la ficha del
+									Compuesto</a>
+							</div></li>
+					</ul>
+					<br>
 					<table class="table table-striped">
 						<thead>
 							<tr>
@@ -44,19 +50,19 @@
 						<tbody>
 							<tr th:each="expedientes: ${mof.expedientesMOF}">
 								<td><a id="ver" class="btn btn-primary btn-xs"
-									th:href="@{/verSecciones/} + ${expedientes.id}"
-									>
-									<img
-										th:src="@{/images/ver.png}" width="35" height="25"></a></td>
+									th:href="@{/verSecciones/} + ${expedientes.id}"> <img
+										th:src="@{/images/ver.png}" width="35" height="25">
+								</a></td>
 								<td th:text="${expedientes.nombreUsuario}"></td>
 								<td th:text="${expedientes.nombreUltimoUsuario}"></td>
 								<td th:text="${expedientes.fecha}"></td>
-								<td><a  class="btn btn-primary btn-xs"
+								<td><a class="btn btn-primary btn-xs"
 									th:href="@{/solicitarPermiso/} + ${expedientes.id}"
 									th:text="'Solicitar Permiso'"></a></td>
 								<td><a id="pdf" class="btn btn-xs"
-									th:href="@{'/verSecciones/' + ${expedientes.id}(format=pdf)}"> <img
-										th:src="@{/images/pdf.png}" width="35" height="25"></a></td>
+									th:href="@{'/verSecciones/' + ${expedientes.id}(format=pdf)}">
+										<img th:src="@{/images/pdf.png}" width="35" height="25">
+								</a></td>
 								<td><a class="btn btn-danger btn-xs"
 									th:href="@{/eliminarPrueba/} + ${expedientes.id}"
 									th:text="'Eliminar'"> <!--  onclick="return confirm('Estás seguro que quieres eliminar?');"-->

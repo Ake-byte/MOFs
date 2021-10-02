@@ -15,12 +15,17 @@
 			</div>
 			<div class="card-body">
 				<div class="container">
-					<nav class="navbar navbar-light bg-light">
-						<div class="container-fluid">
-							<a th:href="@{/formSeccion/} + ${expedientemof.id}"
-								class="btn btn-primary btn-xs">Crear Secci&oacute;n</a>
-						</div>
-					</nav>
+					<ul class="nav nav-pills justify-content-center">
+						<li><div class="container-fluid">
+								<a th:href="@{/formSeccion/} + ${expedientemof.id}"
+									class="btn btn-primary btn-xs">Crear Secci&oacute;n</a>
+							</div></li>
+						<li><div class="container-fluid">
+								<a th:href="@{/listarExpedientes/}  + ${expedientemof.mof.id}"
+									class="btn btn-primary btn-xs">Regresar al Listado de
+									</a>
+							</div></li>
+					</ul>
 					<table class="table table-striped">
 						<thead>
 							<tr>

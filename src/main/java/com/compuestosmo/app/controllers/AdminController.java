@@ -20,11 +20,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.compuestosmo.app.models.entity.Directores;
 import com.compuestosmo.app.models.entity.ExpedienteMOF;
 import com.compuestosmo.app.models.entity.Investigador;
 import com.compuestosmo.app.models.entity.PermisosExpediente;
 import com.compuestosmo.app.models.entity.Role;
 import com.compuestosmo.app.models.entity.Usuario;
+import com.compuestosmo.app.models.service.IDirectoresService;
 import com.compuestosmo.app.models.service.IInvestigadoresService;
 import com.compuestosmo.app.models.service.IPermisosExpedientesService;
 import com.compuestosmo.app.models.service.IRoleService;
@@ -53,6 +55,9 @@ public class AdminController {
 
 	@Autowired
 	private IPermisosExpedientesService permisoS;
+	
+	@Autowired
+	private IDirectoresService directoresS;
 
 	@GetMapping(value = "peticionesExpedientes")
 	public String verExpedientesUsuarios(Model model) {
@@ -107,15 +112,33 @@ public class AdminController {
 	}
 
 	@GetMapping(value = "/verDirectoresTesis")
-	public String verDirectoresTesis(@RequestParam(name = "page", defaultValue = "0") int page, Model model) {
-		Pageable pageRequest = PageRequest.of(page, 10);
-		Page<Role> usuarios = usuarioService.findUsuarioByRole("ROLE_USER3", pageRequest);
-		PageRender<Role> pageRender = new PageRender<Role>("/PersonalAutorizado/verDirectoresTesis", usuarios);
+	public String verDirectoresTesis(Model model) {
+		//Pageable pageRequest = PageRequest.of(page, 10);
+		//Page<Role> usuarios = usuarioService.findUsuarioByRole("ROLE_USER3", pageRequest);
+		//PageRender<Role> pageRender = new PageRender<Role>("/PersonalAutorizado/verDirectoresTesis", usuarios);
 
+		List<Directores> directores = directoresS.findall();
+		
 		model.addAttribute("titulo", "Directores de Tesis");
-		model.addAttribute("role", usuarios);
-		model.addAttribute("page", pageRender);
-		return "PersonalAutorizado/verRol";
+		model.addAttribute("directores", directores);
+		//model.addAttribute("page", pageRender);
+		return "PersonalAutorizado/verDirectoresTesis";
+	}
+	
+	@GetMapping(value = "/nuevoDirectorDeTesis")
+	public String nuevoDirectorDeTesis(Model model) {
+		
+		List<Investigador> investigadores = investigadorS.findall();
+		List<Directores> directores = directoresS.findall();
+		
+		for (Directores d : directores) {
+				investigadores.removeIf(investigador -> d.getRoles().getId().equals(investigador.getRoles().getId()));
+		}
+		
+		model.addAttribute("titulo", "Directores de Tesis");
+		model.addAttribute("investigadores", investigadores);
+		
+		return "PersonalAutorizado/nuevoDirectorDeTesis";
 	}
 
 	@GetMapping(value = "/verUsuariosInhabilitados")
@@ -144,7 +167,6 @@ public class AdminController {
 		List<String> permisosUsuario = new ArrayList<>();
 		permisosUsuario.add("Usuario Registrado");
 		permisosUsuario.add("Investigador");
-		permisosUsuario.add("Director de Tesis");
 		permisosUsuario.add("Personal Autorizado");
 		permisosUsuario.add("Usuario Inhabilitado");
 
@@ -197,11 +219,6 @@ public class AdminController {
 
 			break;
 
-		case "Director de Tesis":
-			roles.setAuthorityName("Director de Tesis");
-			roles.setAuthority("ROLE_USER3");
-			break;
-
 		case "Personal Autorizado":
 			roles.setAuthorityName("Personal Autorizado");
 			roles.setAuthority("ROLE_ADMIN");
@@ -235,6 +252,21 @@ public class AdminController {
 		return "redirect:/PersonalAutorizado/listarRoles";
 	}
 
+	@RequestMapping(value = "/guardarNuevoDirectorDeTesis/{id}")
+	public String nuevoDirectorDeTesis(@PathVariable(value = "id") Long id) {
+
+		if (id > 0) {
+			Usuario usuario = usuarioService.findOne(id);
+			if (usuario != null) {
+				Directores nuevoDirector = new Directores();
+				nuevoDirector.setRoles(usuario.getRoles());
+				directoresS.save(nuevoDirector);
+			}
+		}
+		
+		return "redirect:/PersonalAutorizado/listarRoles";
+	}
+	
 	@RequestMapping(value = "/inhabilitarUsuario/{id}")
 	public String inhabilitarUsuario(@PathVariable(value = "id") Long id) {
 

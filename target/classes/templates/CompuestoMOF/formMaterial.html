@@ -59,21 +59,21 @@
 								<select id="director1" name="director1" th:field="*{director1}">
 									<option th:if="${director1 != ''}" th:value>--
 										Seleccione una opci&oacute;n --</option>
-									<option th:each="director : ${director1}"
-										th:value="${director.nombre}" th:utext="${director.nombre}" />
+									<option th:each="directores : ${director1}"
+										th:value="${directores.roles.users.nombre} + ' ' + ${directores.roles.users.apellidoPaterno} + ' ' + ${directores.roles.users.apellidoMaterno}" th:utext="${directores.roles.users.nombre} + ' ' + ${directores.roles.users.apellidoPaterno} + ' ' + ${directores.roles.users.apellidoMaterno}" />
 								</select>
 							</div>
 						</div>
 						<br>
 						<div class="form-group row">
 							<label class="col-sm-4 col-form-label">Director de Tesis
-								2:</label>
+								1:</label>
 							<div class="col-sm-6">
 								<select id="director2" name="director2" th:field="*{director2}">
 									<option th:if="${director2 != ''}" th:value>--
 										Seleccione una opci&oacute;n --</option>
-									<option th:each="director : ${director2}"
-										th:value="${director.nombre}" th:utext="${director.nombre}" />
+									<option th:each="directores : ${director2}"
+										th:value="${directores.roles.users.nombre} + ' ' + ${directores.roles.users.apellidoPaterno} + ' ' + ${directores.roles.users.apellidoMaterno}" th:utext="${directores.roles.users.nombre} + ' ' + ${directores.roles.users.apellidoPaterno} + ' ' + ${directores.roles.users.apellidoMaterno}" />
 								</select>
 							</div>
 						</div>

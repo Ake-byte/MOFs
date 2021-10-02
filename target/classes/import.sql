@@ -22,21 +22,29 @@ insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enable
 insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enabled) values('Dra. Marlene', 'González', 'Montiel',	'maglerne@gmail.com', '$2a$10$JySokYqxxZ7XAymaYSgI/ej4W7NMEn0x.eMdODVrgQ0DafFHN1UNO',TRUE);
 insert into users (nombre,apellido_paterno, apellido_materno, email, pwd, enabled) values('Dr. Jesús', 'Vega', 'Moreno',	'jwega01@gmail.com', '$2a$10$ew.jUGEt/W42D2nFBwSF..PaBkYOkUGWuGamGX6QUjBHGbxqfFiTm',TRUE);
 
-INSERT INTO roles (user_id, authority, authority_name) VALUES(6, 'ROLE_USER3', 'Director de Tesis');
-INSERT INTO roles (user_id, authority, authority_name) VALUES(7, 'ROLE_USER3', 'Director de Tesis');
-INSERT INTO roles (user_id, authority, authority_name) VALUES(8, 'ROLE_USER3', 'Director de Tesis');
-INSERT INTO roles (user_id, authority, authority_name) VALUES(9, 'ROLE_USER3', 'Director de Tesis');
-INSERT INTO roles (user_id, authority, authority_name) VALUES(10, 'ROLE_USER3', 'Director de Tesis');
-INSERT INTO roles (user_id, authority, authority_name) VALUES(11, 'ROLE_USER3', 'Director de Tesis');
-INSERT INTO roles (user_id, authority, authority_name) VALUES(12, 'ROLE_USER3', 'Director de Tesis');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(6, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(7, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(8, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(9, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(10, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(11, 'ROLE_USER2', 'Investigador');
+INSERT INTO roles (user_id, authority, authority_name) VALUES(12, 'ROLE_USER2', 'Investigador');
 
-INSERT INTO directores (role_id, nombre) VALUES(6, 'Dr. José Antonio Irán Díaz Góngora');
-INSERT INTO directores (role_id, nombre) VALUES(7, 'Dr. Oscar Fernando Odio Chacón');
-INSERT INTO directores (role_id, nombre) VALUES(8, 'Dra. Donají Velasco Arias');
-INSERT INTO directores (role_id, nombre) VALUES(9, 'Dr. Benjamín Portales Martínez');
-INSERT INTO directores (role_id, nombre) VALUES(10, 'Dr. Próspero Acevedo Peña');
-INSERT INTO directores (role_id, nombre) VALUES(11, 'Dra. Marlene González Montiel');
-INSERT INTO directores (role_id, nombre) VALUES(12, 'Dr. Jesús Vega Moreno');
+INSERT INTO directores (role_id) VALUES(6);
+INSERT INTO directores (role_id) VALUES(7);
+INSERT INTO directores (role_id) VALUES(8);
+INSERT INTO directores (role_id) VALUES(9);
+INSERT INTO directores (role_id) VALUES(10);
+INSERT INTO directores (role_id) VALUES(11);
+INSERT INTO directores (role_id) VALUES(12);
+
+INSERT INTO investigadores (role_id, director1, director2) VALUES(6, '', '');
+INSERT INTO investigadores (role_id, director1, director2) VALUES(7, '', '');
+INSERT INTO investigadores (role_id, director1, director2) VALUES(8, '', '');
+INSERT INTO investigadores (role_id, director1, director2) VALUES(9, '', '');
+INSERT INTO investigadores (role_id, director1, director2) VALUES(10, '', '');
+INSERT INTO investigadores (role_id, director1, director2) VALUES(11, '', '');
+INSERT INTO investigadores (role_id, director1, director2) VALUES(12, '', '');
 
 --ALUMNOS
 

@@ -44,31 +44,66 @@
 									Expedientes</a>
 							<li class="nav-item"><a class="nav-link"
 								th:href="@{/formExpediente/} + ${mof.id}"> <img
-									th:src="@{/images/crearExpediente.png}" width="35" height="25"> Crear
-									Expediente
+									th:src="@{/images/crearExpediente.png}" width="35" height="25">
+									Crear Expediente
 							</a>
 						</ul>
 						<div class="card-body">
 							<div class="tab-content" id="myTabContent">
 								<div class="tab-pane fade show active" id="info" role="tabpanel"
 									aria-labelledby="info-tab">
-									<div class="card">
-										<ul class="list-group list-group-flush">
-											<li class="list-group-item"
-												th:text="'F&oacute;rmula: ' + ${mof.formula}">
-											<li class="list-group-item"
-												th:text="'Aplicaciones: ' + ${mof.aplicaciones}"></li>
-											<li class="list-group-item"
-												th:text="'Art&iacute;culo: ' + ${mof.articulo}"></li>
-											<li class="list-group-item"
-												th:text="'T&iacute;tulo
-									de tesis: ' + ${mof.tituloTesis}"></li>
-											<li class="list-group-item" th:text="'Tesis: ' + ${mof.url}"></li>
-											<li class="list-group-item"
-												th:text="'&Uacute;ltima modificaci&oacute;n a la portada: ' + ${mof.fecha}"></li>
-										</ul>
+									<div class="card bg-light">
+										<div class="card-body">
+											<div class="form-group row">
+												<label for="nombre" class="col-sm-2 col-form-label">F&oacute;rmula:</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control"
+														th:field="${mof.formula}" readonly />
+												</div>
+											</div>
+											<br>
+											<div class="form-group row">
+												<label for="nombre" class="col-sm-2 col-form-label">Aplicaciones:</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control"
+														th:field="${mof.aplicaciones}" readonly />
+												</div>
+											</div>
+											<br>
+											<div class="form-group row">
+												<label for="nombre" class="col-sm-2 col-form-label">Art&iacute;culo:</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control"
+														th:field="${mof.articulo}" readonly />
+												</div>
+											</div>
+											<br>
+											<div class="form-group row">
+												<label for="nombre" class="col-sm-2 col-form-label">T&iacute;tulo de Tesis:</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control"
+														th:field="${mof.tituloTesis}" readonly />
+												</div>
+											</div>
+											<br>
+											<div class="form-group row">
+												<label for="nombre" class="col-sm-2 col-form-label">Tesis:</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control"
+														th:field="${mof.url}" readonly />
+												</div>
+											</div>
+											<br>
+											<div class="form-group row">
+												<label for="nombre" class="col-sm-2 col-form-label">&Uacute;ltima modificaci&oacute;n a la portada:</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control"
+														th:field="${mof.fecha}" readonly />
+												</div>
+											</div>
+											<br>
+										</div>
 									</div>
-
 								</div>
 								<div class="tab-pane fade" id="metodoSintesis" role="tabpanel"
 									aria-labelledby="metodoSintesis-tab">
@@ -76,15 +111,21 @@
 								</div>
 								<div class="tab-pane fade" id="fig3d" role="tabpanel"
 									aria-labelledby="fig3d-tab">
-									<p>Acceder al sitio:</p>
-									<p>
-										<a href="https://blokhin.github.io/cif-js-engines/"
-											class="card-link">Ver CIF</a>
-									</p>
-									<p>
-										<a th:href="@{/CompuestoMOF/descargarCIF/} + ${mof.id}"
-											class="card-link">Descargar CIF</a>
-									</p>
+									<ol>
+										<li><p>En caso de que cuentes con el archivo .cif del
+												compuesto, presiona click en "Ver CIF".</p>
+											<p>
+												<a href="https://blokhin.github.io/cif-js-engines/"
+													class="card-link">Ver CIF</a>
+											</p></li>
+										<li><p>Si no cuentas con el archivo .cif, descargalo
+												presionando click en "Descargar CIF".</p>
+											<p>
+												<a th:href="@{/CompuestoMOF/descargarCIF/} + ${mof.id}"
+													class="card-link">Descargar CIF</a>
+											</p>
+											<p>Y regresa al paso anterior.</p></li>
+									</ol>
 								</div>
 								<!-- 
 								<div class="tab-pane fade" id="patrondif" role="tabpanel"

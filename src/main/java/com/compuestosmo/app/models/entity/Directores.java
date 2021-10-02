@@ -24,9 +24,6 @@ public class Directores implements Serializable{
 	@JoinColumn(name = "role_id")
     private Role roles;
 
-	@Column(name = "nombre")
-	private String nombre;
-	
 	public Long getId() {
 		return id;
 	}
@@ -35,15 +32,6 @@ public class Directores implements Serializable{
 		this.id = id;
 	}
 	
-	
-	
-	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 
 	public Role getRoles() {
 		return roles;

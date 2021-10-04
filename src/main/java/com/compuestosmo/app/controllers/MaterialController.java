@@ -2,6 +2,7 @@ package com.compuestosmo.app.controllers;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -92,7 +93,7 @@ public class MaterialController {
 		return "CompuestoMOF/fichaMaterial";
 	}
 
-	@RequestMapping(value = "formMaterial")
+	@RequestMapping(value = "/formMaterial")
 	public String crearFicha(Map<String, Object> model) {
 		MOF mof = new MOF();
 
@@ -137,29 +138,65 @@ public class MaterialController {
 	}
 
 	@PostMapping(value = "/formMaterial")
-	public String guardar(@Valid MOF mof, BindingResult result, Model model, @RequestParam("file") MultipartFile cif,
-			SessionStatus status) {
+	public String guardar(@Valid MOF mof, BindingResult result, Model model,
+			@RequestParam("files") MultipartFile[] files, SessionStatus status) {
 
 		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario MOF");
-			return "formMaterial";
+			return "CompuestoMOF/formMaterial";
 		}
 
-		if (!cif.isEmpty()) {
-			if (mof.getId() != null && mof.getId() > 0 && mof.getCif() != null && mof.getCif().length() > 0) {
-				uploadFileService.delete(mof.getCif());
-			}
-			String uniqueFilename = null;
-			try {
-				uniqueFilename = uploadFileService.copy(cif);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			mof.setCif(uniqueFilename);
-		} else {
-			mof.setCif("");
-		}
 
+		for (int i = 0; i < files.length; i++) {
+
+			if (!files[0].isEmpty()) {
+				if (mof.getId() != null && mof.getId() > 0 && mof.getCif() != null && mof.getCif().length() > 0) {
+					uploadFileService.delete(mof.getCif());
+				}
+				String uniqueFilename = null;
+				try {
+					uniqueFilename = uploadFileService.copy(files[0]);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				mof.setCif(uniqueFilename);
+			} else {
+				mof.setCif("");
+			}
+
+			if (!files[1].isEmpty()) {
+				if (mof.getId() != null && mof.getId() > 0 && mof.getArticuloPDF() != null
+						&& mof.getArticuloPDF().length() > 0) {
+					uploadFileService.delete(mof.getArticuloPDF());
+				}
+				String uniqueFilename = null;
+				try {
+					uniqueFilename = uploadFileService.copy(files[1]);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				mof.setArticuloPDF(uniqueFilename);
+			} else {
+				mof.setArticuloPDF("");
+			}
+
+			if (!files[2].isEmpty()) {
+				if (mof.getId() != null && mof.getId() > 0 && mof.getTesisPDF() != null
+						&& mof.getArticuloPDF().length() > 0) {
+					uploadFileService.delete(mof.getTesisPDF());
+				}
+				String uniqueFilename = null;
+				try {
+					uniqueFilename = uploadFileService.copy(files[2]);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				mof.setTesisPDF(uniqueFilename);
+			} else {
+				mof.setTesisPDF("");
+			}
+
+		}
 		mofdao.save(mof);
 		status.setComplete();
 
@@ -186,6 +223,66 @@ public class MaterialController {
 		MOF mof = mofService.findOne(id);
 
 		String filename = mof.getCif();
+		Resource recurso = null;
+		try {
+			recurso = uploadFileService.load(filename);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		String contentType = null;
+		try {
+			contentType = request.getServletContext().getMimeType(recurso.getFile().getAbsolutePath());
+		} catch (IOException ex) {
+			// logger.info("Could not determine file type.");
+		}
+		// Fallback to the default content type if type could not be determined
+		if (contentType == null) {
+
+			contentType = "application/octet-stream";
+
+		}
+		return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"")
+				.body(recurso);
+
+	}
+
+	@GetMapping(value = "/descargarArticulo/{id}")
+	public ResponseEntity<Resource> descargarPDFArticulo(@PathVariable Long id, HttpServletRequest request) {
+
+		MOF mof = mofService.findOne(id);
+
+		String filename = mof.getArticuloPDF();
+		Resource recurso = null;
+		try {
+			recurso = uploadFileService.load(filename);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+		String contentType = null;
+		try {
+			contentType = request.getServletContext().getMimeType(recurso.getFile().getAbsolutePath());
+		} catch (IOException ex) {
+			// logger.info("Could not determine file type.");
+		}
+		// Fallback to the default content type if type could not be determined
+		if (contentType == null) {
+
+			contentType = "application/octet-stream";
+
+		}
+		return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType))
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + recurso.getFilename() + "\"")
+				.body(recurso);
+
+	}
+
+	@GetMapping(value = "/descargarTesis/{id}")
+	public ResponseEntity<Resource> descargarPDFTesis(@PathVariable Long id, HttpServletRequest request) {
+
+		MOF mof = mofService.findOne(id);
+
+		String filename = mof.getTesisPDF();
 		Resource recurso = null;
 		try {
 			recurso = uploadFileService.load(filename);

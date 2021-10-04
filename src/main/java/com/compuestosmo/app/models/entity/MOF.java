@@ -51,6 +51,12 @@ public class MOF implements Serializable {
 	// Archivo - CIF
 	private String cif;
 	
+	//Archivo - PDF Tesis
+	private String tesisPDF;
+	
+	//Archivo - PDF Artículo
+	private String articuloPDF;
+	
 	//@NotEmpty
 	private String aplicaciones; // Propósito/Aplicaciones del MOF
 
@@ -213,6 +219,22 @@ public class MOF implements Serializable {
 
 	public void setCif(String cif) {
 		this.cif = cif;
+	}
+
+	public String getTesisPDF() {
+		return tesisPDF;
+	}
+
+	public void setTesisPDF(String tesisPDF) {
+		this.tesisPDF = tesisPDF;
+	}
+
+	public String getArticuloPDF() {
+		return articuloPDF;
+	}
+
+	public void setArticuloPDF(String articuloPDF) {
+		this.articuloPDF = articuloPDF;
 	}
 
 	private static final long serialVersionUID = 1L;

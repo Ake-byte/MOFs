@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -37,7 +38,8 @@ import com.compuestosmo.app.models.service.ISeccionesExpedienteService;
 import com.compuestosmo.app.models.service.IUploadFileService;
 import com.compuestosmo.app.models.service.IUsuarioService;
 
-@Controller("/pruebasmof")
+@Controller("/pruebamof")
+@SessionAttributes("pruebamof")
 public class PruebaController {
 	
 	@Autowired
@@ -111,6 +113,7 @@ public class PruebaController {
 			return "redirect:/index";
 		}
 		model.put("pruebamof", pruebasMOF);
+		model.put("file", "/uploads/" + pruebasMOF.getImagen());
 		model.put("titulo", "Editar Prueba");
 		return "formPrueba";
 	}
@@ -125,6 +128,7 @@ public class PruebaController {
 			return "formPrueba";
 		}
 
+		String uniqueFilename = null;
 		if (!foto.isEmpty()) {
 
 			if (pruebamof.getId() != null && pruebamof.getId() > 0 && pruebamof.getImagen() != null
@@ -132,7 +136,7 @@ public class PruebaController {
 
 				uploadFileService.delete(pruebamof.getImagen());
 			}
-			String uniqueFilename = null;
+			
 			try {
 				uniqueFilename = uploadFileService.copy(foto);
 			} catch (IOException e) {
@@ -140,7 +144,20 @@ public class PruebaController {
 			}
 			pruebamof.setImagen(uniqueFilename);
 		} else {
-			pruebamof.setImagen("");
+			if(pruebamof.getImagen() == null) {
+				pruebamof.setImagen("");
+			}
+			/*
+			else {
+				try {
+					uniqueFilename = uploadFileService.copy(foto);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			*/
+			
 		}
 		String mensajeFlash = (pruebamof.getId() != null) ? "Se han editado datos de las pruebas."
 				: "Se ha agregado la prueba al expediente";

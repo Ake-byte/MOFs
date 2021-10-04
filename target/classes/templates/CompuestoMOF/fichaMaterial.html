@@ -79,7 +79,24 @@
 											</div>
 											<br>
 											<div class="form-group row">
-												<label for="nombre" class="col-sm-2 col-form-label">T&iacute;tulo de Tesis:</label>
+												<label for="nombre" class="col-sm-2 col-form-label">URL Art&iacute;culo:</label>
+												<div class="col-sm-10">
+													<input type="text" class="form-control"
+														th:field="${mof.articulo}" readonly />
+												</div>
+											</div>
+											<br>
+											<div class="form-group row">
+												<label for="nombre" class="col-sm-2 col-form-label">PDF Art&iacute;culo:</label>
+												<div class="col-sm-10">
+													<a th:href="@{/CompuestoMOF/descargarArticulo/} + ${mof.id}"
+													class="card-link" th:text="${mof.articuloPDF}"></a>
+												</div>
+											</div>
+											<br>
+											<div class="form-group row">
+												<label for="nombre" class="col-sm-2 col-form-label">T&iacute;tulo
+													de Tesis:</label>
 												<div class="col-sm-10">
 													<input type="text" class="form-control"
 														th:field="${mof.tituloTesis}" readonly />
@@ -87,7 +104,7 @@
 											</div>
 											<br>
 											<div class="form-group row">
-												<label for="nombre" class="col-sm-2 col-form-label">Tesis:</label>
+												<label for="nombre" class="col-sm-2 col-form-label">URL Tesis:</label>
 												<div class="col-sm-10">
 													<input type="text" class="form-control"
 														th:field="${mof.url}" readonly />
@@ -95,7 +112,16 @@
 											</div>
 											<br>
 											<div class="form-group row">
-												<label for="nombre" class="col-sm-2 col-form-label">&Uacute;ltima modificaci&oacute;n a la portada:</label>
+												<label for="nombre" class="col-sm-2 col-form-label">Archivo Tesis:</label>
+												<div class="col-sm-10">
+													<a th:href="@{/CompuestoMOF/descargarTesis/} + ${mof.id}"
+													class="card-link" th:text="${mof.tesisPDF}"></a>
+												</div>
+											</div>
+											<br>
+											<div class="form-group row">
+												<label for="nombre" class="col-sm-2 col-form-label">&Uacute;ltima
+													modificaci&oacute;n a la portada:</label>
 												<div class="col-sm-10">
 													<input type="text" class="form-control"
 														th:field="${mof.fecha}" readonly />
@@ -114,15 +140,19 @@
 									<ol>
 										<li><p>En caso de que cuentes con el archivo .cif del
 												compuesto, presiona click en "Ver CIF".</p>
+											<p>Se abrir&aacute; una nueva pesta&ntilde;a en la que se
+												te solicitar&aacute; que selecciones el archivo .cif para
+												poder visualizarlo.</p>
 											<p>
-												<a href="https://blokhin.github.io/cif-js-engines/"
+												<a target="_blank"
+													href="https://blokhin.github.io/cif-js-engines/"
 													class="card-link">Ver CIF</a>
 											</p></li>
 										<li><p>Si no cuentas con el archivo .cif, descargalo
 												presionando click en "Descargar CIF".</p>
 											<p>
 												<a th:href="@{/CompuestoMOF/descargarCIF/} + ${mof.id}"
-													class="card-link">Descargar CIF</a>
+													class="card-link" th:text="${mof.cif}"></a>
 											</p>
 											<p>Y regresa al paso anterior.</p></li>
 									</ol>

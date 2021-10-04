@@ -25,7 +25,7 @@
 								<th>Ver Clasificaci&oacute;n</th>
 								<th>Nombre de la clasificaci&oacute;n</th>
 								<th>Descripci&oacute;n de la lasificaci&oacute;n</th>
-								<th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
+								<th sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER2')">Editar</th>
 								<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 							</tr>
 						</thead>
@@ -38,7 +38,7 @@
 								<td th:text="${clasificaciones.nombreClasificacion}"></td>
 								<td th:text="${clasificaciones.descripcionClasificacion}"></td>
 								<td><a id="editar" class="btn btn-primary btn-xs"
-									sec:authorize="hasRole('ROLE_ADMIN')"
+									sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER2')"
 									th:href="@{/Clasificacion/formClasificacion/} + ${clasificaciones.id}"
 									><img
 										th:src="@{/images/editarCompuesto.png}" width="35" height="25"></a></td>

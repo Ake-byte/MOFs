@@ -32,6 +32,12 @@
 						<br>
 						<div class="form-group row">
 							<label for="file" class="col-sm-2 col-form-label">Imagen</label>
+							<!--  <div th:if="*{imagen != ''}" class="col-sm-6">
+								<input type="text" class="form-control" name="file"
+									th:field="*{imagen}" readonly/>
+							</div>
+							th:unless="*{imagen != ''}" 
+							-->
 							<div class="col-sm-6">
 								<input type="file" name="file" class="form-control" accept=".jpg,.png.tif"/>
 							</div>
@@ -49,10 +55,10 @@
 							</div>
 						</div>
 						<!--  <input type="hidden" th:value="${mof.id}" th:field="*{mof}" />-->
-						<input type="hidden" th:field="*{id}" /> <input type="hidden"
+						<input type="hidden" th:value="${pruebamof.id}" th:field="*{id}" /> <input type="hidden"
 							th:value="${pruebamof.secciones_expedientes}"
 							th:field="*{secciones_expedientes}" />
-
+						<input type="hidden" th:value="${pruebamof.imagen}" th:field="*{imagen}" />
 					</form>
 				</div>
 			</div>

@@ -45,7 +45,7 @@
 										th:src="@{/images/ver.png}" width="35" height="25"></a></td>
 								<td th:text="${secciones.nombreSeccion}"></td>
 								<td th:text="${secciones.descripcionSeccion}"></td>
-								<td><a id="pdf" class="btn btn-xs"
+								<td><a id="pdf" class="btn btn-xs" target="_blank"
 									th:href="@{'/expedienteMaterial/' + ${secciones.id}(format=pdf)}"> <img
 										th:src="@{/images/pdf.png}" width="35" height="25"></a></td>
 								<!--  <td><a class="btn btn-primary btn-xs"

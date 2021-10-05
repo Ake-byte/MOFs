@@ -310,32 +310,40 @@ public class ExpedienteController {
 			Usuario usuario = usuarioService.findByEmail(auth.getName());
 			
 			List<PermisosExpediente> permisosDelUsuario = usuario.getPermisosExpediente();
-			if(permisosDelUsuario.isEmpty()) {
+			
+			PermisosExpediente pe = permisosDelUsuario.stream()
+					.filter(permiso -> expedienteMOF.getId().equals(permiso.getExpedientes().getId()))
+					.findAny()
+					.orElse(null);
+			
+			if(pe != null) {
+				
+				if(pe.getPermiso().equals(false)) {
+					flash.addFlashAttribute("info", "Se está procesando tu solicitud para modificar este expediente.");
+					return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
+				}
+				else {
+					flash.addFlashAttribute("info", "Ya puedes modificar este expediente, no es necesario que solicites permiso nuevamente.");
+					return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
+				}			
+			}
+			else {
 				PermisosExpediente nuevoPermiso = new PermisosExpediente();
 				nuevoPermiso.setPermiso(false);
 				nuevoPermiso.setUsers(usuario);
 				nuevoPermiso.setExpedientes(expedienteMOF);
+				
 				permisosE.save(nuevoPermiso);
 				permisosE.saveExpediente(expedienteMOF);
 				permisosE.saveUsuario(usuario);
+				
+				usuario.addPermisoExpediente(nuevoPermiso);
+				
+				usuarioService.save(usuario);
+				
 				flash.addFlashAttribute("info", "Se está procesando tu solicitud para modificar este expediente.");
 				return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
 			}
-			else {
-				for(int i = 0; i < permisosDelUsuario.size(); i++) {
-					if(permisosDelUsuario.get(i).getExpedientes().equals(expedienteMOF) ) {
-						if(permisosDelUsuario.get(i).getPermiso().equals(false)) {
-							flash.addFlashAttribute("info", "Se está procesando tu solicitud para modificar este expediente.");
-							return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
-						}
-						else {
-							flash.addFlashAttribute("info", "Ya puedes modificar este expediente, no es necesario que solicites permiso nuevamente.");
-							return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
-						}
-					}
-				}
-			}
-			
 		}
 
 		return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();

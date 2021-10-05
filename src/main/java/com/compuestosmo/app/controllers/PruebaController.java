@@ -147,17 +147,6 @@ public class PruebaController {
 			if(pruebamof.getImagen() == null) {
 				pruebamof.setImagen("");
 			}
-			/*
-			else {
-				try {
-					uniqueFilename = uploadFileService.copy(foto);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			*/
-			
 		}
 		String mensajeFlash = (pruebamof.getId() != null) ? "Se han editado datos de las pruebas."
 				: "Se ha agregado la prueba al expediente";

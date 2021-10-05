@@ -161,7 +161,9 @@ public class MaterialController {
 				}
 				mof.setCif(uniqueFilename);
 			} else {
-				mof.setCif("");
+				if(mof.getCif() == null) {
+					mof.setCif("");
+				}
 			}
 
 			if (!files[1].isEmpty()) {
@@ -177,7 +179,9 @@ public class MaterialController {
 				}
 				mof.setArticuloPDF(uniqueFilename);
 			} else {
-				mof.setArticuloPDF("");
+				if(mof.getArticuloPDF() == null) {
+					mof.setArticuloPDF("");
+				}
 			}
 
 			if (!files[2].isEmpty()) {
@@ -193,7 +197,9 @@ public class MaterialController {
 				}
 				mof.setTesisPDF(uniqueFilename);
 			} else {
-				mof.setTesisPDF("");
+				if(mof.getTesisPDF() == null) {
+					mof.setTesisPDF("");
+				}
 			}
 
 		}

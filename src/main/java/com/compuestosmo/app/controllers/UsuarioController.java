@@ -79,13 +79,15 @@ public class UsuarioController {
 	}
 
 	@PostMapping(value = "/editarDatos")
-	public String guardarDatos(@Valid Usuario usuario, BindingResult result, Model model) {
+	public String guardarDatos(@Valid Usuario usuario, BindingResult result, Model model, SessionStatus status) {
+		
 		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Editar Datos");
 			return "formMaterial";
 		}
 
 		usuarioService.save(usuario);
+		status.setComplete();
 
 		return "redirect:perfil";
 	}

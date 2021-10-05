@@ -1,6 +1,7 @@
 package com.compuestosmo.app.controllers;
 
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.compuestosmo.app.models.entity.PermisosExpediente;
 import com.compuestosmo.app.models.entity.Role;
 import com.compuestosmo.app.models.entity.Usuario;
 import com.compuestosmo.app.models.service.IRoleService;
@@ -93,7 +95,10 @@ public class LoginController {
 		role.setAuthority("ROLE_USER1");
 		role.setUsers(usuario);
 		role.setAuthorityName("Usuario Registrado");
-
+		
+		List<PermisosExpediente> permisosExpediente = new ArrayList<>();
+		
+		usuario.setPermisosExpediente(permisosExpediente);
 		usuario.setRoles(role);
 		usuario.setEnabled(true);
 

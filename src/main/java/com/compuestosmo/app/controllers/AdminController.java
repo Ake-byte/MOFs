@@ -302,6 +302,6 @@ public class AdminController {
 				"Se ha aprobado tu solicitud para editar el expediente de " + expedientemof.getNombreUsuario()
 						+ " del compuesto: " + expedientemof.getMof().getNombreCompuesto(),
 				usuario);
-		return "redirect:/PersonalAutorizado/listarRoles";
+		return "redirect:/PersonalAutorizado/peticionesExpedientes";
 	}
 }

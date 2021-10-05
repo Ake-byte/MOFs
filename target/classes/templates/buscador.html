@@ -13,7 +13,7 @@
 
 		<div sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER2')"
 			class="container" style="width: 38rem;">
-			<nav class="navbar navbar-light bg-light">
+			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class="container-fluid">
 					<form th:action="@{/CompuestoMOF/buscar}" th:object="${mof}"
 						method="GET">

@@ -66,6 +66,8 @@ public class MOF implements Serializable {
 
 	//@NotEmpty
 	private String articulo;
+	
+	private String articuloURL;
 
 	//@NotEmpty
 	@Column(name = "titulo_tesis")
@@ -235,6 +237,15 @@ public class MOF implements Serializable {
 
 	public void setArticuloPDF(String articuloPDF) {
 		this.articuloPDF = articuloPDF;
+	}
+
+	
+	public String getArticuloURL() {
+		return articuloURL;
+	}
+
+	public void setArticuloURL(String articuloURL) {
+		this.articuloURL = articuloURL;
 	}
 
 	private static final long serialVersionUID = 1L;

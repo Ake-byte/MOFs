@@ -38,7 +38,7 @@
 								<th>Descripci&oacute;n de la Secci&oacute;n</th>
 								<th>Modificar</th>
 								<th>Descargar Secci&oacute;n</th>
-								<th>Eliminar</th>
+								<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -55,9 +55,10 @@
 									th:href="@{'/PruebasAplicadas/expedienteMaterial/' + ${secciones.id}(format=pdf)}">
 										<img th:src="@{/images/pdf.png}" width="35" height="25">
 								</a></td>
-								<td><a class="btn btn-danger btn-xs"
-									th:href="@{/SeccionesExpediente/eliminarSeccion/} + ${secciones.id}"
-									th:text="'Eliminar'"> </a></td>
+								<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs"
+									th:href="@{/SeccionesExpediente/eliminarSeccion/} + ${secciones.id}"><img
+										th:src="@{/images/eliminar.png}" width="35" height="25">
+								</a></td>
 
 							</tr>
 						</tbody>

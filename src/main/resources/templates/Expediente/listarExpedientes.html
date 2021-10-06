@@ -44,7 +44,7 @@
 								</th>
 								<th>Solicitar Permiso para Editar</th>
 								<th>Descargar Expediente</th>
-								<th>Eliminar</th>
+								<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -63,9 +63,10 @@
 									th:href="@{'/SeccionesExpediente/verSecciones/' + ${expedientes.id}(format=pdf)}">
 										<img th:src="@{/images/pdf.png}" width="35" height="25">
 								</a></td>
-								<td><a class="btn btn-danger btn-xs"
+								<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs"
 									th:href="@{/PruebasAplicadas/eliminarPrueba/} + ${expedientes.id}"
-									th:text="'Eliminar'"> <!--  onclick="return confirm('Estás seguro que quieres eliminar?');"-->
+									onclick="return confirm('Estás seguro que quieres eliminar?');">
+									<img th:src="@{/images/eliminar.png}" width="35" height="25">
 								</a></td>
 							</tr>
 						</tbody>

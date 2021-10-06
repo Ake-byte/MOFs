@@ -24,8 +24,10 @@
 								role="tab" aria-controls="datosSistema" aria-selected="false">Datos
 									en el Sistema</a></li>
 							<li class="nav-item"><a
-								sec:authorize="hasRole('ROLE_USER2')" class="nav-link"> Ver
-									Expedientes</a></li>
+								sec:authorize="hasRole('ROLE_USER2')" class="nav-link"
+								id="expedientes-tab" data-toggle="tab" href="#expedientes"
+								role="tab" aria-controls="expedientes" aria-selected="false">
+									Ver Expedientes</a></li>
 						</ul>
 						<div class="card-body">
 							<div class="tab-content" id="myTabContent">
@@ -60,7 +62,8 @@
 											</div>
 											<br>
 											<div class="form-group row">
-												<label for="nombre" class="col-sm-4 col-form-label">Correo Electr&oacute;nico:</label>
+												<label for="nombre" class="col-sm-4 col-form-label">Correo
+													Electr&oacute;nico:</label>
 												<div class="col-sm-6">
 													<input type="text" class="form-control"
 														th:field="${usuario.email}" readonly />
@@ -112,6 +115,34 @@
 													th:href="@{/Usuario/editarDatosSistema/} + ${investigador.id}">Editar
 													datos</a>
 											</div>
+										</div>
+									</div>
+								</div>
+								<div class="tab-pane fade" id="expedientes" role="tabpanel"
+									sec:authorize="hasRole('ROLE_USER2')"
+									aria-labelledby="expedientes">
+									<div class="card">
+										<div class="card-body">
+											<table>
+												<thead>
+													<tr>
+														<th>Ver Expediente</th>
+														<th style="width: 20%">Autor</th>
+														<th>Acciones</th>
+													</tr>
+												</thead>
+												<tbody th:each="permisos: ${permisosDelUsuario}">
+													<tr>
+														<td><a id="ver" class="btn btn-primary btn-xs"
+															th:href="@{/SeccionesExpediente/verSecciones/} + ${permisos.expedientes.id}">
+																<img th:src="@{/images/ver.png}" width="35" height="25">
+														</a></td>
+														<td th:text="${permisos.expedientes.nombreUsuario}"></td>
+														<td th:if="${permisos.permiso == true}">Puedes modificar este expediente</td>
+														<td th:unless="${permisos.permiso == true}">NO Puedes modificar este expediente</td>
+													</tr>
+												</tbody>
+											</table>
 										</div>
 									</div>
 								</div>

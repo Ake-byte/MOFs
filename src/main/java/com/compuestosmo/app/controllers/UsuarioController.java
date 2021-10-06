@@ -24,10 +24,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.compuestosmo.app.models.entity.Directores;
 import com.compuestosmo.app.models.entity.Investigador;
+import com.compuestosmo.app.models.entity.PermisosExpediente;
 import com.compuestosmo.app.models.entity.Role;
 import com.compuestosmo.app.models.entity.Usuario;
 import com.compuestosmo.app.models.service.IDirectoresService;
 import com.compuestosmo.app.models.service.IInvestigadoresService;
+import com.compuestosmo.app.models.service.IPermisosExpedientesService;
 import com.compuestosmo.app.models.service.IRoleService;
 import com.compuestosmo.app.models.service.IUsuarioService;
 
@@ -50,6 +52,8 @@ public class UsuarioController {
 	@Autowired
 	private IRoleService roleService;
 
+	@Autowired
+	private IPermisosExpedientesService permisosEService;
 
 	@GetMapping(value = "/perfil")
 	public String verPerfil(Model model, Authentication authentication, HttpServletRequest request) {
@@ -61,9 +65,12 @@ public class UsuarioController {
 		
 		
 		Investigador investigador = investigadorService.findByRoleID(role.getId());
+		
+		List<PermisosExpediente> permisosDelUsuario = usuario.getPermisosExpediente();
 
 		model.addAttribute("usuario", usuario);
 		model.addAttribute("investigador", investigador);
+		model.addAttribute("permisosDelUsuario", permisosDelUsuario);
 		model.addAttribute("titulo", "Datos de Usuario");
 		return "Usuario/perfil";
 	}

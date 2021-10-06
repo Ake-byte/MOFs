@@ -80,15 +80,21 @@
 											<br>
 											<div class="form-group row">
 												<label for="nombre" class="col-sm-2 col-form-label">URL Art&iacute;culo:</label>
-												<div class="col-sm-10">
+												<div th:if="${mof.articuloURL == '' || mof.articuloURL == null}" class="col-sm-10">
+													<p>No hay URL del art&iacute;culo de este material.</p>
+												</div>
+												<div th:unless="${mof.articuloURL == '' || mof.articuloURL == null}" class="col-sm-10">
 													<input type="text" class="form-control"
-														th:field="${mof.articulo}" readonly />
+														th:field="${mof.articuloURL}" readonly />
 												</div>
 											</div>
 											<br>
 											<div class="form-group row">
 												<label for="nombre" class="col-sm-2 col-form-label">PDF Art&iacute;culo:</label>
-												<div class="col-sm-10">
+												<div th:if="${mof.articuloPDF == '' || mof.articuloPDF == null}" class="col-sm-10">
+													<p>No hay archivo PDF del art&iacute;culo de este material.</p>
+												</div>
+												<div th:unless="${mof.articuloPDF == '' || mof.articuloPDF == null}" class="col-sm-10">
 													<a th:href="@{/CompuestoMOF/descargarArticulo/} + ${mof.id}"
 													class="card-link" th:text="${mof.articuloPDF}"></a>
 												</div>
@@ -105,15 +111,21 @@
 											<br>
 											<div class="form-group row">
 												<label for="nombre" class="col-sm-2 col-form-label">URL Tesis:</label>
-												<div class="col-sm-10">
+												<div th:if="${mof.url == '' || mof.url == null}" class="col-sm-10">
+													<p>No hay URL de la tesis de este material.</p>
+												</div>
+												<div th:unless="${mof.url == '' || mof.url == null}" class="col-sm-10">
 													<input type="text" class="form-control"
 														th:field="${mof.url}" readonly />
 												</div>
 											</div>
 											<br>
 											<div class="form-group row">
-												<label for="nombre" class="col-sm-2 col-form-label">Archivo Tesis:</label>
-												<div class="col-sm-10">
+												<label for="nombre" class="col-sm-2 col-form-label">PDF Tesis:</label>
+												<div th:if="${mof.tesisPDF== '' || mof.tesisPDF == null}" class="col-sm-10">
+													<p>No hay archivo PDF de la tesis de este material.</p>
+												</div>
+												<div th:unless="${mof.tesisPDF == '' || mof.tesisPDF == null}" class="col-sm-10">
 													<a th:href="@{/CompuestoMOF/descargarTesis/} + ${mof.id}"
 													class="card-link" th:text="${mof.tesisPDF}"></a>
 												</div>

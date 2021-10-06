@@ -27,7 +27,7 @@
 								<th>Ver Material</th>
 								<th>Nombre</th>
 								<th>Clasificaci&oacute;n</th>
-								<th>Directores</th>
+								<th>Directores de Tesis</th>
 								<th>Investigador Responsable</th>
 								<th>Editar</th>
 								<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
@@ -43,9 +43,10 @@
 								<td th:text="${mof.clasificacionmof.nombreClasificacion}"></td>
 								<td>
 									<ul>
-										<li th:if="${mof.director1 == null or mof.director2 == null}" >No tiene directores de tesis</li>
-										<li th:unless="${mof.director1 == null}" th:text="${mof.director1}"></li>
-										<li th:unless="${mof.director2 == null}" th:text="${mof.director2}"></li>
+										<li th:if="${mof.director1 == null || mof.director1 == ''}" >No tiene director de tesis 1</li>
+										<li th:unless="${mof.director1 == null || mof.director1 == ''}" th:text="${mof.director1}"></li>
+										<li th:if="${mof.director2 == null || mof.director2 == ''}" >No tiene director de tesis 2</li>
+										<li th:unless="${mof.director2 == null || mof.director2 == ''}" th:text="${mof.director2}"></li>
 										
 									</ul>
 								</td>
@@ -54,8 +55,7 @@
 								<td><a id="editar" class="btn btn-xs"
 									th:href="@{/CompuestoMOF/formMaterial/} + ${mof.id}"><img
 										th:src="@{/images/editarCompuesto.png}" width="35" height="25"></a></td>
-								<td><a class="btn btn-danger btn-xs"
-									sec:authorize="hasRole('ROLE_ADMIN')"
+								<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs"
 									th:href="@{/CompuestoMOF/eliminar/} + ${mof.id}"
 									onclick="return confirm('Estás seguro que quieres eliminar?');">
 										<img th:src="@{/images/eliminar.png}" width="35" height="25">

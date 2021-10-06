@@ -24,7 +24,7 @@
 							<tr>
 								<th>Ver Clasificaci&oacute;n</th>
 								<th>Nombre de la clasificaci&oacute;n</th>
-								<th>Descripci&oacute;n de la lasificaci&oacute;n</th>
+								<th>Descripci&oacute;n de la clasificaci&oacute;n</th>
 								<th sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER2')">Editar</th>
 								<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 							</tr>
@@ -37,13 +37,11 @@
 								</a></td>
 								<td th:text="${clasificaciones.nombreClasificacion}"></td>
 								<td th:text="${clasificaciones.descripcionClasificacion}"></td>
-								<td><a id="editar" class="btn btn-primary btn-xs"
-									sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER2')"
+								<td sec:authorize="hasAnyRole('ROLE_ADMIN', 'ROLE_USER2')"><a id="editar" class="btn btn-primary btn-xs"
 									th:href="@{/Clasificacion/formClasificacion/} + ${clasificaciones.id}"
 									><img
 										th:src="@{/images/editarCompuesto.png}" width="35" height="25"></a></td>
-								<td><a id="eliminar" class="btn btn-danger btn-xs"
-									sec:authorize="hasRole('ROLE_ADMIN')"
+								<td sec:authorize="hasRole('ROLE_ADMIN')"><a id="eliminar" class="btn btn-danger btn-xs"
 									th:href="@{/Clasificacion/eliminarClasificacion/} + ${clasificaciones.id}"
 									onclick="return confirm('Estás seguro que quieres eliminar?');">
 								<img th:src="@{/images/eliminar.png}" width="35" height="25">

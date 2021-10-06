@@ -113,15 +113,12 @@ public class AdminController {
 
 	@GetMapping(value = "/verDirectoresTesis")
 	public String verDirectoresTesis(Model model) {
-		//Pageable pageRequest = PageRequest.of(page, 10);
-		//Page<Role> usuarios = usuarioService.findUsuarioByRole("ROLE_USER3", pageRequest);
-		//PageRender<Role> pageRender = new PageRender<Role>("/PersonalAutorizado/verDirectoresTesis", usuarios);
 
 		List<Directores> directores = directoresS.findall();
 		
 		model.addAttribute("titulo", "Directores de Tesis");
 		model.addAttribute("directores", directores);
-		//model.addAttribute("page", pageRender);
+
 		return "PersonalAutorizado/verDirectoresTesis";
 	}
 	

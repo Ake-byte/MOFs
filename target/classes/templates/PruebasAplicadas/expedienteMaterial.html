@@ -16,11 +16,13 @@
 				<div class="container">
 					<ul class="nav nav-pills justify-content-center">
 						<li><div class="container-fluid">
-								<a th:href="@{/PruebasAplicadas/formPrueba/}+ ${expedientemof.id}"
+								<a
+									th:href="@{/PruebasAplicadas/formPrueba/}+ ${expedientemof.id}"
 									class="btn btn-primary btn-xs">Crear Prueba</a>
 							</div></li>
 						<li><div class="container-fluid">
-								<a th:href="@{/Expediente/listarExpedientes/} + ${expedientemof.expedientes.mof.id}"
+								<a
+									th:href="@{/Expediente/listarExpedientes/} + ${expedientemof.expedientes.mof.id}"
 									class="btn btn-primary btn-xs">Regresar al Listado de
 									Expedientes</a>
 							</div></li>
@@ -43,7 +45,7 @@
 								<th>Descripci&oacute;n</th>
 								<th>Modificar</th>
 								<th>PDF</th>
-								<th>Eliminar</th>
+								<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -63,11 +65,14 @@
 									th:href="@{'/pdf/'} + ${pruebas.id} + '/' + ${pruebas.imagen}"> <img
 										th:src="@{/images/pdf.png}" width="35" height="25"></a></td>-->
 								<td><a id="pdf" class="btn btn-xs" target="_blank"
-									th:href="@{'/PruebasAplicadas/verPrueba/' + ${pruebas.id}(format=pdf)}"> <img
-										th:src="@{/images/pdf.png}" width="35" height="25"></a></td>
-								<td><a class="btn btn-danger btn-xs"
+									th:href="@{'/PruebasAplicadas/verPrueba/' + ${pruebas.id}(format=pdf)}">
+										<img th:src="@{/images/pdf.png}" width="35" height="25">
+								</a></td>
+								<td sec:authorize="hasRole('ROLE_ADMIN')"><a
+									class="btn btn-danger btn-xs"
 									th:href="@{/PruebasAplicadas/eliminarPrueba/} + ${expedientemof.id} + '/' + ${pruebas.id}"
-									th:text="'Eliminar'"> </a></td>
+									th:text="'Eliminar'"> <img th:src="@{/images/eliminar.png}"
+										width="35" height="25"></a></td>
 							</tr>
 						</tbody>
 					</table>

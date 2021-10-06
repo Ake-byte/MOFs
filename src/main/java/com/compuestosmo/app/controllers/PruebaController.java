@@ -191,8 +191,7 @@ public class PruebaController {
 	@PostMapping(value = "formPrueba")
 	public String guardar(@Valid PruebasMOF pruebamof, BindingResult result, Model model, RedirectAttributes flash,
 			@RequestParam("file") MultipartFile foto, SessionStatus status) {
-		//
-
+		
 		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario de Prueba");
 			return "formPrueba";
@@ -220,17 +219,20 @@ public class PruebaController {
 		}
 		String mensajeFlash = (pruebamof.getId() != null) ? "Se han editado datos de las pruebas."
 				: "Se ha agregado la prueba al expediente";
+		
 		seccionesEService.savePrueba(pruebamof);
-
+		pruebaService.save(pruebamof);
+		
 		Long idSeccion = pruebamof.getSecciones_expedientes().getId();
-
-		SeccionesExpediente seccionesE = null;
-
-		seccionesE = seccionesEService.findOne(idSeccion);
+		SeccionesExpediente seccionesExpediente= seccionesEService.findOne(idSeccion);
+		
+		pruebamof.setSecciones_expedientes(seccionesExpediente);
 
 		status.setComplete();
+		
+		
 		flash.addFlashAttribute("success", mensajeFlash);
-		return "redirect:/PruebasAplicadas/expedienteMaterial/" + seccionesE.getId();
+		return "redirect:/PruebasAplicadas/expedienteMaterial/" + idSeccion;
 	}
 
 	@GetMapping(value = "/uploads/{filename:.+}")

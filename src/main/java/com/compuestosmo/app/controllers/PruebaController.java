@@ -11,6 +11,9 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -33,14 +36,20 @@ import com.compuestosmo.app.models.entity.PermisosExpediente;
 import com.compuestosmo.app.models.entity.PruebasMOF;
 import com.compuestosmo.app.models.entity.SeccionesExpediente;
 import com.compuestosmo.app.models.entity.Usuario;
+import com.compuestosmo.app.models.service.IExpedienteMOFService;
 import com.compuestosmo.app.models.service.IPruebasMOFService;
 import com.compuestosmo.app.models.service.ISeccionesExpedienteService;
 import com.compuestosmo.app.models.service.IUploadFileService;
 import com.compuestosmo.app.models.service.IUsuarioService;
+import com.compuestosmo.app.models.util.PageRender;
 
 @Controller("/pruebamof")
+@RequestMapping("/PruebasAplicadas")
 @SessionAttributes("pruebamof")
 public class PruebaController {
+	
+	@Autowired
+	private IExpedienteMOFService expedienteService;
 	
 	@Autowired
 	private IPruebasMOFService pruebaService;
@@ -54,13 +63,40 @@ public class PruebaController {
 	@Autowired
 	private IUsuarioService usuarioService;
 
+	@GetMapping(value = "/expedienteMaterial/{id}")
+	public String verExpediente(@RequestParam(name = "page", defaultValue = "0") int page,
+			@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
+
+		SeccionesExpediente seccionE = seccionesEService.findOne(id);
+
+		Long idExpediente = seccionE.getId();
+
+		Pageable pageRequest = PageRequest.of(page, 4);
+		Page<PruebasMOF> prueba = pruebaService.findPruebasById(idExpediente, pageRequest);
+		PageRender<PruebasMOF> pageRender = new PageRender<PruebasMOF>("/PruebasAplicadas/expedienteMaterial/" + id, prueba);
+
+		SeccionesExpediente expedienteMOF = seccionesEService.findOne(id);
+		if (expedienteMOF == null) {
+			flash.addFlashAttribute("error", "No existe el Expediente en la base de datos");
+			return "redirect:/index";
+		}
+
+		((Model) model).addAttribute("prueba", prueba);
+		((Model) model).addAttribute("expedientemof", expedienteMOF);
+		((Model) model).addAttribute("page", pageRender);
+
+		return "PruebasAplicadas/expedienteMaterial";
+	}
+
+	
 	@GetMapping("/formPrueba/{id}")
 	public String crearPrueba(@PathVariable(value = "id") Long seccionId, Map<String, Object> model,
 			RedirectAttributes flash, Authentication authentication, HttpServletRequest request) {
 
 		SeccionesExpediente seccionesE = seccionesEService.findOne(seccionId);
 		if (seccionesE == null) {
-			return "redirect:/listarMateriales";
+			flash.addFlashAttribute("error", "No existe este registro en la base de datos.");
+			return "redirect:/index";
 		}
 
 		ExpedienteMOF expedienteMOF = seccionesE.getExpedientes();
@@ -71,37 +107,45 @@ public class PruebaController {
 
 		List<PermisosExpediente> permisosDelUsuario = usuario.getPermisosExpediente();
 
-		if (permisosDelUsuario.isEmpty()) {
-			flash.addFlashAttribute("error",
-					"No tienes permisos para modificar este expediente. Solicita permiso para editar.");
-			return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
-		} else {
-			for (int i = 0; i < permisosDelUsuario.size(); i++) {
-				if (permisosDelUsuario.get(i).getExpedientes().equals(expedienteMOF)) {
-					if (permisosDelUsuario.get(i).getPermiso().equals(true)) {
-						PruebasMOF pruebaMOF = new PruebasMOF();
-						pruebaMOF.setSecciones_expedientes(seccionesE);
-
-						model.put("pruebamof", pruebaMOF);
-						model.put("titulo", "Formulario Prueba");
-					} else {
-						flash.addFlashAttribute("error",
-								"No tienes permisos para modificar este expediente. Se ha notificado a personal autorizado que deseas acceder a este recurso.");
-						return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
-					}
-				}
+		PermisosExpediente pe = permisosDelUsuario.stream()
+				.filter(permiso -> expedienteMOF.getId().equals(permiso.getExpedientes().getId()))
+				.findAny()
+				.orElse(null);
+		
+		if(pe != null) {
+			
+			if(pe.getPermiso().equals(false)) {
+				flash.addFlashAttribute("info", "Se está procesando tu solicitud para modificar este expediente.");
+				return "redirect:/Expediente/listarExpedientes/" + expedienteMOF.getMof().getId();
 			}
-		}
+			else {
+				PruebasMOF pruebaMOF = new PruebasMOF();
+				pruebaMOF.setSecciones_expedientes(seccionesE);
+				
+				pruebaService.save(pruebaMOF);
+				seccionesEService.savePrueba(pruebaMOF);
 
-		return "formPrueba";
+				model.put("pruebamof", pruebaMOF);
+				model.put("titulo", "Formulario Prueba");
+				
+				return "PruebasAplicadas/formPrueba";
+			}			
+		}
+		else {
+			flash.addFlashAttribute("info", "No puedes editar este expediente, solicita permiso para editar.");
+			return "redirect:/Expediente/listarExpedientes/" + expedienteMOF.getMof().getId();
+		}
 	}
 
 	// Pasar Authentication authentication en el método para obtener el nombre del
 	// usuario que ha ingresado
 	// para guardar el registro de quién hizo la última modificación
-	@RequestMapping(value = "/formPrueba/{idMOF}/{id}")
-	public String editar(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
+	@RequestMapping(value = "/formPrueba/{idSeccion}/{id}")
+	public String editar(@PathVariable(value = "id") Long idSeccion,
+			@PathVariable(value = "id") Long id, Map<String, Object> model, Authentication authentication, RedirectAttributes flash) {
 		PruebasMOF pruebasMOF = null;
+		SeccionesExpediente seccionExpediente = seccionesEService.findOne(idSeccion);
+		ExpedienteMOF expedienteMOF = expedienteService.findOne(seccionExpediente.getExpedientes().getId());
 		if (id > 0) {
 			pruebasMOF = pruebaService.findOne(id);
 			if (pruebasMOF == null) {
@@ -109,13 +153,39 @@ public class PruebaController {
 				return "redirect:/index";
 			}
 		} else {
-
+			flash.addFlashAttribute("error", "No existe la prueba dentro del expediente.");
 			return "redirect:/index";
 		}
-		model.put("pruebamof", pruebasMOF);
-		model.put("file", "/uploads/" + pruebasMOF.getImagen());
-		model.put("titulo", "Editar Prueba");
-		return "formPrueba";
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		Usuario usuario = usuarioService.findByEmail(auth.getName());
+		
+		List<PermisosExpediente> permisosDelUsuario = usuario.getPermisosExpediente();
+		
+		PermisosExpediente pe = permisosDelUsuario.stream()
+				.filter(permiso -> expedienteMOF.getId().equals(permiso.getExpedientes().getId()))
+				.findAny()
+				.orElse(null);
+		
+		if(pe != null) {
+			
+			if(pe.getPermiso().equals(false)) {
+				flash.addFlashAttribute("info", "Se está procesando tu solicitud para modificar este expediente.");
+				return "redirect:/Expediente/listarExpedientes/" + expedienteMOF.getMof().getId();
+			}
+			else {
+				model.put("pruebamof", pruebasMOF);
+				model.put("file", "/PruebasAplicadas/uploads/" + pruebasMOF.getImagen());
+				model.put("titulo", "Editar Prueba");
+				
+				return "PruebasAplicadas/formPrueba";
+			}			
+		}
+		else {	
+			flash.addFlashAttribute("info", "No puedes editar este expediente, solicita permiso para editar.");
+			return "redirect:/Expediente/listarExpedientes/" + expedienteMOF.getMof().getId();
+		}
 	}
 
 	@PostMapping(value = "formPrueba")
@@ -160,7 +230,7 @@ public class PruebaController {
 
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
-		return "redirect:/expedienteMaterial/" + seccionesE.getId();
+		return "redirect:/PruebasAplicadas/expedienteMaterial/" + seccionesE.getId();
 	}
 
 	@GetMapping(value = "/uploads/{filename:.+}")
@@ -192,7 +262,7 @@ public class PruebaController {
 		}
 
 		SeccionesExpediente seccionesE = prueba.getSecciones_expedientes();
-		return "redirect:/expedienteMaterial/" + seccionesE.getId();
+		return "redirect:/PruebasAplicadas/expedienteMaterial/" + seccionesE.getId();
 	}
 
 	@GetMapping(value = "/verPrueba/{id}")
@@ -201,7 +271,7 @@ public class PruebaController {
 		
 		model.addAttribute("prueba", prueba);
 		
-		return "verPrueba";
+		return "PruebasAplicadas/verPrueba";
 	}
 
 }

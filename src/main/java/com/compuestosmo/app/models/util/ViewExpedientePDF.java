@@ -21,7 +21,7 @@ import com.lowagie.text.Image;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-@Component("verSecciones")
+@Component("SeccionesExpediente/verSecciones")
 public class ViewExpedientePDF extends AbstractPdfView{
 	
 	@Autowired

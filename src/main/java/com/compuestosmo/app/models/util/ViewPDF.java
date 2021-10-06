@@ -16,7 +16,7 @@ import com.lowagie.text.Image;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-@Component("verPrueba")
+@Component("PruebasAplicadas/verPrueba")
 public class ViewPDF extends AbstractPdfView {
 
 	@Autowired

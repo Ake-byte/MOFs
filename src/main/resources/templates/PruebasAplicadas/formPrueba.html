@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layout/layout :: head"></head>
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light mb-3" style="border-color: #4169E1">
+			<div class="card-header mb-3 text-white text-center"
+				style="background: #4169E1">
+				<h3 th:text="${titulo}"></h3>
+			</div>
+			<div class="card-body">
+				<div class="container">
+					<form th:action="@{/PruebasAplicadas/formPrueba}" th:object="${pruebamof}"
+						method="post" enctype="multipart/form-data">
+						<div class="form-group row">
+							<label for="nombre" class="col-sm-2 col-form-label">Nombre
+								de la Figura/Gr&aacute;fica</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control"
+									th:field="*{nombrePrueba}" />
+							</div>
+						</div>
+						<br>
+						<div class="form-group row">
+							<label for="nombre" class="col-sm-2 col-form-label">Descripci&oacute;n</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control"
+									th:field="*{descripcionPrueba}" />
+							</div>
+						</div>
+						<br>
+						<div class="form-group row">
+							<label for="file" class="col-sm-2 col-form-label">Imagen</label>
+							<!--  <div th:if="*{imagen != ''}" class="col-sm-6">
+								<input type="text" class="form-control" name="file"
+									th:field="*{imagen}" readonly/>
+							</div>
+							th:unless="*{imagen != ''}" 
+							-->
+							<div class="col-sm-6">
+								<input type="file" name="file" class="form-control" accept=".jpg,.png.tif"/>
+							</div>
+						</div>
+						<br>
+
+						<div class="form-group row">
+							<div class="col-sm-1">
+								<input type="submit" value="Guardar" class="btn btn-primary" />
+							</div>
+							<div class="col-sm-1">
+								<a class="btn btn-danger"
+									th:href="@{/SeccionesExpediente/verSecciones/} + ${pruebamof.secciones_expedientes.id}"
+									th:text="'Cancelar'"> </a>
+							</div>
+						</div>
+						<!--  <input type="hidden" th:value="${mof.id}" th:field="*{mof}" />-->
+						<input type="hidden" th:value="${pruebamof.id}" th:field="*{id}" /> <input type="hidden"
+							th:value="${pruebamof.secciones_expedientes}"
+							th:field="*{secciones_expedientes}" />
+						<input type="hidden" th:value="${pruebamof.imagen}" th:field="*{imagen}" />
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+</body>
+</html>

@@ -19,7 +19,7 @@ import com.lowagie.text.Image;
 import com.lowagie.text.pdf.PdfPTable;
 import com.lowagie.text.pdf.PdfWriter;
 
-@Component("expedienteMaterial")
+@Component("PruebasAplicadas/expedienteMaterial")
 public class ViewPDFSeccion extends AbstractPdfView {
 
 	@Autowired

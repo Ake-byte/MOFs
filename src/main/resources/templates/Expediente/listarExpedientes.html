@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="layout/layout :: head"></head>
+
+<body>
+	<header th:replace="layout/layout :: header"></header>
+	<div class="container">
+		<div class="card bg-light mb-3">
+			<div class="card-header mb-3 text-white text-center">
+				<h3 th:text="${titulo}"></h3>
+			</div>
+			<div class="card-body">
+				<div th:if="${#lists.isEmpty(mof.expedientesMOF)}"
+					class="alert alert-info my-4 text-center"
+					th:text="'No hay expedientes del compuesto ' + ${mof.nombreCompuesto}">
+				</div>
+				<div class="container">
+					<ul class="nav nav-pills justify-content-center">
+						<li><div class="container-fluid">
+								<a th:href="@{/Expediente/formExpediente/} + ${mof.id}"
+									class="btn btn-primary btn-xs">Crear Expediente</a>
+							</div></li>
+						<li><div class="container-fluid">
+								<a th:href="@{/CompuestoMOF/fichaMaterial/} + ${mof.id}"
+									class="btn btn-primary btn-xs">Regresar a la ficha del
+									Compuesto</a>
+							</div></li>
+					</ul>
+					<br>
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Ver Expediente</th>
+								<th style="width: 20%">Autor</th>
+								<th colspan="2" class="text-center">&Uacute;ltima
+									modificaci&oacute;n
+									<table>
+										<tr>
+											<th style="width: 10%">Usuario</th>
+											<th style="width: 10%">Fecha</th>
+										</tr>
+									</table>
+								</th>
+								<th>Solicitar Permiso para Editar</th>
+								<th>Descargar Expediente</th>
+								<th>Eliminar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="expedientes: ${mof.expedientesMOF}">
+								<td><a id="ver" class="btn btn-primary btn-xs"
+									th:href="@{/SeccionesExpediente/verSecciones/} + ${expedientes.id}"> <img
+										th:src="@{/images/ver.png}" width="35" height="25">
+								</a></td>
+								<td th:text="${expedientes.nombreUsuario}"></td>
+								<td th:text="${expedientes.nombreUltimoUsuario}"></td>
+								<td th:text="${expedientes.fecha}"></td>
+								<td><a class="btn btn-primary btn-xs"
+									th:href="@{/Expediente/solicitarPermiso/} + ${expedientes.id}"
+									th:text="'Solicitar Permiso'"></a></td>
+								<td><a id="pdf" class="btn btn-xs" target="_blank"
+									th:href="@{'/SeccionesExpediente/verSecciones/' + ${expedientes.id}(format=pdf)}">
+										<img th:src="@{/images/pdf.png}" width="35" height="25">
+								</a></td>
+								<td><a class="btn btn-danger btn-xs"
+									th:href="@{/PruebasAplicadas/eliminarPrueba/} + ${expedientes.id}"
+									th:text="'Eliminar'"> <!--  onclick="return confirm('Estás seguro que quieres eliminar?');"-->
+								</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<footer th:replace="layout/layout :: footer"></footer>
+
+</body>
+</html>

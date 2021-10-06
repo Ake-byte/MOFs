@@ -40,14 +40,12 @@ import com.compuestosmo.app.models.service.IUsuarioService;
 import com.compuestosmo.app.models.util.PageRender;
 
 @Controller("/expedientemof")
+@RequestMapping("/Expediente")
 @SessionAttributes("expedientemof")
 public class ExpedienteController {
 
 	@Autowired
 	private IMOFService mofService;
-
-	@Autowired
-	private IPruebasMOFService pruebasService;
 
 	@Autowired
 	private IExpedienteMOFService expedienteService;
@@ -56,65 +54,20 @@ public class ExpedienteController {
 	private IUsuarioService usuarioService;
 
 	@Autowired
-	private ISeccionesExpedienteService seccionEService;
-
-	@Autowired
 	private IPermisosExpedientesService permisosE;
 
 	@GetMapping(value = "/listarExpedientes/{id}")
-	public String verClasificacion(@PathVariable(value = "id") Long id, Map<String, Object> model) {
+	public String verListadoExpedientes(@PathVariable(value = "id") Long id, Map<String, Object> model) {
 		MOF mof = mofService.findOne(id);
 
 		if (mof == null) {
-			return "redirect:/listadoClasificacionMateriales";
+			return "redirect:/Expediente/listarExpedientes";
 		}
 
 		model.put("mof", mof);
 		model.put("titulo", "Expedientes en: " + mof.getNombreCompuesto());
 
-		return "listarExpedientes";
-	}
-
-	@GetMapping(value = "/expedienteMaterial/{id}")
-	public String verExpediente(@RequestParam(name = "page", defaultValue = "0") int page,
-			@PathVariable(value = "id") Long id, Map<String, Object> model) {
-
-		SeccionesExpediente seccionE = seccionEService.findOne(id);
-
-		Long idExpediente = seccionE.getId();
-
-		Pageable pageRequest = PageRequest.of(page, 4);
-		Page<PruebasMOF> prueba = pruebasService.findPruebasById(idExpediente, pageRequest);
-		PageRender<PruebasMOF> pageRender = new PageRender<PruebasMOF>("/expedienteMaterial/" + id, prueba);
-
-		SeccionesExpediente expedienteMOF = seccionEService.findOne(id);
-		if (expedienteMOF == null) {
-			return "redirect:/listarExpedientes";
-		}
-
-		((Model) model).addAttribute("prueba", prueba);
-		((Model) model).addAttribute("expedientemof", expedienteMOF);
-		((Model) model).addAttribute("page", pageRender);
-
-		return "expedienteMaterial";
-	}
-
-	@GetMapping(value = "/verSecciones/{id}")
-	public String verSeccion(@PathVariable(value = "id") Long id, Map<String, Object> model) {
-
-		ExpedienteMOF expedienteMOF = expedienteService.findOne(id);
-
-		if (expedienteMOF == null) {
-			return "redirect:/listarExpedientes";
-		}
-
-		MOF mof = expedienteMOF.getMof();
-
-		model.put("expedientemof", expedienteMOF);
-		model.put("nombreCompuesto", mof.getNombreCompuesto());
-		model.put("autor", expedienteMOF.getNombreUsuario());
-
-		return "verSecciones";
+		return "Expediente/listarExpedientes";
 	}
 
 	@GetMapping("/formExpediente/{id}")
@@ -142,95 +95,7 @@ public class ExpedienteController {
 		model.put("expedientemof", expedienteMOF);
 		model.put("titulo", "Formulario Expediente");
 		
-		return "formExpediente";
-	}
-
-	@GetMapping("/formSeccion/{id}")
-	public String crearSeccion(@PathVariable(value = "id") Long expedienteId, Map<String, Object> model,
-			RedirectAttributes flash, Authentication authentication, HttpServletRequest request) {
-
-		SeccionesExpediente se = new SeccionesExpediente();
-
-		ExpedienteMOF expedienteMOF = expedienteService.findOne(expedienteId);
-		if (expedienteMOF == null) {
-			return "redirect:/listarMateriales";
-		}
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-
-		Usuario usuario = usuarioService.findByEmail(auth.getName());
-
-		List<PermisosExpediente> expedientesUsuario = usuario.getPermisosExpediente();
-
-		if (expedientesUsuario.isEmpty()) {
-			flash.addFlashAttribute("error",
-					"No tienes permisos para modificar este expediente. Solicita permiso para editar.");
-			return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
-		} else {
-			for (int i = 0; i < expedientesUsuario.size(); i++) {
-				if (expedientesUsuario.get(i).getExpedientes().equals(expedienteMOF)) {
-					if(expedientesUsuario.get(i).getPermiso().equals(true)) {
-						se.setExpedientes(expedienteMOF);
-						
-						model.put("seccionE", se);
-						model.put("titulo", "Formulario Sección");
-
-					}
-					else {
-						flash.addFlashAttribute("error", "No tienes permisos para modificar este expediente.");
-						return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
-					}
-				} 
-			}
-		}
-
-		return "formSeccion";
-	}
-
-	@RequestMapping(value = "/formSeccion/{idMOF}/{id}")
-	public String editar(@PathVariable(value = "id") Long id, Map<String, Object> model, RedirectAttributes flash) {
-		ExpedienteMOF expedienteMOF = null;
-		if (id > 0) {
-			expedienteMOF = expedienteService.findOne(id);
-			if (expedienteMOF == null) {
-				flash.addFlashAttribute("error", "No existe este MOF en base de datos");
-				return "redirect:/listarExpedientes";
-			}
-		} else {
-
-			return "redirect:/listarExpedientes";
-		}
-		model.put("expedientemof", expedienteMOF);
-		model.put("titulo", "Editar Sección");
-		return "formSeccion";
-	}
-
-	@PostMapping(value = "formSeccion")
-	public String guardarSeccion(@Valid SeccionesExpediente seccionE, BindingResult result, Model model,
-			RedirectAttributes flash, SessionStatus status, Authentication authentication, HttpServletRequest request) {
-		
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		
-		Usuario usuario = usuarioService.findByEmail(auth.getName());
-
-		if (result.hasErrors()) {
-			model.addAttribute("titulo", "Formulario de una nueva Sección");
-			return "formSeccion";
-		}
-		
-		String mensajeFlash = (seccionE.getId() != null) ? "Se han editado datos en el expediente."
-				: "Se ha agregado una sección al expediente";
-		expedienteService.saveSeccion(seccionE);
-
-		Long idExpediente = seccionE.getExpedientes().getId();
-		ExpedienteMOF expedientemof = expedienteService.findOne(idExpediente);
-
-		expedientemof.setNombreUltimoUsuario(usuario.getNombre() + ' ' + usuario.getApellidoPaterno() + ' ' + usuario.getApellidoMaterno());
-		//expedientemof.setFecha(null);
-		expedienteService.save(expedientemof);
-		
-		status.setComplete();
-		flash.addFlashAttribute("success", mensajeFlash);
-		return "redirect:/verSecciones/" + expedientemof.getId();
+		return "Expediente/formExpediente";
 	}
 
 	@PostMapping(value = "formExpediente")
@@ -241,7 +106,7 @@ public class ExpedienteController {
 
 		if (result.hasErrors()) {
 			model.addAttribute("titulo", "Formulario Nuevo Expediente");
-			return "formSeccion";
+			return "Expediente/formExpediente/";
 		}
 
 		String mensajeFlash = (expedientemof.getId() != null)? "Se ha agregado un expediente." : "Se ha agregado agregado un expediente";
@@ -264,8 +129,6 @@ public class ExpedienteController {
 		permisosE.save(permisoExpediente);
 		permisosE.saveExpediente(expedientemof);
 		
-		
-		//Se realiza lo anterior para todo el usuario con permiso 'Personal Autorizado'
 		List<Role> personalAutorizado = usuarioService.findByRolUsuario("ROLE_ADMIN");
 		for(int i = 0; i < personalAutorizado.size(); i++) {
 			PermisosExpediente permisoExpedientePA = new PermisosExpediente();
@@ -283,19 +146,7 @@ public class ExpedienteController {
 		
 		status.setComplete();
 		flash.addFlashAttribute("success", mensajeFlash);
-		return "redirect:/listarExpedientes/" + expedientemof.getMof().getId();
-	}
-
-	@RequestMapping(value = "/eliminarSeccion/{idMOF}/{id}")
-	public String eliminar(@PathVariable(value = "id") Long id, @PathVariable(value = "idMOF") Long idMOF,
-			RedirectAttributes flash) {
-		if (id > 0) {
-			expedienteService.delete(id);
-			flash.addFlashAttribute("success", "La sección se ha eliminado del expediente.");
-
-		}
-		MOF mof = mofService.findOne(idMOF);
-		return "redirect:/fichaMaterial/" + mof.getId();
+		return "redirect:/Expediente/listarExpedientes/" + expedientemof.getMof().getId();
 	}
 
 	@RequestMapping(value = "/solicitarPermiso/{idExpediente}")
@@ -320,11 +171,11 @@ public class ExpedienteController {
 				
 				if(pe.getPermiso().equals(false)) {
 					flash.addFlashAttribute("info", "Se está procesando tu solicitud para modificar este expediente.");
-					return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
+					return "redirect:/Expediente/listarExpedientes/" + expedienteMOF.getMof().getId();
 				}
 				else {
 					flash.addFlashAttribute("info", "Ya puedes modificar este expediente, no es necesario que solicites permiso nuevamente.");
-					return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
+					return "redirect:/Expediente/listarExpedientes/" + expedienteMOF.getMof().getId();
 				}			
 			}
 			else {
@@ -342,11 +193,11 @@ public class ExpedienteController {
 				usuarioService.save(usuario);
 				
 				flash.addFlashAttribute("info", "Se está procesando tu solicitud para modificar este expediente.");
-				return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
+				return "redirect:/Expediente/listarExpedientes/" + expedienteMOF.getMof().getId();
 			}
 		}
 
-		return "redirect:/listarExpedientes/" + expedienteMOF.getMof().getId();
+		return "redirect:/Expediente/listarExpedientes/" + expedienteMOF.getMof().getId();
 	}
 	
 }

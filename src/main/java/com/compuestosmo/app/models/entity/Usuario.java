@@ -14,6 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="users")
@@ -23,19 +26,26 @@ public class Usuario implements Serializable{
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private Long id;
-	
+
+	@NotEmpty
 	@Column(name = "nombre")
 	private String nombre;
-	
+
+	@NotEmpty
 	@Column(name = "apellido_paterno")
 	private String apellidoPaterno;
-	
+
+	@NotEmpty
 	@Column(name = "apellido_materno")
 	private String apellidoMaterno;
-	
+
+	@NotEmpty
+	@Email
 	@Column(name = "email", unique=true)
-	private String email;	
-	
+	private String email;
+
+	@NotEmpty
+	//@Size(min = 6, max = 8)
 	@Column(name = "pwd", length=100)
 	private String password;
 	

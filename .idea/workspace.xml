@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0c506d6f-1492-40e2-a60a-29748057eb20" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/compuestosmo/app/controllers/MaterialController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/compuestosmo/app/controllers/MaterialController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/compuestosmo/app/controllers/PruebaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/compuestosmo/app/controllers/PruebaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/compuestosmo/app/models/dao/IMOFDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/compuestosmo/app/models/dao/IMOFDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/compuestosmo/app/models/entity/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/compuestosmo/app/models/entity/Usuario.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CompuestoMOF/ResultadosBusquedaMOF.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CompuestoMOF/ResultadosBusquedaMOF.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CompuestoMOF/fichaMaterial.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CompuestoMOF/fichaMaterial.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CompuestoMOF/formMaterial.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CompuestoMOF/formMaterial.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/CompuestoMOF/listarMateriales.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/CompuestoMOF/listarMateriales.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/PruebasAplicadas/formPrueba.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/PruebasAplicadas/formPrueba.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/maven/com.compuestosmo.datajpa.app/CompuestosMO_LNCAE/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/maven/com.compuestosmo.datajpa.app/CompuestosMO_LNCAE/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/CompuestosMoLncaeApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/CompuestosMoLncaeApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/MvcConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/MvcConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/SpringSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/SpringSecurityConfig.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/auth/handler/LoginSuccesHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/auth/handler/LoginSuccesHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/AdminController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/ClasificacionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/ClasificacionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/ExpedienteController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/ExpedienteController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/ForgotPasswordController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/ForgotPasswordController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/MaterialController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/MaterialController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/PruebaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/PruebaController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/SeccionController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/SeccionController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/UsuarioController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/controllers/UsuarioController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IClasificacionMOFDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IClasificacionMOFDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IDirectoresDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IDirectoresDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IExpedienteMOFDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IExpedienteMOFDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IInvestigadoresDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IInvestigadoresDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IMOFDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IMOFDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IPermisosExpedientesDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IPermisosExpedientesDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IPruebasMOFDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IPruebasMOFDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IRoleDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IRoleDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/ISeccionesExpedienteDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/ISeccionesExpedienteDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IUsuarioDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/dao/IUsuarioDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/ClasificacionMOF.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/ClasificacionMOF.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/Directores.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/Directores.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/ExpedienteMOF.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/ExpedienteMOF.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/Investigador.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/Investigador.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/MOF.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/MOF.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/PermisosExpediente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/PermisosExpediente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/PruebasMOF.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/PruebasMOF.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/Role.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/RolesUsuarios.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/RolesUsuarios.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/SeccionesExpediente.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/SeccionesExpediente.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/Usuario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/entity/Usuario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/ClasificacionMOFService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/ClasificacionMOFService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/DirectoresService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/DirectoresService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/ExpedienteMOFService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/ExpedienteMOFService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IClasificacionMOFService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IClasificacionMOFService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IDirectoresService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IDirectoresService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IExpedienteMOFService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IExpedienteMOFService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IInvestigadoresService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IInvestigadoresService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IMOFService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IMOFService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IPermisosExpedientesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IPermisosExpedientesService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IPruebasMOFService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IPruebasMOFService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IRoleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IRoleService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/ISeccionesExpedienteService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/ISeccionesExpedienteService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IUploadFileService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IUploadFileService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IUsuarioService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/IUsuarioService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/InvestigadoresService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/InvestigadoresService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/JpaUserDetailsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/JpaUserDetailsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/MOFService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/MOFService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/PermisosExpedientesService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/PermisosExpedientesService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/PruebasMOFService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/PruebasMOFService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/RoleService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/RoleService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/SeccionesExpedienteService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/SeccionesExpedienteService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/UploadService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/UploadService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/UsuarioService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/service/UsuarioService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/util/MailBodyContent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/util/MailBodyContent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/util/MailSenderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/util/MailSenderService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/util/PageItem.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/util/PageItem.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/util/PageRender.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/util/PageRender.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/util/ViewExpedientePDF.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/util/ViewExpedientePDF.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/util/ViewPDF.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/util/ViewPDF.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/util/ViewPDFSeccion.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/compuestosmo/app/models/util/ViewPDFSeccion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/CompuestoMOF/ResultadosBusquedaMOF.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/CompuestoMOF/ResultadosBusquedaMOF.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/CompuestoMOF/fichaMaterial.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/CompuestoMOF/fichaMaterial.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/CompuestoMOF/formMaterial.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/CompuestoMOF/formMaterial.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/CompuestoMOF/listarMateriales.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/CompuestoMOF/listarMateriales.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/PruebasAplicadas/formPrueba.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/PruebasAplicadas/formPrueba.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/templates/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/compuestosmo/app/CompuestosMoLncaeApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/test-classes/com/compuestosmo/app/CompuestosMoLncaeApplicationTests.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="20H5nwTUwKrLzzp1RY90TvNytRt" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RunManager">
+    <configuration name="CompuestosMoLncaeApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.compuestosmo.app.CompuestosMoLncaeApplication" />
+      <module name="CompuestosMO_LNCAE" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.compuestosmo.app.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.CompuestosMoLncaeApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0c506d6f-1492-40e2-a60a-29748057eb20" name="Default Changelist" comment="" />
+      <created>1635688842500</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1635688842500</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="724" height="344" key="GridCell.Tab.0.bottom" timestamp="1642726496532">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="724" height="344" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1642726496532" />
+    <state width="724" height="344" key="GridCell.Tab.0.center" timestamp="1642726496531">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="724" height="344" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1642726496531" />
+    <state width="724" height="344" key="GridCell.Tab.0.left" timestamp="1642726496531">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="724" height="344" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1642726496531" />
+    <state width="724" height="344" key="GridCell.Tab.0.right" timestamp="1642726496531">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="724" height="344" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1642726496531" />
+  </component>
+</project>

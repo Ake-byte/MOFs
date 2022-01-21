@@ -220,17 +220,19 @@ public class PruebaController {
 		String mensajeFlash = (pruebamof.getId() != null) ? "Se han editado datos de las pruebas."
 				: "Se ha agregado la prueba al expediente";
 		
-		seccionesEService.savePrueba(pruebamof);
-		pruebaService.save(pruebamof);
+		
 		
 		Long idSeccion = pruebamof.getSecciones_expedientes().getId();
 		SeccionesExpediente seccionesExpediente= seccionesEService.findOne(idSeccion);
 		
 		pruebamof.setSecciones_expedientes(seccionesExpediente);
 
+		
+		
+		seccionesEService.savePrueba(pruebamof);
+		pruebaService.save(pruebamof);
+		
 		status.setComplete();
-		
-		
 		flash.addFlashAttribute("success", mensajeFlash);
 		return "redirect:/PruebasAplicadas/expedienteMaterial/" + idSeccion;
 	}
@@ -270,6 +272,7 @@ public class PruebaController {
 	@GetMapping(value = "/verPrueba/{id}")
 	public String verPDF(@PathVariable Long id, Model model, HttpServletRequest request, HttpServletResponse response) {
 		PruebasMOF prueba = pruebaService.findOne(id);
+		
 		
 		model.addAttribute("prueba", prueba);
 		

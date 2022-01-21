@@ -26,6 +26,7 @@
 							<tr>
 								<th>Ver Material</th>
 								<th>Nombre</th>
+								<th>F&oacute;rmula</th>
 								<th>Clasificaci&oacute;n</th>
 								<th>Directores de Tesis</th>
 								<th>Investigador Responsable</th>
@@ -40,6 +41,7 @@
 										th:src="@{/images/ver.png}" width="35" height="25">
 								</a></td>
 								<td th:text="${mof.nombreCompuesto}"></td>
+								<td th:text="${mof.formula}"></td>
 								<td th:text="${mof.clasificacionmof.nombreClasificacion}"></td>
 								<td>
 									<ul>
@@ -57,7 +59,7 @@
 										th:src="@{/images/editarCompuesto.png}" width="35" height="25"></a></td>
 								<td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-danger btn-xs"
 									th:href="@{/CompuestoMOF/eliminar/} + ${mof.id}"
-									onclick="return confirm('Estás seguro que quieres eliminar?');">
+									onclick="return confirm('Estï¿½s seguro que quieres eliminar?');">
 										<img th:src="@{/images/eliminar.png}" width="35" height="25">
 								</a></td>
 							</tr>

@@ -22,11 +22,12 @@
 					<form autocomplete="off" th:action="@{/register}"
 						th:object="${usuario}" method="post" enctype="multipart/form-data">
 						<div class="form-group row">
-							<label for="nombre" class="col-sm-2 col-form-label">Nombre</label>
+							<label class="col-sm-2 col-form-label">Nombre</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control"
 									th:errorclass="'form-control alert-danger'"
 									th:field="*{nombre}" required/>
+								<small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small>
 							</div>
 						</div>
 						<br>

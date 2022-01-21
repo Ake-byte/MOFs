@@ -24,7 +24,7 @@
 											<div class="col-sm-7">
 												<input type="text" class="form-control"
 													th:errorclass="'form-control alert-danger'"
-													th:field="*{nombreCompuesto}" /> <small
+													th:field="*{nombreCompuesto}" required/> <small
 													class="form-text text-danger"
 													th:if="${#fields.hasErrors('nombreCompuesto')}"
 													th:errors="*{nombreCompuesto}"></small>
@@ -37,7 +37,7 @@
 											<div class="col-sm-7">
 												<input type="text" class="form-control"
 													th:errorclass="'form-control alert-danger'"
-													th:field="*{formula}" /> <small
+													th:field="*{formula}" required/> <small
 													class="form-text text-danger"
 													th:if="${#fields.hasErrors('formula')}"
 													th:errors="*{formula}"></small>
@@ -50,7 +50,7 @@
 												del compuesto: </label>
 											<div class="col-sm-7">
 												<select id="clasificacion" name="clasificacion"
-													th:field="*{clasificacionmof}">
+													th:field="*{clasificacionmof}" required>
 													<option th:if="${clasificacionmof != ''}" th:value>--
 														Seleccione una clasificaci&oacute;n --</option>
 													<option th:each="clasificacionmof : ${clasificacion}"
@@ -65,7 +65,7 @@
 												th:text="'Investigador Responsable:'"></label>
 											<div class="col-sm-8">
 												<input type="text" class="form-control"
-													th:field="*{investigador}" />
+													th:field="*{investigador}" required/>
 											</div>
 										</div>
 										<br>
@@ -75,7 +75,7 @@
 												Tesis 1:</label>
 											<div class="col-sm-6">
 												<select id="director1" name="director1"
-													th:field="*{director1}">
+													th:field="*{director1}" required>
 													<option th:if="${director1 != ''}" th:value>--
 														Seleccione una opci&oacute;n --</option>
 													<option th:each="directores : ${director1}"

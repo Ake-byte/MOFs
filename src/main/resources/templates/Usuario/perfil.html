@@ -5,7 +5,7 @@
 <body>
 	<header th:replace="layout/layout :: header"></header>
 
-	<div class="container" style="width: 54rem;">
+	<div class="container" style="width: 94rem;">
 		<div class="card bg-light mb-3">
 			<div class="card-header mb-3 text-white text-center">
 				<h3 th:text="${titulo}"></h3>
@@ -127,7 +127,8 @@
 												<thead>
 													<tr>
 														<th>Ver Expediente</th>
-														<th style="width: 20%">Autor</th>
+														<th>Compuesto Asociado</th>
+														<th>Autor</th>
 														<th>Acciones</th>
 													</tr>
 												</thead>
@@ -137,6 +138,7 @@
 															th:href="@{/SeccionesExpediente/verSecciones/} + ${permisos.expedientes.id}">
 																<img th:src="@{/images/ver.png}" width="35" height="25">
 														</a></td>
+														<td th:text="${permisos.expedientes.mof.nombreCompuesto}"></td>
 														<td th:text="${permisos.expedientes.nombreUsuario}"></td>
 														<td th:if="${permisos.permiso == true}">Puedes modificar este expediente</td>
 														<td th:unless="${permisos.permiso == true}">NO Puedes modificar este expediente</td>

@@ -18,7 +18,7 @@
 								de la Figura/Gr&aacute;fica</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control"
-									th:field="*{nombrePrueba}" />
+									th:field="*{nombrePrueba}" required/>
 							</div>
 						</div>
 						<br>
@@ -44,7 +44,7 @@
 							</div>
 							<div class="col-sm-1">
 								<a class="btn btn-danger"
-									th:href="@{/SeccionesExpediente/verSecciones/} + ${pruebamof.secciones_expedientes.id}"
+									th:href="@{/PruebasAplicadas/expedienteMaterial/} + ${pruebamof.secciones_expedientes.id}"
 									th:text="'Cancelar'"> </a>
 							</div>
 						</div>

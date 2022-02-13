@@ -39,27 +39,23 @@
 
 						<thead class="table-light">
 							<tr>
-								<th>id</th>
-								<th>Imagen</th>
-								<th>Nombre</th>
-								<th>Descripci&oacute;n</th>
-								<th>Modificar</th>
+								<th>Imagen de la Prueba</th>
+								<th>Nombre de la Prueba</th>
+								<th>Descripci&oacute;n de la Prueba</th>
+								<th>Modificar la Prueba</th>
 								<th>PDF</th>
 								<th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 							</tr>
 						</thead>
 						<tbody>
 							<tr th:each="pruebas: ${prueba}">
-								<td><a id="ver" class="btn btn-xs"
-									th:href="@{/PruebasAplicadas/verPrueba/} + ${pruebas.id}"><img
-										th:src="@{/images/ver.png}" width="35" height="25"></a></td>
 								<td><img th:if="${#strings.length(pruebas.imagen)>0}"
 									th:src="@{'/PruebasAplicadas/uploads/' + ${pruebas.imagen}}"
 									th:alt="${pruebas.imagen}" /></td>
 								<td th:text="${pruebas.nombrePrueba}"></td>
 								<td th:text="${pruebas.descripcionPrueba}"></td>
 								<td><a class="btn btn-primary btn-xs"
-									th:href="@{/PruebasAplicadas/formPrueba/} + ${pruebas.secciones_expedientes.id} + '/' + ${pruebas.id}"
+									th:href="@{/PruebasAplicadas/formPrueba/} + ${pruebas.secciones_expedientes.expedientes.id} + '/' + ${pruebas.secciones_expedientes.id} + '/' + ${pruebas.id}"
 									th:text="'Modificar'"></a></td>
 								<!-- <td><a id="pdf" class="btn btn-xs"
 									th:href="@{'/pdf/'} + ${pruebas.id} + '/' + ${pruebas.imagen}"> <img

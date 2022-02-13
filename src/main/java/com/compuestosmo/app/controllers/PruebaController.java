@@ -121,9 +121,6 @@ public class PruebaController {
 			else {
 				PruebasMOF pruebaMOF = new PruebasMOF();
 				pruebaMOF.setSecciones_expedientes(seccionesE);
-				
-				pruebaService.save(pruebaMOF);
-				seccionesEService.savePrueba(pruebaMOF);
 
 				model.put("pruebamof", pruebaMOF);
 				model.put("titulo", "Formulario Prueba");
@@ -140,13 +137,14 @@ public class PruebaController {
 	// Pasar Authentication authentication en el método para obtener el nombre del
 	// usuario que ha ingresado
 	// para guardar el registro de quién hizo la última modificación
-	@RequestMapping(value = "/formPrueba/{idSeccion}/{id}")
-	public String editar(@PathVariable(value = "id") Long idSeccion,
+	@RequestMapping(value = "/formPrueba/{idExpediente}/{idSeccion}/{id}")
+	public String editar(@PathVariable(value = "idExpediente") Long idExpediente,
+						 @PathVariable(value = "idSeccion") Long idSeccion,
 			@PathVariable(value = "id") Long id, Map<String, Object> model, Authentication authentication, RedirectAttributes flash) {
-		PruebasMOF pruebasMOF = null;
+		PruebasMOF pruebasMOF = pruebaService.findOne(id);
 		SeccionesExpediente seccionExpediente = seccionesEService.findOne(idSeccion);
-		ExpedienteMOF expedienteMOF = expedienteService.findOne(seccionExpediente.getExpedientes().getId());
-		if (id > 0) {
+		ExpedienteMOF expedienteMOF = expedienteService.findOne(idExpediente);
+		/*if (id > 0) {
 			pruebasMOF = pruebaService.findOne(id);
 			if (pruebasMOF == null) {
 				flash.addFlashAttribute("error", "No existe este MOF en base de datos");
@@ -155,7 +153,7 @@ public class PruebaController {
 		} else {
 			flash.addFlashAttribute("error", "No existe la prueba dentro del expediente.");
 			return "redirect:/index";
-		}
+		}*/
 		
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
@@ -227,8 +225,6 @@ public class PruebaController {
 		
 		pruebamof.setSecciones_expedientes(seccionesExpediente);
 
-		
-		
 		seccionesEService.savePrueba(pruebamof);
 		pruebaService.save(pruebamof);
 		

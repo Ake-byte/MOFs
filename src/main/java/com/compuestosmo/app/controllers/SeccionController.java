@@ -1,11 +1,13 @@
 package com.compuestosmo.app.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import com.compuestosmo.app.models.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,11 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.compuestosmo.app.models.entity.ExpedienteMOF;
-import com.compuestosmo.app.models.entity.MOF;
-import com.compuestosmo.app.models.entity.PermisosExpediente;
-import com.compuestosmo.app.models.entity.SeccionesExpediente;
-import com.compuestosmo.app.models.entity.Usuario;
 import com.compuestosmo.app.models.service.IExpedienteMOFService;
 import com.compuestosmo.app.models.service.IMOFService;
 import com.compuestosmo.app.models.service.ISeccionesExpedienteService;
@@ -168,8 +165,11 @@ public class SeccionController {
 		
 		String mensajeFlash = (seccionE.getId() != null) ? "Se han editado datos en el expediente."
 				: "Se ha agregado una sección al expediente";
-		
+		List<PruebasMOF> pruebasMOFS = new ArrayList<>();
+		seccionE.setPruebasMOF(pruebasMOFS);
+
 		seccionService.save(seccionE);
+
 		ExpedienteMOF expedienteMOF = seccionE.getExpedientes();
 		//List<SeccionesExpediente> seccionesExpediente = expedienteMOF.getSeccionesExpediente();
 		//seccionesExpediente.add(seccionE);
